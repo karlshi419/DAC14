@@ -1,0 +1,324 @@
+\documentclass[a4paper, 11pt]{article}
+
+%MATH package
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+%graph package
+\usepackage{graphicx}
+%table package
+\usepackage{booktabs}
+
+%algorithm package
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\algorithmicrequire}{ \textbf{Initialization:}}
+\renewcommand{\algorithmicensure}{ \textbf{Recurrence:}}
+%\usepackage[noend]{algpseudocode}
+
+%Set FONT
+%\usepackage{fontspec}
+\topmargin -10mm
+\oddsidemargin 0mm
+\evensidemargin 0mm
+\textwidth 158mm
+\textheight 226mm
+\parskip 0mm
+
+%title
+\title{Progress Report}
+\author{Kan Shi}
+%date, if blank no date will be displayed
+\date{October 2013}
+
+%page number format
+\pagenumbering{arabic}
+
+%\setmainfont{Times New Roman}
+
+%Observations
+\newtheorem{Ob}{\hskip\parindent\bf{Observation}}[]
+
+\begin{document}
+%Generate Title
+\maketitle
+\vspace{-10mm}
+
+\section{Design of Digit-parallel Online Adder}
+
+\section{Design and Optimization of A Digit-parallel Online Multiplier}
+\subsection{Online Multipilication Algorithm}
+
+Typically the online multiplication is performed in a recursive manner. The algorithm to generate 1-digit product $z_j$ is given by Algorithm~\ref{Algorithm:OnlineMult}, where $j$ is the number of iteration, $r$ denotes the radix and $N$ represents the word-length of input operands. 
+%
+\begin{algorithm}[htbp]
+  \caption{Online Multiplication}
+  \begin{algorithmic}[1]
+
+    \REQUIRE~$X[-\delta]=Y[-\delta]=P[-\delta]=0$
+    \ENSURE~$for~~ j=-\delta,~-\delta+1,~\cdots,~1,~2,~\cdots,~N-1 ~~do$
+      \begin{eqnarray}\label{Eq:OnlineMult_General}
+        \begin{matrix}
+          %Y[j+1] & = & \left\langle Y[j],~y_{j+\delta} \right\rangle\\
+          %X[j+1] & = & \left\langle X[j],~x_{j+\delta} \right\rangle\\
+          %%Y[j+1] & = &  Y[j],y_{j+\delta} \rangle\\
+          H[j]   & = & r^{-\delta}\left(x_{j+\delta}\cdot Y[j+1]+y_{j+\delta}\cdot X[j]\right)\\
+
+          W[j]   & = & P[j] + H[j]\\
+          z_j    & = & sel(\widehat{W}[j])\\
+          P[j+1] & = & r\left(W[j]-z_j\right)
+        \end{matrix}
+      \end{eqnarray}
+      %$H[j] & = & r^{-\delta}$\\
+
+      %\FOR{$j=-\delta,~-\delta+1,~\cdots,~1,~2,~\cdots$}
+  \label{Algorithm:OnlineMult}
+  \end{algorithmic}
+\end{algorithm}
+ 
+ The operands and product are signed number in the range $(-1,1)$, and they can be represented with signed digits from the set $\{-a,\cdots,a\}$. For instance in a radix-2 online multiplier, the most common digit set is $\{-1,0,1\}$. The operands and product at iteration $j$ can be represent by~(\ref{Eq:Operands_OM}).
+ %
+\begin{eqnarray}\label{Eq:Operands_OM}
+  X[j]=\sum_{i=0}^{j+\delta-1}x_ir^{-i-1},~~Y[j]=\sum_{i=0}^{j+\delta-1}y_ir^{-i-1},~~Z[j]=\sum_{i=0}^{j-1}z_ir^{-i-1}
+\end{eqnarray}
+
+In addition, $sel(\widehat{W}[j])$ is the function to select the product digit at iteration $j$. The selection is accomplished by using a discretization algorithm [xxx] based on the knowledge of $\widehat{W}[j]$, which is an estimate of the residue $W[j]$. In the following of this article, $\widehat{W}[j]$ is obtained by truncating $W[j]$ to its first few MSDs.
+
+Note that in this algorithm, the first non-zero product is obtained when $j=0$, while the MSD of the $N$-digit input operand is applied when $j=-\delta$. In order to acquire the most significant $N$-digit of product, $x_j$ and $y_j$ are assigned to be $0$ when $j=N-\delta,\cdots,N-1$. Similarly if $2N$-digit is required for product, $x_j$ and $y_j$ should be assigned as $0$ when $j=N-\delta,\cdots,2N-1$. In this article, we will focus on the situation where the multiplication stops when the first $N$-digit MSDs of products are obtained. Because normally the remaining $N$-digit LSDs will be truncated in real computations such as $a\times b+c$ where $a,~b,~c$ are $N$-digit numbers.
+
+%\subsubsection{Inputs and Outputs}
+
+%\subsubsection{Recurrence Equations}
+
+%\subsubsection{Selection Function}
+
+\subsection{Radix-2 Online Multiplier}
+Currently we consider the online multiplication algorithm in radix-2 as it is the most commonly used situation in computer arithmetic. In a radix-2 online multiplier, the design choices are summarized in Table~\ref{Tab:Radix2_OM_Parameter} [xxx]. 
+%
+\begin{table}[htbp]
+\caption{Design Choice for Radix-2 Online Multiplication.}
+\centering
+%\vspace{10ex}
+\begin{tabular}{c|c|c|c}
+ \hline
+ \hline
+ $r$ & Digit Set & $\widehat{W}[j]$  & $\delta$ \\ 
+ \hline
+ $2$ & $\{\bar{1},0,1\}$ & $w_{-2}w_{-1}.w_{0}$ & $3$\\
+ \hline
+ \hline 
+\end{tabular}
+\label{Tab:Radix2_OM_Parameter}
+\end{table}
+
+Hence (\ref{Eq:OnlineMult_General}) can be modified as given by (\ref{Eq:OnlineMult}).
+%
+\begin{eqnarray}\label{Eq:OnlineMult}
+  \begin{matrix}
+    H[j] & = & 2^{-3}(x_{j+3}\cdot Y[j+1]+y_{j+3}\cdot X[j])\\
+    W[j] & = & P[j]+H[j]\\
+    z_j  & = & sel(\widehat{W}[j])\\
+    P[j+1] & = & 2(W[j]-z_j)
+  \end{matrix}
+\end{eqnarray}
+
+The selection function is given by (\ref{Eq:SelFunc_OM}) [xxx].
+\begin{eqnarray}\label{Eq:SelFunc_OM}
+  z_j=sel(\widehat{W}[j])=\begin{cases}
+    1 & \text{ if } \widehat{W}[j] \geqslant \frac{1}{2} \\ 
+    0 & \text{ if } -\frac{1}{2}\leqslant\widehat{W}[j]<\frac{1}{2} \\ 
+    \bar{1} & \text{ if } \widehat{W}[j]<-\frac{1}{2}
+  \end{cases}
+\end{eqnarray}
+
+\subsection{Implementation of Radix-2 Online Multiplication Algorithm}
+
+The online multiplication algorithm can be implemented in either a digit-serial fashion or a digit-parallel fashion, of which the general structure is demonstrated in Fig.xxx(a) and Fig.xxx(b) respectively. In the digit-serial implementation, the input operands are given digit by digit. Correspondingly the product is generated one digit per cycle. Whereas in the digit-parallel architecture, $N$-digit operands are given simultaneously, and the $N$-digit MSDs of products can be sampled at the same time. In comparison to the digit-serial structure where a general architecture is required in order to process inputs for all $j$, digit-parallel structure offers the opportunities to optimize the logic of each stage with respect to the given inputs. For example when $j=N-\delta,\cdots,N-1$, we have $x_j=y_j=0$ as described earlier. In this case $H[j]=0$ and $W[j]=P[j]$ in (\ref{Eq:OnlineMult_General}) and (\ref{Eq:OnlineMult}), that is, the signed-digit by vector multiplication can be removed from this stages and hence the area is reduced. Therefore in the following of this section, we describe the details of implementation and optimization for the digit-parallel online multiplication.
+
+\subsubsection{Signed-digit by Vector Multiplication Module}
+As can be seen in (\ref{Eq:OnlineMult}), two signed-digit by vector multiplication (SDVM) modules are required to generate $H[j]$. Implementing SDVM for $r>2$ is difficult, since it is basically a normal multiplier and the computation time will depend on the precision of operands. This will introduce a large overhead of delay and area. However for $r=2$ the structure becomes straight forward, because $x_j$ and $y_j$ can only be $\pm1$ or $0$. As an example for $y_{j+3}\cdot X[j]$ we have (\ref{Eq:SDVM_OM}).
+\begin{eqnarray}\label{Eq:SDVM_OM}
+  y_{j+3}\cdot X[j]=\begin{cases}
+    X[j]          & \text{ if } y_{j+3}=1 \\ 
+    \overline{X}[j]+1  & \text{ if }y_{j+3}=\bar{1} \\ 
+    0             & \text{ otherwise }
+  \end{cases}
+\end{eqnarray}
+
+
+\subsubsection{Generation of Residue $W[j]$}
+We can see from (\ref{Eq:OnlineMult}) that addition is required to generate $W[j]$. Instead of using conventional adder, such as the ripple carry adder, the carry-save adder is employed so that the addition time is independent of the precision. Correspondingly $W[j]$ and $P[j]$ are represented in the carry-save form. Hence we have (\ref{Eq:ResidueW_OM}) which can be implemented using a carry-save adder with 4 inputs and 2 outputs as shown in Fig.xxx.
+\begin{eqnarray}\label{Eq:ResidueW_OM}
+  (WC[j],~WS[j]) = PC[j] + PS[j] + 2^{-3}x_{j+3}Y[j+1] + 2^{-3}y_{j+3}X[j]
+\end{eqnarray}
+
+The word-length of the carry-save adder is determined by the word-length of inputs. For a $N$-digit online multiplier, a $(N+5)$-bit carry-save adder is required for (\ref{Eq:ResidueW_OM}) because of the $3$-bit shift and $2$-bit integer is needed for $\widehat{W}[j]$.
+
+\subsubsection{Selection Function}
+The selection function can be directly implemented using combinational logic based on (\ref{Eq:SelFunc_OM}), where $z_j$ is represented in the signed-digit form coding as $(z_+,~z_-)$. The expression for $z_+$ and $z_-$ are given by (\ref{Eq:ExpressionZ}) where $w_{-2}w_{-1}.w_0$ is used to represent $\widehat{W}[j]$ as shown in Table~\ref{Tab:Radix2_OM_Parameter}.
+%
+\begin{eqnarray}\label{Eq:ExpressionZ}
+  z_+=\overline{w}_{-2}(w_{-1}+w_0),~~z_-=w_{-2}(\overline{w}_{-1}+\overline{w}_0)
+\end{eqnarray}
+
+\subsubsection{Generation of Propagation Output $P[j+1]$}
+According to (\ref{Eq:OnlineMult}) the fractional bits of $P[j+1]$ are identical to $2W[j]$ as $z_j$ is an integer number. Moreover $w_{-2}$ will be discarded after shift operation to keep the word-length of $P[j+1]$ to be $N+5$ bits. Therefore only the first integer bit of $P[j+1]$ should be calculated as given by (\ref{Eq:ExpressionP}), while the remaining bits are directly wired to the corresponding bits in $2W[j]$. Note that $\oplus$ in (\ref{Eq:ExpressionP}) denotes the exclusive OR operation.
+%
+\begin{eqnarray}\label{Eq:ExpressionP}
+  p_{-2} = 2(w_{-1} ~\oplus~ (z_+ ~\oplus~ z_-))
+  %p_{-2} = 2(w_{-1} ~XOR~ (z_+ ~XOR~ z_-))
+\end{eqnarray}
+
+\subsubsection{Optimization for Area Reduction}
+We have discussed earlier that the SDVM module is not required in the last $\delta$ stages. Besides in the first stage, we have $W[j] = 2^{-3}x_{j+3}Y[j+1]$ meaning that only one SDVM is needed. In addition the carry-select adder is not necessary for the first stage since $P[-\delta]=0$. For the first $\delta$ stages, we also have $z_j=0$ and therefore $P[j+1]=2W[j]$. This means the selection function can be removed for those stages. Moreover word-length optimization can be performed for $W[j]$ and $P[j]$ in all stages instead of keeping $N+5$ bits. The overall area saving after optimization can be $xxx\%$.
+
+
+
+
+%--------------------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------------------------
+
+\section{Probabilistic Model of Overclocking Error in Online Multiplier}
+%In a digit-parallel on-line multiplier, delay can be derived from many sources such as
+%For ease of discussion, we
+\subsection{Annihilation of the Propagation Chain}\label{subSec:AnnihilationOfChain}
+
+While the delay in a digit-parallel online multiplier might be derived from many sources such as the computation delay to generate outputs, the overall delay will eventually be determined by the longest propagation delay between stages with increasing operand word-lengths. Let the propagation delay between two adjacent stages in a $N$-digit olMult be dented by $\mu$, hence the delay of the longest chain which propagates from the MSD to the LSD is given by $d_w$ as shown in~(\ref{Eq:WorstCaseDelay_NaiveAnalysis}).
+\begin{eqnarray}\label{Eq:WorstCaseDelay_NaiveAnalysis}
+  d_w = (N+\delta-1)\cdot \mu
+\end{eqnarray}
+
+However, we note that the chain is annihilated at a certain stage if the propagation inputs of this stage change while the propagation outputs keep stable. This will shrink the value of $d_w$, and there are two possible cases specifically. As an example for the first case, assume at time $t~(t>\mu)$ the value of propagation inputs and outputs of a stage $S_i$ to be $Pin(t)$ and $Pout(t)$ respectively. After delay $\mu$, the input value changes to $Pin(t+\mu)$ and stabilizes thereafter, while the output of this stage remains $Pout(t)$. Hence for the next stage $S_{i+1}$, the input of which varies from $Pout(t-\mu)$ to $Pout(t)$, as illustrated in Figure.xxx. Under this situation, the chain delay to $S_{i+1}$ is reduced by $\mu$ because of the annihilation.
+%
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.5\textwidth]{./Figures/TimingWave.pdf}
+  \caption{Timing wave.}
+\end{figure}
+
+For the second case, the current chain will be completely annihilated and a new chain will be generated at a given stage if $Pout(t)=Pout(0)$ for $t=\mu,~2\mu,~\cdots$. Therefore the worst case delay is given by~(\ref{Eq:OverallPathDelay_MultiPaths}) where $d_p$ denotes the delay of the $p^{th}$ propagation chain.
+\begin{eqnarray}\label{Eq:OverallPathDelay_MultiPaths}
+  d_w'=max(d_1,~d_2,~\cdots)
+\end{eqnarray}
+
+In the following of this section, detailed analysis for both cases will be described and the worst-case delay of the olMult will be discussed.
+%--------------------------------------------------------------------------------------------------
+
+\subsection{Worst-case Analysis in Online Multiplier}
+\subsubsection{Two Observations}
+From (\ref{Eq:OnlineMult}) two observations can be made under the assumption that all signals are reset to $0$ initially.
+
+%\newtheorem{Ob}{Observation}\label{Ob:Ob1}
+\begin{Ob}\label{Ob:Ob1}
+    The two integer bits of $W[j]$ and $2P[j+1]$ are either $00$ or $11$.
+\end{Ob}
+
+This observation can be justified by contradiction. All the combinations of $\widehat{W[j]}$ and the corresponding $z_j$, the most significant 3 bits of $P[j+1]$ and the 2 integer bits of $2P[j+1]$ are listed in Table~\ref{Tab:Observation1}. For $j=-3$, we have (\ref{Eq:olMult_Stage0}) according to (\ref{Eq:OnlineMult}).
+\begin{eqnarray}\label{Eq:olMult_Stage0}
+\left\{\begin{matrix}
+    W[-3] & = & 2^{-3}(y_1\cdot X[-3])\\
+    H[-2] & = & W[-3]
+\end{matrix}\right.
+\end{eqnarray}
+
+Hence $\widehat{W[-3]}$ is either $11.1$ or $00.0$, with the corresponding $2P[-2]$ being $00$ or $11$ which is the propagation input for the next stage. For $j>-3$, the 3 MSBs of $H[j]$ in (\ref{Eq:OnlineMult}) is either $00.0$ or $11.1$ due to the shift of binary point. Also as seen in Table.xxx, if the two integer bits of $\widehat{W[j]}$ are identical, the integer bits of $2P[j+1]$ will be the same. Therefore the propagation of $2P[j+1]$ will not generate diverse bits in the integer part of $W[j]$.
+%
+\begin{table}[htbp]
+\caption{All the combinations of $\widehat{W[j]}$ and the corresponding $z_j$, $P[j+1]$ and $2P[j+1]$.}
+\centering
+%\vspace{10ex}
+\begin{tabular}{c|ccc}
+\toprule
+ $\widehat{W[j]}$ & $z_j$ & $P[j+1]$ (3 MSBs)  & $2P[j+1]$ (2 MSBs) \\ \midrule
+ $00.0$ & $0$ & $00.0$ & $00$\\
+ $00.1$ & $1$ & $11.1$ & $11$\\
+ $01.0$ & $1$ & $00.0$ & $00$\\
+ $01.1$ & $1$ & $00.1$ & $01$\\
+ $10.0$ & $\bar{1}$ & $11.0$ & $10$\\
+ $10.1$ & $\bar{1}$ & $11.1$ & $11$\\
+ $11.0$ & $\bar{1}$ & $00.0$ & $00$\\
+ $11.1$ & $0$ & $11.1$ & $11$\\ \bottomrule
+\end{tabular}
+\label{Tab:Observation1}
+\end{table}
+
+\begin{Ob}\label{Ob:Ob2}
+    $P[j+1]$ will not change if only the integer bits of $W[j]$ change to a new value.
+\end{Ob}
+
+According to Observation~\ref{Ob:Ob1}, there are only four possible cases for the change of $W[j]$ as summarized in Table.xxx. This observation describes the situation where a propagation chain annihilates but not necessarily generating a new chain, because $2P[j+1]$ may not maintain its initial value at all times.
+%
+\begin{table}[htbp]
+\caption{Ob2.}
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+ $\widehat{W[j]}$ & $z_j$ & $P[j+1]$ (3 MSBs)  & $2P[j+1]$ (2 MSBs) \\ \midrule
+ $00.0\rightarrow11.0$ & $0\rightarrow\bar{1}$ & $00.0$ & $00$\\
+ $00.1\rightarrow11.1$ & $1\rightarrow\bar{0}$ & $11.1$ & $11$\\
+ $11.0\rightarrow00.0$ & $\bar{1}\rightarrow0$ & $00.0$ & $00$\\
+ $11.1\rightarrow00.1$ & $0\rightarrow{1}$ & $11.1$ & $11$\\ \bottomrule
+\end{tabular}
+\label{Tab:Observation2}
+\end{table}
+
+% only result in $11.1$ or $00.0$ for the most significant 3 bits of $W[j]$. In addition for $2P[j+1]$, there are only two cases ($01$ and $10$) violate Observation~\ref{Tab:Observation1}. The corresponding value of $\widehat{W[j]}$ are $01.1$ and $10.0$ respectively.
+\subsubsection{Annihilation of the Propagation Chain in An olMult }
+As stated in Section~\ref{subSec:AnnihilationOfChain}, the annihilation of propagation chain would leads to a reduction of the propagation delay. It is worthwhile exploring the conditions of occurrence of Observation~\ref{Ob:Ob2}. For instance in a 3-digit olMult, there are 6 stages in total, as shown in Fig.xxx. If $x_{-3}\neq0$ and/or $y_{-3}\neq0$, no more than 6 MSBs of $P[-2]$ will change with respect to the initial value at $t=0$. This is because in (\ref{Eq:olMult_Stage0}) $y_1\cdot X[-3]$ contains only 1 fractional bit and 2 integer bits. Hence maximally 5 MSBs of $2P_{[-2]}(0)$ will be updated and thereafter stabilized. It is worth noting that this is irrelevant to the word-length of the olMult. Additionally as assumed previously in the timing model, at $t=0$ the computation of $H[j]~(j\in[-2,2])$ in (\ref{Eq:OnlineMult}) is finished. This results in $2P_{[j]}(0)$, which will be updated sequentially with a delay of $\mu$, triggered by the propagation of $2P_{[-2]}(0)$. During each propagation, the number of the altered MSBs will be reduced by 1, because of the shifting of the binary point in $2P[j]$. For example, $2P_{[-1]}(t)$ stabilizes when $t=\mu$, and the altered MSBs for $2P_{[-1]}(0)\rightarrow2P_{[-1]}(\mu)$ are 4 bits. This process repeats until $S_1$, of which the changed MSBs for $2P_{[1]}(3\mu)\rightarrow2P_{[1]}(4\mu)$ are 2 bits. According to Observation~\ref{Ob:Ob2}, the chain triggered by $2P_{[-2]}(0)$ is annihilated at $S_1$. Therefore the propagation delay from $S_{-3}$ to $S_2$ is $4\mu$.
+ 
+%$ For $t>0$, the variation of $2P[j]$ propagates from $S_{-3}$ to $S_{-2}\cdots S_1$ with the number of altered MSBs being $5\cdots2$, from $t=\mu$ to $t=4\mu$ respectively. Also note that this changing procedure is irrelevant to the value of $x_{j+4}$, $y_{j+4}$, $X[j]$ and $Y[j+1]$ for $S_{-2}\cdots S_1$. Hence for $2P_{[1]}(3\mu)\rightarrow2P_{[1]}(4\mu)$, we have $2P_{[2]}(3\mu)=2P_{[2]}(4\mu)$ in accordance with Observation~\ref{Ob:Ob2}. This stands for an annihilation of the chain, and therefore the propagation delay from $S_{-3}$ to $S_2$ is $4\mu$.
+
+\begin{figure}[htbp]
+  \includegraphics[width=\textwidth]{./Figures/OlMult_Stage.pdf}
+  \caption{Propagation chain in 3-digit olMult}
+\end{figure}
+
+It is worth noting that in this example, the chain still propagates through $S_2$ without generating a new chain. Because it is hardly to achieve $2P_{[2]}(t)\equiv2P_{[2]}(0)$ with $t=\mu,~2\mu,\cdots$, due to the propagation of $2P_{[j]}(t)$ where $j\in[-2,1]$. The maximum number of the changed MSBs for $2P_{[2]}(3\mu)\rightarrow2P_{[2]}(4\mu)$ is 3, because this is actually triggered by $2P_{[-1]}(0)$, which varies 6 MSBs in comparison to its initial value. Likewise there will be maximally 4 MSBs changing for $2P_{[3]}(4\mu)\rightarrow2P_{[3]}(5\mu)$.
+
+The above changing process happens in a 3-digit olMult when $P[-2]\neq0$, which is only determined by the inputs of the first stage regardless of the other stages. Actually in other situations, the overall propagation delay will not be increased. For example for $t=0,~\mu,~\cdots$ if $P_{[-2]}(t)=0$ while $P_{[-1]}(t)\neq0$, the chain starts from $2P_{[-1]}(0)$. Based on a similar analysis, the chain will finally annihilate at $S_2$, of which we have 2 MSBs changing for $2P_{[2]}(3\mu)\rightarrow2P_{[2]}(4\mu)$, yielding a delay of $4\mu$. This value shrinks to $3\mu$ if $P_{[-2]}(t)=P_{[-1]}(t)=0$ while $P_{[0]}(t)\neq0$ for $t=0,~\mu,~\cdots$.
+
+\subsubsection{State Transition Graph in An olMult}
+For an olMult with a greater word-length, the aforementioned process is still valid. Annihilation happens at $S_i$ when there are only 2 MSBs of $2P_{[i]}(t)$ update before it is stabilized. Otherwise the propagation continues regardless of the inputs $x_{j+4},~y_{j+4},~X[j]$ and $Y[j+1]$ of $S_j$. The propagation process from $S_1$ can be illustrated using a state transition graph. One possible transition path from $S_1$ in a 5-digit olMult is shown in Fig.xxx, where a state $S_{mn}$ denotes the propagation input of $Stage~m$ changes $n$ MSBs prior to stabilization. The transition probabilities are labelled on the edges. For instance $P_{12\_23}$ denotes the conditional probability $P(S_{23}\mid S_{12})$. Note that $P_{23\_32}=1$ because annihilation only happens when $n=2$ in $S_{mn}$. In this case, the probability of this transition path is given by~(\ref{Eq:TransitionProb_OnePath}), where $P(S_{12})$ is determined by the value of $x_1$ and $y_1$ because $S_{12}$ will happen when $2P_{[-2]}(0)\neq0$.
+\begin{eqnarray}\label{Eq:TransitionProb_OnePath}
+\begin{split}
+  P_{trans} &= P(S_{42},~S_{32},~S_{23},~S_{12})\\
+            &= P(S_{42}\mid S_{32},~S_{23},~S_{12})P(S_{32}\mid S_{23},~S_{12})P(S_{23}\mid S_{12})P(S_{12})\\
+            &= P_{32\_42}\cdot1\cdot P_{12\_23}\cdot P(S_{12}) 
+\end{split}
+\end{eqnarray}
+
+\begin{figure}[tbp]\label{Fig:StateTransGraph}
+  \centering
+  \includegraphics[width=0.7\textwidth]{./Figures/OlMult_TimingGraph.pdf}
+  \caption{State transition graph in a 5-digit olMult when $2P_{[-2]}(0)\neq0$. (a) One possible transition path from $Stage1$ to $Stage4$ with transition probabilities labelled on the edges. (b) All possible transition paths starting from $S_1$.}
+\end{figure}
+
+The delay of this transition path can also be determined by counting the number of states $S_{m2}$. First, there is no annihilation prior to $S_{12}$. Second, $S_{42}$ is excluded because it is not necessary to wait for the propagation output of this stage to generate before sampling $z_4$. Hence there are totally 2 annihilation states $S_{12}$ and $S_{32}$ in this path. According to (\ref{Eq:WorstCaseDelay_NaiveAnalysis}) the worst case delay without any annihilation is $d_w=7\mu$. Delay of a specific transition path is given by (\ref{Eq:Delay_TransitionPath}). Hence the delay of this path is $5\mu$.
+%
+\begin{eqnarray}\label{Eq:Delay_TransitionPath}
+  d = d_w - \mu\cdot AnnihilationNo.  
+\end{eqnarray}
+
+Additionally as discussed earlier, there might be other possible states when annihilation happens. The complete transition graph of a 5-digit olMult is shown in Figure~\ref{Fig:StateTransGraph}.
+
+(extra description about why Fig.xxx looks like this)
+
+\subsubsection{Conclusion}
+To summarize in a 5-digit olMult, the worst case delay is $5\mu$, instead of $7\mu$ as predicted in (\ref{Eq:WorstCaseDelay_NaiveAnalysis}). This example can be generalized to an olMult with any word-length based on the similar analysis. Figure xxx illustrates the critical path delay with respect to given word-lengths under two cases: one is predicted from (\ref{Eq:WorstCaseDelay_NaiveAnalysis}), while the other is obtained through the worst case analysis as described above. Between the two lines we can always observe a gap, which increases with the growth of the operand word-length. This finding indicates that instead of operating at a frequency reported by the timing analysis tool, we can safely increase the operating frequency to a large extend (e.g.~$38.9\%$ speedup for a 16-digit olMult) without timing violations, because in an olMult there is no chain propagating from the first stage to the final stage. Note that Figure.xxx is observed based on the aforementioned simple timing models. The experimental results based on real timing information on an FPGA will be given in Section.xxx.
+
+In the remaining of this section, we investigate the situation where the operating frequency is further increased such that timing violation happens. Probabilistic models of both magnitude and probability of the overclocking error will be detailed.
+
+% figure goes here
+
+ %In the previous example where $P[-2]\neq0$, there is no new chain generated. Instead, the chain propagates to $S_2$, because $2P_{[-1]}(t)\cdots 2P_{[2]}(t)$ will prevent $2P_{[3]}(t)$ maintaining its initial value before $2P_{[-2]}(0)$ propagates down to $S_2$. In this case, the propagation input of $S_2$ changes from $2P_{[2]}(3\mu)$ to $2P_{[2]}(4\mu)$ and stabilizes, as illustrated in Fig.xxx(previous figure).
+
+
+\subsection{Probability of Overclocking Error in Online Multiplier}
+
+\subsection{Magnitude of Overclocking Error in Online Multiplier}
+
+%------------------------------------------------------------------------
+\section{Probabilistic Model of Truncation Error in Online Operators}
+
+
+\end{document} 
