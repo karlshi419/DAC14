@@ -290,6 +290,18 @@ For a given $T_S$, the combination of $Prob(T_S)$ and $E(|\varepsilon|)$ in Algo
     \includegraphics[width=1.7in]{./Figures/WL12_Model.eps}
   \end{minipage}
   }
+%  \subfigure[8-digit]{
+%  \begin{minipage}{0.24\textwidth}
+%    %\centering
+%    \includegraphics[width=1.7in]{./Figures/Model8.eps}
+%  \end{minipage}%
+%  }% This is important! use % to indicate same line, otherwise new line
+%  \subfigure[12-digit]{
+%  \begin{minipage}{0.24\textwidth}
+%    %\centering
+%    \includegraphics[width=1.7in]{./Figures/Model12.eps}
+%  \end{minipage}
+%  }
   \vspace{-2ex}
   \caption{Expectation of overclocking error for online multipliers: verification of the proposed model against Monte-Carlo simulations based on aforementioned timing models.}
   \label{Fig:ModelVerification}
@@ -408,18 +420,19 @@ The output images for both design scenarios are presented in Figure \ref{Fig:Len
 \end{figure}
 
 \subsection{Potential Benefits in Circuit Design}
-In general, our results could be of interest to a circuit design in two folds. Typically by choosing different computing arithmetics and data representations, either a circuit can be designed to operate at a certain frequency with the minimum possible MRE, or a given error budget specified by the algorithm designer can be met with the fastest achievable operating frequency. For the first case, the experimental results obtained by uniform independent inputs together with 4 benchmark images are summarized in Table xxx in terms of the difference of SNR and the relative reduction of MRE as given by () where $MRE_{OL}$ and $MRE_{Trad}$ denote the value obtained with online arithmetic and with traditional arithmetic, respectively.
+In general, our results could be of interest to a circuit design in two folds. Typically by choosing different computing arithmetics and data representations, either a circuit can be designed to operate at a certain frequency with the minimum possible MRE, or a given error budget specified by the algorithm designer can be met with the fastest achievable operating frequency. For the first case, the experimental results obtained by uniform independent inputs together with 4 benchmark images are summarized in Table \ref{Tab:MRE_Redu_Freq} in terms of the difference of SNR and the relative reduction of MRE as given by (\ref{Eq:MRE_Reduction}) where $MRE_{OL}$ and $MRE_{Trad}$ denote the value obtained with online arithmetic and with traditional arithmetic, respectively.
 %
-\begin{eqnarray}
+\begin{eqnarray}\label{Eq:MRE_Reduction}
   \frac{MRE_{Trad}-MRE_{OL}}{MRE_{Trad}}\times100\%
 \end{eqnarray}
 %
-For a fairer comparison, the frequency in this table is normalized to the maximum error-free frequency for each arithmetic. It can be seen that a significant reduction of MRE can be obtained using online arithmetic for all input types. The geometric mean reduction varies from $97.3\%$ to $98.2\%$. In addition, larger differences of MRE reduction can be achieved in practice. This is because long chains occur with even smaller probabilities with real data. Similarly from Table xxx, the differences in SNR vary from 21.4dB to 43.9dB.
+For a fairer comparison, the frequency in this table is normalized to the maximum error-free frequency for each arithmetic. It can be seen that a significant reduction of MRE can be obtained using online arithmetic for all input types. The geometric mean reduction varies from $97.3\%$ to $98.2\%$. In addition, larger differences of MRE reduction can be achieved in practice. This is because long chains occur with even smaller probabilities with real data. Similarly from Table \ref{Tab:SNR_Impro_Freq}, the differences in SNR vary from 21.4dB to 43.9dB.
 
 \begin{table}[tbp]
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4.1pt}
 \caption{Relative Reduction of MRE with Online Arithmetic for Various Normalized Frequencies.}
+\label{Tab:MRE_Redu_Freq}
 \small
 \centering
 \begin{tabular}{|c|ccccc|c|}
@@ -444,6 +457,7 @@ Tiffany & 99.9\% & 97.6\% & 98.4\% & 97.8\% & 97.2\% & 98.2\%\\
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4.1pt}
 \caption{Improvement of SNR with Online Arithmetic for Various Normalized Frequencies}
+\label{Tab:SNR_Impro_Freq}
 \small
 \centering
 \begin{tabular}{|c|ccccc|}
@@ -462,16 +476,18 @@ Tiffany & 43.9 & 25.9 & 29.5 & 25.6 & 24.5\\
 \normalsize
 \end{table}
 
+Table \ref{Tab:MRE_Reduc_Error} illustrates the frequency speedups with different input types when specific error budgets can be tolerated. We see that for all input types using online arithmetic still outperforms the traditional design for each MRE budget in terms of operating frequency. Likewise the geometric mean of frequency speed-ups is larger for real image inputs.
 
 \begin{table}[tbp]
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4.1pt}
-\caption{Relative Reduction of MRE with Online Arithmetic for Various Normalized Frequencies.}
+\caption{Relative Reduction of MRE with Online Arithmetic for Various Error Budgets.}
+\label{Tab:MRE_Reduc_Error}
 \small
 \centering
 \begin{tabular}{|c|cccc|c|}
 \hline
-\multirow{2}*{\textbf{Inputs}} & \multicolumn{4}{c|}{\textbf{Normalized Frequency}} &
+\multirow{2}*{\textbf{Inputs}} & \multicolumn{4}{c|}{\textbf{Error Budget}} &
 \multirow{2}*{\begin{tabular}{c}\textbf{Geo.}\\\textbf{Mean}\end{tabular}}\\
 & 0.01\% & 0.1\% & 1\% & 10\% &\\
 \hline
@@ -485,6 +501,25 @@ Tiffany & 2.35\% & 6.90\%   & 18.58\% & 12.22\% & 7.79\% \\
 \label{Tab:}
 \vspace{-2ex}
 \normalsize
+\end{table}
+
+The area comparison between two designs when $N=9$ is illustrated in Table~\ref{Tab:AreaComparison}. The area overhead with online arithmetic is 2.08 in terms of LUTs and 1.62 in terms of Slices in the FPGA.
+
+\begin{table}[tbp]
+\centering
+\caption{Area Comparison between Two Designs.}
+\label{Tab:AreaComparison}
+\begin{tabular}{|c|cc|c|}
+\hline
+\multirow{2}*{\textbf{Metric}} & \multicolumn{2}{c|}{\textbf{Arithmetic Type}} &
+\multirow{2}*{\textbf{Overhead}}\\
+ & Traditional & Online &\\ \hline
+ LUTs   & 304 & 632 & 2.08 \\ \hline
+ Slices & 108 & 175 & 1.62 \\ \hline
+
+\end{tabular}
+\label{Tab:Annihilation}
+\vspace{-2ex}
 \end{table}
 
 %\end{document}  % This is where a 'short' article might terminate
