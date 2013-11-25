@@ -1,3 +1,51 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{RedundantNumber}
+A.~Avizienis.
+\newblock Signed-digit number representations for fast parallel arithmetic.
+\newblock {\em IRE Trans. on Electronic Computers}, EC-10(3):389--400, 1961.
+
+\bibitem{Ercegovac_OnlineOverview}
+M.~D. Ercegovac.
+\newblock On-line arithmetic: An overview.
+\newblock In {\em Proc. Annual Technical Symp. Real time signal processing
+  VII}, pages 86--93, 1984.
+
+\bibitem{Ercegovac_Book}
+M.~D. Ercegovac and T.~Lang.
+\newblock {\em Digital arithmetic}.
+\newblock Morgan Kaufmann, 2003.
+
+\bibitem{Oregon_OnlineNetwork}
+R.~Galli and A.~Tenca.
+\newblock A design methodology for networks of online modules and its
+  application to the levinson-durbin algorithm.
+\newblock {\em IEEE Trans. on VLSI}, 12(1):52--66, 2004.
+
+\bibitem{RedundantMult_1987}
+Y.~Harata, Y.~Nakamura, H.~Nagase, M.~Takigawa, and N.~Takagi.
+\newblock A high-speed multiplier using a redundant binary adder tree.
+\newblock {\em IEEE Jourl. of Solid-State Circuits}, 22(1):28--34, 1987.
+
+\bibitem{Online_Trunc}
+S.~Rajagopal and J.~Cavallaro.
+\newblock Truncated online arithmetic with applications to communication
+  systems.
+\newblock {\em IEEE Trans. on Computers}, 55(10):1240--1252, 2006.
+
+\bibitem{RedundantMult_1985}
+N.~Takagi, H.~Yasuura, and S.~Yajima.
+\newblock High-speed vlsi multiplication algorithm with a redundant binary
+  addition tree.
+\newblock {\em IEEE Trans. on Computers}, 100(9):789--796, 1985.
+
+\bibitem{Ercegovac_OnlineMult}
+K.~S. Trivedi and M.~Ercegovac.
+\newblock On-line algorithms for division and multiplication.
+\newblock {\em IEEE Trans. on Computers}, 26:161--167, 1975.
+
+\bibitem{Ercegovac_OnlineVLSI}
+D.~M. Tullsen and M.~Ercegovac.
+\newblock Design and vlsi implementation of an on-line algorithm.
 
 \end{thebibliography}

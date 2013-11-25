@@ -1,18 +1,24 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: OnlineArith.aux
 The style file: abbrv.bst
-I found no \citation commands---while reading file OnlineArith.aux
 Database file #1: Reference.bib
 I was expecting a `,' or a `}'---line 345 of file Reference.bib
  :   
  :   %organization={International Society for Optics and Photonics}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 408 of file Reference.bib
+Warning--entry type for "Ercegovac_OnlineVLSI" isn't style-file defined
+--line 365 of file Reference.bib
+I was expecting a `,' or a `}'---line 370 of file Reference.bib
+ :   
+ :   pages={92-99}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 466 of file Reference.bib
  :   
  :   year={2011}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 421 of file Reference.bib
+I was expecting a `,' or a `}'---line 479 of file Reference.bib
  :   
  :   year={2009}
 (Error may have been on previous line)
