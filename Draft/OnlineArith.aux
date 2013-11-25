@@ -4,17 +4,16 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Online Arithmetic}{\thepage }}
 \newlabel{Eq:Online_Operands}{{1}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Radix-2 Digit-parallel Online Adder}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Radix-2 Digit-parallel Online Multiplier}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces An $N$-digit radix-2 online adder.}}{\thepage }}
 \newlabel{Fig:Radix2SD_adder}{{1}{\thepage }}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Online Multiplication}}{\thepage }}
 \newlabel{Eq:OnlineMult_General}{{2}{\thepage }}
 \newlabel{Algorithm:OnlineMult}{{1}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Online Multiplier}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Radix-2 Digit-parallel Online Multiplier}{\thepage }}
 \newlabel{Eq:SelFunc_OM}{{3}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces (a) Synthesis of Algorithm 1 into a digit-parallel online multiplier (b) Structure of one stage.}}{\thepage }}
 \newlabel{Fig:Radix2OnlineMultiplier}{{2}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Analysis of The Critical Path}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Analysis of The Critical Path}{\thepage }}
 \newlabel{Eq:Bound_GenChain}{{4}{\thepage }}
 \newlabel{Eq:WorstCaseDelay_NaiveAnalysis}{{5}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces All possible chains with the maximum length in a 3-digit online multiplier. The numbers on the line segment represent the number of the updated MSDs of $W_{[j]}$.}}{\thepage }}
@@ -23,41 +22,39 @@
 \newlabel{Tab:Annihilation}{{1}{\thepage }}
 \newlabel{Eq:Bound_ChainLength}{{6}{\thepage }}
 \newlabel{Eq:MaxChainLength_OneStage}{{7}{\thepage }}
+\newlabel{Eq:WorstCaseDelay_OM}{{8}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Probabilistic Model of Overclocking \\Error}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Comparison between the worst-case delay of an online multiplier obtained from (5\hbox {}) and (8\hbox {}).}}{\thepage }}
 \newlabel{Fig:Gap_OM}{{4}{\thepage }}
-\newlabel{Eq:WorstCaseDelay_OM}{{8}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Probabilistic Model of Overclocking \\Error}{\thepage }}
 \newlabel{Eq:MaxChainLength}{{9}{\thepage }}
 \newlabel{Eq:UppBoundofChainNo}{{10}{\thepage }}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Probability of Timing Violations}{\thepage }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Probability of Timing Violations}{\thepage }}
 \newlabel{Eq:AllInputCases}{{11}{\thepage }}
 \newlabel{Eq:P_Wordlength}{{12}{\thepage }}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Probability of Timing Violations}}{\thepage }}
 \newlabel{Algorithm:ProbabilityTimingViolation}{{8}{\thepage }}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Magnitude of Overclocking Error}{\thepage }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Magnitude of Overclocking Error}{\thepage }}
+\newlabel{Eq:ErrorMagnitude}{{13}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Expectation of overclocking error for online multipliers: verification of the proposed model against Monte-Carlo simulations based on aforementioned timing models.}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {8-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {12-digit}}}{\thepage }}
 \newlabel{Fig:ModelVerification}{{5}{\thepage }}
-\newlabel{Eq:ErrorMagnitude}{{13}{\thepage }}
 \newlabel{Eq:Error_Overclocking}{{14}{\thepage }}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Expectation of Overclocking Error}{\thepage }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Expectation of Overclocking Error}{\thepage }}
 \newlabel{Eq:Expectation_Overclocking}{{15}{\thepage }}
+\newlabel{Eq:PDF_MeanError}{{16}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Probabilities of different chain delay, the corresponding magnitude of overclocking error and the combination of both in terms of error expectation in a radix-2 OM.}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {8-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {12-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {16-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {32-digit}}}{\thepage }}
 \newlabel{Fig:Probability_Error_Mean}{{6}{\thepage }}
-\newlabel{Eq:PDF_MeanError}{{16}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Case Study: Image Filter}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental Setup}{\thepage }}
-\newlabel{Eq:MRE}{{17}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Impact of Overclocking on Different\\ Arithmetic}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Overclocking error in an image filter with two types of computer arithmetic: online arithmetic and standard binary arithmetic, of which the rated frequencies are 148.3MHz and 168.7MHz, respectively, according to the timing analysis tool.}}{\thepage }}
 \newlabel{Fig:MRE_ImageFilter}{{7}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Potential Benefits in Circuit Design}{\thepage }}
-\newlabel{Eq:MRE_Reduction}{{18}{\thepage }}
+\newlabel{Eq:MRE}{{17}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Impact of Overclocking on Different\\ Arithmetic}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Output images of image filter using online arithmetic (left column) and traditional arithmetic (right column).}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {229MHz,\nobreakspace {}no errors}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {229MHz,\nobreakspace {}SNR:20.6dB}}}{\thepage }}
@@ -66,14 +63,16 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {250MHz,\nobreakspace {}SNR:36.2dB}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {250MHz,\nobreakspace {}SNR:8.5dB}}}{\thepage }}
 \newlabel{Fig:LenaImage}{{8}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Potential Benefits in Circuit Design}{\thepage }}
+\bibstyle{abbrv}
+\bibdata{Reference}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Relative Reduction of MRE with Online Arithmetic for Various Normalized Frequencies.}}{\thepage }}
 \newlabel{Tab:MRE_Redu_Freq}{{2}{\thepage }}
 \newlabel{Tab:}{{2}{\thepage }}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Improvement of SNR with Online Arithmetic for Various Normalized Frequencies}}{\thepage }}
 \newlabel{Tab:SNR_Impro_Freq}{{3}{\thepage }}
 \newlabel{Tab:}{{3}{\thepage }}
-\bibstyle{abbrv}
-\bibdata{Reference}
+\newlabel{Eq:MRE_Reduction}{{18}{\thepage }}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Relative Reduction of MRE with Online Arithmetic for Various Error Budgets.}}{\thepage }}
 \newlabel{Tab:MRE_Reduc_Error}{{4}{\thepage }}
 \newlabel{Tab:}{{4}{\thepage }}

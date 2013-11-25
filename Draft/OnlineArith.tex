@@ -46,12 +46,39 @@ Digital circuits are currently designed to ensure timing closure. Releasing this
 \keywords{Online Arithmetic, Overclocking, Imprecise Design, Approximate Computing} % NOT required for Proceedings
 
 \section{Introduction}
+Circuit performance has increased tremendously over the past decades with the continuous scaling of CMOS technology to the nanometer regime. Typically hardware designers tend to employ conservative safety margins for timing closure. However, continuing with this approach could become very costly in the short term future. This is because the highly scaled CMOS devices would inevitably exhibit probabilistic behavior, meaning that we can no longer expect a uniform circuit performance. Covering all possible worst cases would become increasing difficult, expensive and result in large yield loss due to the variation.
+ 
+While the standard approaches such as heavily pipeline the datapath can be used to boost the frequency, the overall latency will not tend to be reduced. As a result, this method will not be applicable to many embedded applications, which normally have strict latency requirements, or in any datapath containing feedback where C-slow retiming is inappropriate. Besides, the conservative timing margin will not be removed by these approaches. To tackle this problem, a large volume of current studies has demonstrated that relaxing the absolute accuracy requirement can provide the freedom to create designs with better performance or energy efficiency. Our previous work also demonstrated that allowing timing violations to happen would be of benefit in many applications, because the worst-case happen with a very small probability.
+
+However, we notice that research in this area focus on standard binary arithmetic, which suffers from large magnitude of timing errors. This is because in standard arithmetic operators such as ripple-carry adders, the most significant digit (MSD) is last updated due to carry propagation, whereas timing violation initially affects the MSD. In this paper, for the first time we attempt to solve this problem by using online arithmetic, which was designed for the MSD-first operation. We evaluate the probabilistic behavior of basic arithmetic primitives with different types of arithmetic when operating beyond the deterministic region. We suggest that in comparison to conventional arithmetic, operators with online arithmetic are less sensitive to overclocking in practice, because timing errors only affect the least significant digits. To support this hypothesis, we initially propose probabilistic models of errors generated in this process for the online multiplier. It is followed by experimental results on an image processing application. We demonstrate that our novel design methodology can lead to substantial performance benefits compared to the design method using conventional arithmetic. The contributions of this paper are:
+%
+\begin{itemize}
+\vspace{-2ex}
+  \item the first evaluation of datapath function with different types of computer arithmetic under overclocking,
+  \item probabilistic models of overclocking errors for a digit-parallel online multiplier,
+  \item analytical and empirical results which demonstrate that the impact of timing violations is ameliorated with online arithmetic and that large performance benefits can be achieved.
+\end{itemize}
+
+
+
+%For instance, the Razor project was proposed to shave the conservative timing margins by overscaling the supply voltage while monitoring the output error rates. It has demonstrated that over $30\%$ energy efficiency can be obtained by allowing $1\%$ output errors. Lu et al. proposed a simplified datapath to speculate the original logic functions for performance benefits. Palem et al. described a voltage scaling technique that employs different voltage regions for different bits along a carry chain in a ripple carry adder. Kulkarni et al. developed an underdesigned multiplier unit, of which the the worst case was replaced by a normal case based on the straight-forward Karnaugh-Map analysis. In addition, our previous work has demonstrated that
+ 
+% Meanwhile, drastic variations have been introduced by higher integration densities and progressively stringent requirements have been placed on circuit performance. In order to ensure an absolutely correct functionality across various operating conditions, hardware designers tend to employ very conservative safety margins for timing closure.
+
+%In order to meet the stringent latency requirement, a large volume of current studies has demonstrated that, FPGA-based accelerators can be employed to achieve significant performance gains over software designs across a wide range of applications. However, one of the major obstacles of these accelerators is that they typically operate at much lower clock frequencies in comparison to general purpose processors (GPPs) or graphics processing units (GPUs). While the standard approaches such as heavily pipeline the datapath can be used to boost the frequency, the overall latency will not be reduced. Besides, the conservative safety margin will not be removed by these approaches.
+
+
+
+
+
+
 
 \section{Background}
 \subsection{Online Arithmetic}
-In conventional arithmetic, the computation results are generated either from the least significant digit (LSD), e.g. addition and multiplication, or the most significant digit (MSD), e.g. division and square root. This inconsistency in computing directions would result in large latency when propagating data among different operations. To tackle this problem, online arithmetic has been proposed and studied over the past few decades [xxx]. Both the inputs and outputs are processed in a MSD-first manner using online arithmetic, enabling parallelism among multiple operations. Therefore the overall latency can be largely reduced. Another advantage of online arithmetic is that computations can be dynamically terminated based on the required precision [xxx]. For instance, traditionally $2N$ digits of results will be generated in a $N$-digit multiplier, while only the most significant $N$ digits will be used for successive computations while the $N$ LSDs will be discarded. In contrast, the computation latency can be saved using online arithmetic, which can be finished immediately if the first $N$ digits of results are obtained.
+In conventional arithmetic, the computation results are generated either from the least significant digit (LSD), e.g. addition and multiplication, or the most significant digit (MSD), e.g. division and square root. This inconsistency in computing directions can result in large latency when propagating data among different operations. To tackle this problem, online arithmetic has been proposed and studied over the past few decades [xxx]. Both the inputs and outputs are processed in a MSD-first manner using online arithmetic, enabling parallelism among multiple operations. Therefore the overall latency can be greatly reduced.
+%Another advantage of online arithmetic is that computations can be dynamically terminated based on the required precision [xxx]. For instance, traditionally $2N$ digits of results will be generated in a $N$-digit multiplier, while only the most significant $N$ digits will be used for successive computations while the $N$ LSDs will be discarded. In contrast, the computation latency can be saved using online arithmetic, which can be finished immediately if the first $N$ digits of results are obtained.
 
-Originally online arithmetic is designed for digit-serial operation. In order to generate the first output digit, $\delta$ digits of inputs are required, as illustrated in Figure xxx. $\delta$ is known as the online delay, which is irrelevant to the precision in a given operation. For ease of discussion, the input to our circuit is normalized to a fixed point number in the range $(-1,1)$. Based on this premise, the online representations of the operands and the results are given by (\ref{Eq:Online_Operands}) [xxx] for $j\in[-\delta,N-1]$.
+Originally online arithmetic was designed for digit-serial operation. In order to generate the first output digit, $\delta$ digits of inputs are required, as illustrated in Figure xxx. $\delta$ is known as the online delay, which is a constant, independent of the precision in a given operation. For ease of discussion, the input to our circuit is normalized to a fixed point number in the range $(-1,1)$. Based on this premise, the online representations of the operands and the results are given by (\ref{Eq:Online_Operands}) [xxx] for $j\in[-\delta,N-1]$ and $r$ denotes the radix.
 %
 \begin{eqnarray}\label{Eq:Online_Operands}
 \footnotesize
@@ -59,10 +86,10 @@ Originally online arithmetic is designed for digit-serial operation. In order to
 \normalsize
 \end{eqnarray}
 %
-The MSD-first operation in the online arithmetic is accomplished by utilizing a redundant number system [xxx], in which each digit is represented with a redundant digit set $\{-a,\cdots,-1,0,1,\cdots,a\}$, where $a$ is bounded by $[\frac{r}{2},r-1]$ and $r$ is the radix. Due to the redundancy, the MSDs of the result can be firstly estimated only based on partial information of the inputs and then revised by the following digits.
+The MSD-first operation in the online arithmetic is accomplished by utilizing a redundant number system [xxx], in which each digit is represented with a redundant digit set $\{-a,\cdots,-1,0,1,\cdots,a\}$, where $a\in[\frac{r}{2},r-1]$. Due to the redundancy, the MSDs of the result can be estimated only based on partial information of the inputs and then the value of the number can be revised by the following digits.
 
 \subsection{Radix-2 Digit-parallel Online Adder}
-Adders serve as a critical building block for arithmetic operations. To perform digit-parallel online addition, the redundant adder can be directly utilized. The adder structure diagram is shown in Figure~\ref{Fig:Radix2SD_adder}. A major advantage with redundant number system over the standard ripple-carry based arithmetic is that the propagation of carry is eliminated, resulting in a precision-independent computation time for addition. As seen in Figure~\ref{Fig:Radix2SD_adder}, the computation delay of this adder is only 2 full adder (FA) delays for any operand word-length, with the cost of one extra FA for each digit of operands Therefore it is unlikely that timing violations happen on the online adder. Due to this reason, this adder structure has been widely used as a part of other arithmetic operators such as multipliers to accelerate the sum of partial products [xxx].
+Adders serve as a critical building block for arithmetic operations. To perform digit-parallel online addition, a redundant adder can be directly utilized. The adder structure diagram is shown in Figure~\ref{Fig:Radix2SD_adder}. A major advantage with the redundant number system over the standard ripple-carry based arithmetic is that the propagation of carry is eliminated, resulting in a precision-independent computation time for addition. As seen in Figure~\ref{Fig:Radix2SD_adder}, the computation delay of this adder is only 2 full adder (FA) delays for any operand word-length, with the cost of one extra FA for each digit of operands Therefore it is unlikely that timing violations happen on the online adder. For this reason, this adder structure has been widely used as a part of other arithmetic operators such as multipliers to accelerate the sum of partial products [xxx].
 %
 \begin{figure}
 %\centering
@@ -72,8 +99,7 @@ Adders serve as a critical building block for arithmetic operations. To perform 
 \label{Fig:Radix2SD_adder}
 \end{figure}
 
-
-\section{Online Multiplier}
+%\section{Online Multiplier}
 \subsection{Radix-2 Digit-parallel Online Multiplier}
 Multiplication is another key primitive of arithmetic operations. Typically the online multiplication is performed in a recursive manner, as illustrated in Algorithm~\ref{Algorithm:OnlineMult} where both inputs and outputs are $N$-digit number as represented in~(\ref{Eq:Online_Operands}). For a given iteration $j$, the product digit $z_j$ is generated through a selection function $sel()$. In order to ensure the convergence of the algorithm, appropriate selection method and the value of $\delta$ should be determined on the basis of radix $r$ and the digit set. As radix-2 is used most commonly in computer arithmetic, we keep $r=2$ throughout this paper with the corresponding redundant digit set $\{\overline{1},0,1\}$. In this case we have $\delta=3$, and $sel()$ is given by (\ref{Eq:SelFunc_OM})[xxx]. It can be seen that the decision is made only based on 1 integer bit and 1 fractional bit of $W_{[j]}$.
 %
@@ -95,12 +121,15 @@ Multiplication is another key primitive of arithmetic operations. Typically the 
 \end{algorithm}
 %
 \begin{eqnarray}\label{Eq:SelFunc_OM}
+\small
   sel(W_{[j]})=\begin{cases}
     1 & \text{ if } W_{[j]} \geqslant \frac{1}{2} \\
     0 & \text{ if } -\frac{1}{2}\leqslant W_{[j]}<\frac{1}{2} \\
     \overline{1} & \text{ if } W_{[j]}<-\frac{1}{2}
   \end{cases}
+\normalsize
 \end{eqnarray}
+\vspace{-2ex}
 %
 %
 \begin{figure}[tbp]
@@ -111,11 +140,11 @@ Multiplication is another key primitive of arithmetic operations. Typically the 
 \label{Fig:Radix2OnlineMultiplier}
 \end{figure}
 
-Algorithm \ref{Algorithm:OnlineMult} can be synthesized into a unrolled digit parallel structure as shown in  Figure~\ref{Fig:Radix2OnlineMultiplier}(a). In an $N$-digit OM, there are totally $N+\delta$ stages, of which the online inputs are generated from the appending logic according to (\ref{Eq:Online_Operands}). For each stage, an online adder is used as shown in Figure~\ref{Fig:Radix2OnlineMultiplier}(b). The SDVM module performs the signed-digit vector multiplication. When $r=2$ and the digit set $\{\overline{1},0,1\}$ is used, the implementation of SDVM is straight forward, because for instance the output of $(y_{j+\delta+1}\cdot X_{[j]})$ is 0, $X_{[j]}$ or $-X_{[j]}$ when $y$ equals to $0$, $1$ and $-1$ respectively.
+Algorithm \ref{Algorithm:OnlineMult} can be synthesized into a unrolled digit parallel structure as shown in  Figure~\ref{Fig:Radix2OnlineMultiplier}(a). In an $N$-digit OM, there are totally $N+\delta$ stages, of which the online inputs are generated from the appending logic according to (\ref{Eq:Online_Operands}). For each stage, an online adder is used as shown in Figure~\ref{Fig:Radix2OnlineMultiplier}(b). The SDVM module performs the signed-digit vector multiplication. When $r=2$ and the digit set $\{\overline{1},0,1\}$ is used, the implementation of SDVM is straight forward, because for instance the output of $(y_{j+\delta+1}\cdot X_{[j]})$ is 0, $X_{[j]}$ or $-X_{[j]}$ when $y$ is equal to $0$, $1$ and $-1$ respectively.
 
 Instead of duplicating the digit-serial implementation $N+\delta$ times, each stage in the digit-parallel architecture can be optimized for area reduction. For instance, the SDVM modules and the appending logic are not required in the last $\delta$ stages because the inputs are 0. This leads to a smaller online adder in these stages. Similarly for the first $\delta$ stages the selection logic can be removed, as the first digit of the result is generated at $S_0$.
 
-\subsection{Analysis of The Critical Path}
+\section{Analysis of The Critical Path}
 
 From Figure \ref{Fig:Radix2OnlineMultiplier} we observe two types of delay chains. One is caused by generation and propagation of $P_{[j]}$ among different stages. The other is the generation of online inputs from the appending logic. Since the appending logic is basically wires, the overall latency will eventually be determined by the delay from the first source, especially with increasing operand word-lengths. As such, we initially model the delay of each stage within an online multiplier to be a constant value $\mu$. We also assume that the generation of online inputs costs no delay.
 
