@@ -10,6 +10,11 @@ A.~Avizienis.
 \newblock Signed-digit number representations for fast parallel arithmetic.
 \newblock {\em IRE Trans. on Electronic Computers}, EC-10(3):389--400, 1961.
 
+\bibitem{Online_Conversion}
+M.~Ercegovac and T.~Lang.
+\newblock On-the-fly conversion of redundant into conventional representations.
+\newblock {\em IEEE Trans. on Computer}, C-36(7):895--897, 1987.
+
 \bibitem{Ercegovac_OnlineOverview}
 M.~D. Ercegovac.
 \newblock On-line arithmetic: An overview.
@@ -70,6 +75,6 @@ K.~S. Trivedi and M.~Ercegovac.
 
 \bibitem{Ercegovac_OnlineVLSI}
 D.~M. Tullsen and M.~Ercegovac.
-\newblock Design and vlsi implementation of an on-line algorithm.
+\newblock Design and {VLSI} implementation of an on-line algorithm, 1986.
 
 \end{thebibliography}
