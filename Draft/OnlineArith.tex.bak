@@ -6,6 +6,7 @@
 % algorithm package
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{indentfirst}
 \renewcommand{\algorithmicrequire}{ \textbf{Initialization:}}
 \renewcommand{\algorithmicensure}{ \textbf{Recurrence:}}
 
@@ -37,24 +38,34 @@ Digital circuits are currently designed to ensure timing closure. Releasing this
 
 
 % A category with the (minimum) three required fields
-\category{H.4}{Information Systems Applications}{Miscellaneous}
+%\category{H.4}{Information Systems Applications}{Miscellaneous}
+\category{B.2.4}{Arithmetic and Logic Structures}{High-Speed Arithmetic}[Algorithms,Cost/performance]
 %A category including the fourth, optional field follows...
-\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+%\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
 
 \terms{Design, Performance, Reliability}
 
 \keywords{Online Arithmetic, Overclocking, Imprecise Design, Approximate Computing} % NOT required for Proceedings
 
 \section{Introduction}
-Circuit performance has increased tremendously over the past decades with the continuous scaling of CMOS technology to the nanometer regime. Typically hardware designers tend to employ conservative safety margins for timing closure. However, continuing with this approach could become very costly in the short term future. This is because the highly scaled CMOS devices would inevitably exhibit probabilistic behavior, meaning that we can no longer expect a uniform circuit performance. Covering all possible worst cases would become increasing difficult, expensive and result in large yield loss due to the variation.
- 
-While the standard approaches such as heavily pipeline the datapath can be used to boost the frequency, the overall latency will not tend to be reduced. As a result, this method will not be applicable to many embedded applications, which normally have strict latency requirements, or in any datapath containing feedback where C-slow retiming is inappropriate. Besides, the conservative timing margin will not be removed by these approaches. To tackle this problem, a large volume of current studies has demonstrated that relaxing the absolute accuracy requirement can provide the freedom to create designs with better performance or energy efficiency. Our previous work also demonstrated that allowing timing violations to happen would be of benefit in many applications, because the worst-case happen with a very small probability.
+Circuit performance has increased tremendously over the past decades with the continuous scaling of CMOS technology. Typically hardware designers tend to employ conservative safety margins for timing closure. However, continuing with this approach could become very costly in the short term future. This is because the highly scaled CMOS devices would inevitably exhibit probabilistic behavior, meaning that we can no longer expect a uniform circuit performance. Covering all possible worst cases would become increasing difficult, expensive and result in large yield loss due to the variation.\par
 
-However, we notice that research in this area focus on standard binary arithmetic, which suffers from large magnitude of timing errors. This is because in standard arithmetic operators such as ripple-carry adders, the most significant digit (MSD) is last updated due to carry propagation, whereas timing violation initially affects the MSD. In this paper, for the first time we attempt to solve this problem by using online arithmetic, which was designed for the MSD-first operation. We evaluate the probabilistic behavior of basic arithmetic primitives with different types of arithmetic when operating beyond the deterministic region. We suggest that in comparison to conventional arithmetic, operators with online arithmetic are less sensitive to overclocking in practice, because timing errors only affect the least significant digits.
+While standard approaches such as heavily pipelining the datapath can be used to boost the frequency, the overall latency will not tend to be reduced. As a result, this method will not be applicable to many embedded applications, which normally have strict latency requirements, or in any datapath containing feedback, where C-slow retiming is inappropriate. Besides, the conservative timing margin will not be removed by these approaches. To tackle this problem, a large volume of current studies has demonstrated that relaxing the absolute accuracy requirement can provide the freedom to create designs with better performance or energy efficiency \cite{Razor2004,Gupta2013TransCADICS,NonUniformScaling,Undersigned2x2multiplier}.
+%Our previous work also demonstrated that allowing timing violations to happen would be of benefit in many applications, because the worst case only happens with a very small probability.
+
+However, we notice that research in this area focuses on standard binary arithmetic, which potentially suffers from large magnitude of timing errors. This is because in standard arithmetic operators such as ripple-carry adders, the most significant digit (MSD) is updated last due to carry propagation, so timing violation initially affects the MSD. In this paper, for the first time we attempt to solve this problem by adopting an alternative form of MSD-first arithmetic known as online arithmetic. We evaluate the probabilistic behavior of basic arithmetic primitives with different types of arithmetic when operating beyond the deterministic clocking region. We suggest that in comparison to conventional arithmetic, operators with employing this arithmetic are less sensitive to overclocking, because timing errors only affect the least significant digits. To support this hypothesis, we propose probabilistic models of errors generated in this process for the online multiplier. We back up the models with experimental results on an image processing application. We demonstrate that our novel design methodology can lead to substantial performance benefits compared to the design method using conventional arithmetic. The contributions of this paper are:
+%
+\begin{itemize}
+\vspace{-2ex}
+  \item to our knowledge, the first ``overclocking friendly'' computer arithmetic,
+  \item probabilistic models of overclocking errors for a digit-parallel online multiplier,
+  \item analytical and empirical results which demonstrate that the impact of timing violations is ameliorated with online arithmetic and that large performance benefits can be achieved.
+\end{itemize}
+
 
 
 %For instance, the Razor project was proposed to shave the conservative timing margins by overscaling the supply voltage while monitoring the output error rates. It has demonstrated that over $30\%$ energy efficiency can be obtained by allowing $1\%$ output errors. Lu et al. proposed a simplified datapath to speculate the original logic functions for performance benefits. Palem et al. described a voltage scaling technique that employs different voltage regions for different bits along a carry chain in a ripple carry adder. Kulkarni et al. developed an underdesigned multiplier unit, of which the the worst case was replaced by a normal case based on the straight-forward Karnaugh-Map analysis. In addition, our previous work has demonstrated that
- 
+
 % Meanwhile, drastic variations have been introduced by higher integration densities and progressively stringent requirements have been placed on circuit performance. In order to ensure an absolutely correct functionality across various operating conditions, hardware designers tend to employ very conservative safety margins for timing closure.
 
 %In order to meet the stringent latency requirement, a large volume of current studies has demonstrated that, FPGA-based accelerators can be employed to achieve significant performance gains over software designs across a wide range of applications. However, one of the major obstacles of these accelerators is that they typically operate at much lower clock frequencies in comparison to general purpose processors (GPPs) or graphics processing units (GPUs). While the standard approaches such as heavily pipeline the datapath can be used to boost the frequency, the overall latency will not be reduced. Besides, the conservative safety margin will not be removed by these approaches.
@@ -67,10 +78,19 @@ However, we notice that research in this area focus on standard binary arithmeti
 
 \section{Background}
 \subsection{Online Arithmetic}
-In conventional arithmetic, the computation results are generated either from the least significant digit (LSD), e.g. addition and multiplication, or the most significant digit (MSD), e.g. division and square root. This inconsistency in computing directions can result in large latency when propagating data among different operations. To tackle this problem, online arithmetic has been proposed and studied over the past few decades [xxx]. Both the inputs and outputs are processed in a MSD-first manner using online arithmetic, enabling parallelism among multiple operations. Therefore the overall latency can be greatly reduced.
+In conventional arithmetic, the computation results are generated either from the least significant digit (LSD), e.g. addition and multiplication, or the MSD, e.g. division and square root. This inconsistency in computing directions can result in large latency when propagating data among different operations. To tackle this problem, online arithmetic has been proposed and studied over the past few decades \cite{Ercegovac_OnlineOverview,Ercegovac_OnlineMult,Online_Trunc}. Both the inputs and outputs are processed in a MSD-first manner using online arithmetic, enabling parallelism among multiple operations. Therefore the overall latency can be greatly reduced.
 %Another advantage of online arithmetic is that computations can be dynamically terminated based on the required precision [xxx]. For instance, traditionally $2N$ digits of results will be generated in a $N$-digit multiplier, while only the most significant $N$ digits will be used for successive computations while the $N$ LSDs will be discarded. In contrast, the computation latency can be saved using online arithmetic, which can be finished immediately if the first $N$ digits of results are obtained.
 
-Originally online arithmetic was designed for digit-serial operation. In order to generate the first output digit, $\delta$ digits of inputs are required, as illustrated in Figure xxx. $\delta$ is known as the online delay, which is a constant, independent of the precision in a given operation. For ease of discussion, the input to our circuit is normalized to a fixed point number in the range $(-1,1)$. Based on this premise, the online representations of the operands and the results are given by (\ref{Eq:Online_Operands}) [xxx] for $j\in[-\delta,N-1]$ and $r$ denotes the radix.
+Originally online arithmetic was designed for digit-serial operation. In order to generate the first output digit, $\delta$ digits of inputs are required, as illustrated in Figure \ref{Fig:OnlineDataFlow}. $\delta$ is known as the online delay, which is a constant, independent of the precision in a given operation. For ease of discussion, the input to our circuit is normalized to a fixed point number in the range $(-1,1)$. Based on this premise, the online representations of the operands and the results are given by (\ref{Eq:Online_Operands}) \cite{Ercegovac_Book} for $j\in[-\delta,N-1]$ and $r$ denotes the radix.
+%
+\begin{figure}[htbp]
+  \centering
+  \vspace{-2ex}
+  \includegraphics[width=.46\textwidth]{./Figures/OnlineArithmetic_DataFlow.pdf}
+  \vspace{-3ex}
+  \caption{Dataflow in Online Arithmetic.}
+  \label{Fig:OnlineDataFlow}
+\end{figure}
 %
 \begin{eqnarray}\label{Eq:Online_Operands}
 \footnotesize
@@ -78,10 +98,10 @@ Originally online arithmetic was designed for digit-serial operation. In order t
 \normalsize
 \end{eqnarray}
 %
-The MSD-first operation in the online arithmetic is accomplished by utilizing a redundant number system [xxx], in which each digit is represented with a redundant digit set $\{-a,\cdots,-1,0,1,\cdots,a\}$, where $a\in[\frac{r}{2},r-1]$. Due to the redundancy, the MSDs of the result can be estimated only based on partial information of the inputs and then the value of the number can be revised by the following digits.
+The MSD-first operation in the online arithmetic is accomplished by utilizing a redundant number system \cite{RedundantNumber}, in which each digit is represented with a redundant digit set $\{-a, \cdots,\\-1, 0, 1, \cdots, a\}$, where $a\in[r/2,r-1]$. Due to the redundancy, the MSDs of the result can be estimated only based on partial information of the inputs and then the value of the number can be revised by the following digits.
 
 \subsection{Radix-2 Digit-parallel Online Adder}
-Adders serve as a critical building block for arithmetic operations. To perform digit-parallel online addition, a redundant adder can be directly utilized. The adder structure diagram is shown in Figure~\ref{Fig:Radix2SD_adder}. A major advantage with the redundant number system over the standard ripple-carry based arithmetic is that the propagation of carry is eliminated, resulting in a precision-independent computation time for addition. As seen in Figure~\ref{Fig:Radix2SD_adder}, the computation delay of this adder is only 2 full adder (FA) delays for any operand word-length, with the cost of one extra FA for each digit of operands Therefore it is unlikely that timing violations happen on the online adder. For this reason, this adder structure has been widely used as a part of other arithmetic operators such as multipliers to accelerate the sum of partial products [xxx].
+Adders serve as a critical building block for arithmetic operations. To perform digit-parallel online addition, a redundant adder can be directly utilized. The adder structure diagram is shown in Figure~\ref{Fig:Radix2SD_adder}. A major advantage with the redundant number system over the standard ripple-carry based arithmetic is that the propagation of carry is eliminated, resulting in a precision-independent computation time for addition. As seen in Figure~\ref{Fig:Radix2SD_adder}, the computation delay of this adder is only 2 full adder (FA) delays for any operand word-length, with the cost of one extra FA for each digit of operands Therefore it is unlikely that timing violations happen on the online adder. For this reason, this adder structure has been widely used as a part of other arithmetic operators such as multipliers to accelerate the sum of partial products \cite{RedundantMult_1987,RedundantMult_1985}.
 %
 \begin{figure}
 %\centering
@@ -93,7 +113,7 @@ Adders serve as a critical building block for arithmetic operations. To perform 
 
 %\section{Online Multiplier}
 \subsection{Radix-2 Digit-parallel Online Multiplier}
-Multiplication is another key primitive of arithmetic operations. Typically the online multiplication is performed in a recursive manner, as illustrated in Algorithm~\ref{Algorithm:OnlineMult} where both inputs and outputs are $N$-digit number as represented in~(\ref{Eq:Online_Operands}). For a given iteration $j$, the product digit $z_j$ is generated through a selection function $sel()$. In order to ensure the convergence of the algorithm, appropriate selection method and the value of $\delta$ should be determined on the basis of radix $r$ and the digit set. As radix-2 is used most commonly in computer arithmetic, we keep $r=2$ throughout this paper with the corresponding redundant digit set $\{\overline{1},0,1\}$. In this case we have $\delta=3$, and $sel()$ is given by (\ref{Eq:SelFunc_OM})[xxx]. It can be seen that the decision is made only based on 1 integer bit and 1 fractional bit of $W_{[j]}$.
+Multiplication is another key primitive of arithmetic operations. Typically the online multiplication is performed in a recursive manner, as illustrated in Algorithm~\ref{Algorithm:OnlineMult} where both inputs and outputs are $N$-digit number as represented in~(\ref{Eq:Online_Operands}) \cite{Ercegovac_Book,Ercegovac_OnlineVLSI}. For a given iteration $j$, the product digit $z_j$ is generated through a selection function $sel()$. In order to ensure the convergence of the algorithm, appropriate selection method and the value of $\delta$ should be determined on the basis of radix $r$ and the digit set. As radix-2 is used most commonly in computer arithmetic, we keep $r=2$ throughout this paper with the corresponding redundant digit set $\{\overline{1},0,1\}$. In this case we have $\delta=3$, and $sel()$ is given by (\ref{Eq:SelFunc_OM}) \cite{Oregon_OnlineNetwork}. It can be seen that the decision is made only based on 1 integer bit and 1 fractional bit of $W_{[j]}$.
 %
 \begin{algorithm}[tbp]
   \caption{Online Multiplication}
@@ -136,102 +156,112 @@ Algorithm \ref{Algorithm:OnlineMult} can be synthesized into a unrolled digit pa
 
 Instead of duplicating the digit-serial implementation $N+\delta$ times, each stage in the digit-parallel architecture can be optimized for area reduction. For instance, the SDVM modules and the appending logic are not required in the last $\delta$ stages because the inputs are 0. This leads to a smaller online adder in these stages. Similarly for the first $\delta$ stages the selection logic can be removed, as the first digit of the result is generated at $S_0$.
 
-\section{Analysis of The Critical Path}
-
-From Figure \ref{Fig:Radix2OnlineMultiplier} we observe two types of delay chains. One is caused by generation and propagation of $P_{[j]}$ among different stages. The other is the generation of online inputs from the appending logic. Since the appending logic is basically wires, the overall latency will eventually be determined by the delay from the first source, especially with increasing operand word-lengths. As such, we initially model the delay of each stage within an online multiplier to be a constant value $\mu$. We also assume that the generation of online inputs costs no delay.
-
-For an $N$-digit OM, let a propagation chain is generated at $S_{\tau}$ with the length of $d(\tau)$ digits, then $\tau$ is bounded by (\ref{Eq:Bound_GenChain}).
+%\section{Analysis of The Critical Path}
 %
-\begin{eqnarray}\label{Eq:Bound_GenChain}
-  -\delta\leqslant\tau\leqslant N-1-\delta
-\end{eqnarray}
+%Suppose a chain is generated at the first stage $S_{-\delta}$ and is propagated to the final stage $S_{N-1}$. This corresponds to $d(\tau)=N+\delta$ and hence the critical path delay of the OM is then given by (\ref{Eq:WorstCaseDelay_NaiveAnalysis}). Note that this value is normally employed by the timing analysis tools together with a guard-band to ensure a correct functionality across a variety of operating conditions.
 %
-Suppose a chain is generated at the first stage $S_{-\delta}$ and is propagated to the final stage $S_{N-1}$. This corresponds to $d(\tau)=N+\delta$ and hence the critical path delay of the OM is then given by (\ref{Eq:WorstCaseDelay_NaiveAnalysis}). Note that this value is normally employed by the timing analysis tools together with a guard-band to ensure a correct functionality across a variety of operating conditions.
+%\begin{eqnarray}\label{Eq:WorstCaseDelay_NaiveAnalysis}
+%  \mu_{OM\_structural} = (N+\delta)\cdot \mu
+%\end{eqnarray}
+%%
+%For a given stage $S_\tau$ when inputs are initially introduced, we have $W_{[\tau]}=H_{[\tau]}$ as $P_{[\tau]}=0$. From (\ref{Eq:OnlineMult_General}) the maximum word-length of $H_{[\tau]}$ and $P_{[\tau]}$ is $(\tau+2\delta+2)$ and $(\tau+2\delta)$, respectively. Thus the propagation of $P_{[\tau]}$ will only affect the first $(\tau+2\delta)$ MSDs of $W_{[\tau]}$. As an example, the maximum word-length of $P_{[-2]}$ is 4 digits while the value of $H_{[-2]}$ is 6. After delay $\mu$ from the start of computation, only the first 4 digits of $W_{[-2]}$ will be changed by the propagation of $P_{[-2]}$, as labeled on the segment of $P_{[-2]}$ in Figure~\ref{Fig:TimingGraph_OM}. During each propagation, this value is reduced by 1 due to the shifting to derive $P_{[j+1]}$ in (\ref{Eq:OnlineMult_General}). Finally this chain annihilates if the number shrinks to 1, because for all possible changes as listed in Table~\ref{Tab:Annihilation}, the propagation output keeps unchanged. In the previous example, the chain generated at $S_{-3}$ will annihilate at $S_1$ as shown in Figure \ref{Fig:TimingGraph_OM}. Besides, chains generated at other stages with the maximum lengths are also depicted for a 3-digit OM. It can be seen that the actual worst-case delay is $5\mu$, instead of $6\mu$ as predicted by (\ref{Eq:WorstCaseDelay_NaiveAnalysis}).
+%%
+%\begin{figure}[tbp]
+%\centering
+%\includegraphics[width=.5\textwidth]{./Figures/Timing_3DigitOM.pdf}
+%\vspace{-5ex}
+%\caption{All possible chains with the maximum length in a 3-digit online multiplier. The numbers on the line segment represent the number of the updated MSDs of $W_{[j]}$.}
+%\label{Fig:TimingGraph_OM}
+%\end{figure}
+%%
+%\begin{table}[tbp]
+%\centering
+%\caption{All the combinations of ${W}_{[j]}$ of which 2 MSBs might change. Together with the corresponding $z_j$ and the integer bit of $P_{[j+1]}$.}
+%\begin{tabular}{|c|c|c|c|}
+%\hline
+%${W}_{[j]}$&$z_j$&$P_{[j+1]}=2(W_{[j]}-z_j)$\\ \hline
+% $0.0\rightarrow1.0$ & $0\rightarrow\overline{1}$ & $0\rightarrow0$\\ \hline
+% $0.1\rightarrow1.1$ & $1\rightarrow0$ & $1\rightarrow1$\\ \hline
+% $1.0\rightarrow0.0$ & $\overline{1}\rightarrow0$ & $0\rightarrow0$\\ \hline
+% $1.1\rightarrow0.1$ & $0\rightarrow{1}$ & $1\rightarrow1$\\  \hline
+%\end{tabular}
+%\label{Tab:Annihilation}
+%\vspace{-2ex}
+%\end{table}
 %
-\begin{eqnarray}\label{Eq:WorstCaseDelay_NaiveAnalysis}
-  \mu_{OM\_structural} = (N+\delta)\cdot \mu
-\end{eqnarray}
+%In general for a given value of $\tau$, the maximum value of $d(\tau)$ is bounded by two constraints. On one hand, the chain length cannot be greater than $N-1$. On the other hand, the altered digit number of $P_{[\tau+1]}$ will eventually reduced to 1. The combination of both gives (\ref{Eq:Bound_ChainLength}).
+%%
+%\begin{eqnarray}\label{Eq:Bound_ChainLength}
+%  d(\tau)_{max}=Min(N-1-\tau,~\tau+2\delta+1)
+%\end{eqnarray}
+%For all values of $\tau$ in (\ref{Eq:Bound_GenChain}), the critical path delay of the OM is then given by (\ref{Eq:MaxChainLength_OneStage}).
+%%
+%\begin{eqnarray}\label{Eq:MaxChainLength_OneStage}
+%  \mu_{OM}=Max(d(\tau)_{max})\cdot\mu
+%\end{eqnarray}
+%%
+%Substituting (\ref{Eq:Bound_GenChain}) and (\ref{Eq:Bound_ChainLength}) into (\ref{Eq:MaxChainLength_OneStage}), we obtain the expression of $\mu_{OM}$ in (\ref{Eq:WorstCaseDelay_OM}). The comparison between (\ref{Eq:WorstCaseDelay_NaiveAnalysis}) and (\ref{Eq:WorstCaseDelay_OM}) is illustrated in Figure \ref{Fig:Gap_OM}, from which we see that the OM could run at a higher frequency than predicted from naive structural timing analysis.
+%%
+%\begin{eqnarray}\label{Eq:WorstCaseDelay_OM}
+%  \mu_{OM} = \begin{cases}
+%    \frac{N-1}{2}\cdot\mu+4\mu & \text{if N is odd}\\
+%    \frac{N-2}{2}\cdot\mu+4\mu & \text{if N is even}
+%  \end{cases}
+%\end{eqnarray}
 %
-For a given stage $S_\tau$ when inputs are initially introduced, we have $W_{[\tau]}=H_{[\tau]}$ as $P_{[\tau]}=0$. From (\ref{Eq:OnlineMult_General}) the maximum word-length of $H_{[\tau]}$ and $P_{[\tau]}$ is $(\tau+2\delta+2)$ and $(\tau+2\delta)$, respectively. Thus the propagation of $P_{[\tau]}$ will only affect the first $(\tau+2\delta)$ MSDs of $W_{[\tau]}$. As an example, the maximum word-length of $P_{[-2]}$ is 4 digits while the value of $H_{[-2]}$ is 6. After delay $\mu$ from the start of computation, only the first 4 digits of $W_{[-2]}$ will be changed by the propagation of $P_{[-2]}$, as labeled on the segment of $P_{[-2]}$ in Figure~\ref{Fig:TimingGraph_OM}. During each propagation, this value is reduced by 1 due to the shifting to derive $P_{[j+1]}$ in (\ref{Eq:OnlineMult_General}). Finally this chain annihilates if the number shrinks to 1, because for all possible changes as listed in Table~\ref{Tab:Annihilation}, the propagation output keeps unchanged. In the previous example, the chain generated at $S_{-3}$ will annihilate at $S_1$ as shown in Figure \ref{Fig:TimingGraph_OM}. Besides, chains generated at other stages with the maximum lengths are also depicted for a 3-digit OM. It can be seen that the actual worst-case delay is $5\mu$, instead of $6\mu$ as predicted by (\ref{Eq:WorstCaseDelay_NaiveAnalysis}).
-%
-\begin{figure}[tbp]
-\centering
-\includegraphics[width=.5\textwidth]{./Figures/Timing_3DigitOM.pdf}
-\vspace{-5ex}
-\caption{All possible chains with the maximum length in a 3-digit online multiplier. The numbers on the line segment represent the number of the updated MSDs of $W_{[j]}$.}
-\label{Fig:TimingGraph_OM}
-\end{figure}
-%
-\begin{table}[tbp]
-\centering
-\caption{All the combinations of ${W}_{[j]}$ of which 2 MSBs might change. Together with the corresponding $z_j$ and the integer bit of $P_{[j+1]}$.}
-\begin{tabular}{|c|c|c|c|}
-\hline
-${W}_{[j]}$&$z_j$&$P_{[j+1]}=2(W_{[j]}-z_j)$\\ \hline
- $0.0\rightarrow1.0$ & $0\rightarrow\overline{1}$ & $0\rightarrow0$\\ \hline
- $0.1\rightarrow1.1$ & $1\rightarrow0$ & $1\rightarrow1$\\ \hline
- $1.0\rightarrow0.0$ & $\overline{1}\rightarrow0$ & $0\rightarrow0$\\ \hline
- $1.1\rightarrow0.1$ & $0\rightarrow{1}$ & $1\rightarrow1$\\  \hline
-\end{tabular}
-\label{Tab:Annihilation}
-\vspace{-2ex}
-\end{table}
-
-In general for a given value of $\tau$, the maximum value of $d(\tau)$ is bounded by two constraints. On one hand, the chain length cannot be greater than $N-1$. On the other hand, the altered digit number of $P_{[\tau+1]}$ will eventually reduced to 1. The combination of both gives (\ref{Eq:Bound_ChainLength}).
-%
-\begin{eqnarray}\label{Eq:Bound_ChainLength}
-  d(\tau)_{max}=Min(N-1-\tau,~\tau+2\delta+1)
-\end{eqnarray}
-For all values of $\tau$ in (\ref{Eq:Bound_GenChain}), the critical path delay of the OM is then given by (\ref{Eq:MaxChainLength_OneStage}).
-%
-\begin{eqnarray}\label{Eq:MaxChainLength_OneStage}
-  \mu_{OM}=Max(d(\tau)_{max})\cdot\mu
-\end{eqnarray}
-%
-Substituting (\ref{Eq:Bound_GenChain}) and (\ref{Eq:Bound_ChainLength}) into (\ref{Eq:MaxChainLength_OneStage}), we obtain the expression of $\mu_{OM}$ in (\ref{Eq:WorstCaseDelay_OM}). The comparison between (\ref{Eq:WorstCaseDelay_NaiveAnalysis}) and (\ref{Eq:WorstCaseDelay_OM}) is illustrated in Figure \ref{Fig:Gap_OM}, from which we see that the OM could run at a higher frequency than predicted from naive structural timing analysis.
-%
-\begin{eqnarray}\label{Eq:WorstCaseDelay_OM}
-  \mu_{OM} = \begin{cases}
-    \frac{N-1}{2}\cdot\mu+4\mu & \text{if N is odd}\\
-    \frac{N-2}{2}\cdot\mu+4\mu & \text{if N is even}
-  \end{cases}
-\end{eqnarray}
-
-%
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=.4\textwidth]{./Figures/Gap.eps}
-    %\vspace{-5ex}
-    \caption{Comparison between the worst-case delay of an online multiplier obtained from (\ref{Eq:WorstCaseDelay_NaiveAnalysis}) and (\ref{Eq:WorstCaseDelay_OM}).}
-\label{Fig:Gap_OM}
-\end{figure}
+%%
+%\begin{figure}[t]
+%    \centering
+%    \includegraphics[width=.4\textwidth]{./Figures/Gap.eps}
+%    %\vspace{-5ex}
+%    \caption{Comparison between the worst-case delay of an online multiplier obtained from (\ref{Eq:WorstCaseDelay_NaiveAnalysis}) and (\ref{Eq:WorstCaseDelay_OM}).}
+%\label{Fig:Gap_OM}
+%\end{figure}
 
 
-\subsection{Probabilistic Model of Overclocking \\Error}
-For an $N$-digit OM, it follows that if the clock period $T_S$ is greater than $\mu_{OM}$, correct results will be sampled. If, however, faster-than-rated sampling frequencies are applied such that $T_S<\mu_{OM}$, timing violations might happen and intermediate results will be sampled, potentially generating errors. For a given $T_S$, the maximum length of error-free propagation is described by (\ref{Eq:MaxChainLength}) where $f_S$ denotes the sampling frequency. We assume that the first digit of the result will be generated correctly, i.e. $b>3$. The upper bound of parameter $\tau$ in (\ref{Eq:Bound_GenChain}) is then modified as given by (\ref{Eq:UppBoundofChainNo}). In this Section, we model the probability and the magnitude of the overclocking error, under the assumption that every digit of each input to our circuit is uniformly and independently generated with the digit set $\{\overline{1},0,1\}$. Nevertheless, the assumption will be relaxed in Section xxx where real image data are used.
+%\subsection{Probabilistic Model of Overclocking \\Error}
+\section{Probabilistic Model of\\Overclocking Error}
+As it is unlikely that timing violation happens in the online adder, in this section we model the overclocking error in the radix-2 online multiplier (OM). From Figure \ref{Fig:Radix2OnlineMultiplier} we observe two types of delay chains. One is caused by generation and propagation of $P_{[j]}$ among different stages. The other is the generation of online inputs from the appending logic. Since the appending logic is basically wires and simple combinational logic \cite{Online_Conversion}, the overall latency will eventually be determined by the delay of the first type, especially with increasing operand word-lengths. As such, we initially model the delay of each stage within an online multiplier to be a constant value $\mu$. We also assume that the generation of online inputs costs no delay.
+
+Let $\mu_{OM}$ denote the worst-case delay of an OM. For an $N$-digit OM, it follows that if the clock period $T_S$ is greater than $\mu_{OM}$, correct results will be sampled. If, however, faster-than-rated sampling frequencies are applied such that $T_S<\mu_{OM}$, timing violations might happen and intermediate results will be sampled, potentially generating errors. For a given $T_S$, the maximum length of error-free propagation is described by (\ref{Eq:MaxChainLength}) where $f_S$ denotes the sampling frequency. To avoid too large frequencies, we always ensure that the first digit of the result will be generated correctly, i.e. $b>\delta$.
 %
 \begin{eqnarray}\label{Eq:MaxChainLength}
+\small
   b:=\left\lceil \frac{T_S}{\mu} \right\rceil=\left\lceil \frac{1}{\mu\cdot f_S}\right\rceil
+\normalsize
 \end{eqnarray}
 %
-%
-\begin{eqnarray}\label{Eq:UppBoundofChainNo}
-  \tau\leqslant N-1-b=\tau_{upp}
-\end{eqnarray}
+We then model the errors assuming that every digit of each input to our circuit is uniformly and independently generated with the digit set  $\{\overline{1},0,1\}$. Nevertheless, the assumption will be relaxed in Section xxx where real image data are used.
 
-\subsubsection{Probability of Timing Violations}
-If a chain is generated at $S_{\tau}$, the presence of timing violation requires $d(\tau)>b$. Since the propagation and annihilation of the chain in an OM is irrelevant to the operand word-length, the probability of $d(\tau)$ is only dependent upon the specific input pattern of $S_{\tau}$, which is denoted as $C(\tau)$. In general there are four types of inputs as listed in (\ref{Eq:AllInputCases}). Under the assumption that all digits of input signal are mutually independent, the probability of $C_1\sim C_4$ equal to $4/9$, $1/9$, $2/9$ and $2/9$ respectively.
+\subsection{Probability of Timing Violations}
+For an $N$-digit OM, let a propagation chain be generated at $S_{\tau}$ with the length of $d(\tau)$ digits, then $\tau$ is bounded by (\ref{Eq:Bound_GenChain}). The presence of timing violation requires $d(\tau)>b$. Besides, the chain cannot propagate over stage N-1. Therefore parameter the bound of $d(\tau)$ is given by (\ref{Eq:Bound_ChainLength}).
+%
+\begin{eqnarray}\label{Eq:Bound_GenChain}
+\small
+  -\delta\leqslant\tau\leqslant N-1-b=\tau_{max}
+\end{eqnarray}
+%
+\vspace{-4ex}
+\begin{eqnarray}\label{Eq:Bound_ChainLength}
+  b<d(\tau)\leqslant N-1-\tau
+\normalsize
+\end{eqnarray}
+%
+However, the actual length of a propagation chain is dependent upon input patterns. Let $C(\tau)$ represent the specific input pattern of $S_{\tau}$, then generally there are four types of inputs as listed in (\ref{Eq:AllInputCases}). Under the assumption that all digits of input signal are mutually independent, the probability of $C_1\sim C_4$ equal to $1/9$, $4/9$, $2/9$ and $2/9$ respectively.
 %
 \begin{eqnarray}\label{Eq:AllInputCases}
+\small
   C(\tau)=\left\{\begin{matrix}
-    \text{Case 1~(}C_1{):} & x_{\tau+\delta+1}\neq0,~y_{\tau+\delta+1}\neq0\\
-    \text{Case 2~(}C_2{):} & x_{\tau+\delta+1}=0,~y_{\tau+\delta+1}=0\\
+    \text{Case 1~(}C_1{):} & x_{\tau+\delta+1}=0,~y_{\tau+\delta+1}=0\\
+    \text{Case 2~(}C_2{):} & x_{\tau+\delta+1}\neq0,~y_{\tau+\delta+1}\neq0\\
     \text{Case 3~(}C_3{):} & x_{\tau+\delta+1}\neq0,~y_{\tau+\delta+1}=0\\
     \text{Case 4~(}C_4{):} & x_{\tau+\delta+1}=0,~y_{\tau+\delta+1}\neq0
   \end{matrix}\right.
+\normalsize
 \end{eqnarray}
 %
-As discussed when deriving (\ref{Eq:Bound_ChainLength}), the value of $d(\tau)$ corresponds to the word-length of $P_{[\tau+1]}$ when computation initially starts. That is, (\ref{Eq:OnlineMult_General}) can be modified to give (\ref{Eq:P_Wordlength}) for $\tau>-\delta$. Therefore the word-length of $P_{[\tau+1]}$ is best considered separately for different value of $C(\tau)$.
+If all internal signals are reset to 0 initially, then (\ref{Eq:OnlineMult_General}) can be modified to give (\ref{Eq:P_Wordlength}) for $\tau>-\delta$. Consequently no propagation chain will be generated at $S_{\tau}$ if $C(\tau)=C_1$.
+%
 \begin{eqnarray}\label{Eq:P_Wordlength}
   \begin{aligned}
     P_{[\tau+1]} &= r\cdot W_{[\tau]}\\
@@ -239,9 +269,15 @@ As discussed when deriving (\ref{Eq:Bound_ChainLength}), the value of $d(\tau)$ 
   \end{aligned}
 \end{eqnarray}
 %
-If $C(\tau)=C_1$, $P_{[\tau+1]}$ embodies the maximum word-length and hence $d(\tau)=d(\tau)_{max}$ as given in (\ref{Eq:MaxChainLength_OneStage}). If $C(\tau)=C_2$, we have $P_{[\tau+1]}=0$. In this case no chain is generated and $d(\tau)=0$. Similarly the probability is $1/9$.
+In other cases, a new propagation chain will be generated at $S_{\tau}$. If, for example, the word-length of $P_{[\tau+1]}$ is $D$ digits. That is, $P_{[\tau+1]}$ changes $D$ digits for chain generation. From (\ref{Eq:OnlineMult_General}) we notice that $D=D-1$ when $P_{[\tau+1]}$ propagates to the next stage, because of the 1-digit shifting when computing $P_{[\tau+1]}=r(W_{[\tau]}-z_{\tau})$, and this process is irrelevant to the inputs. Finally this chain is annihilated when $D=1$. Hence the actual chain length corresponds to the word-length of $P_{[\tau+1]}$, of which the value we consider separately for different values of $C(\tau)$.
 
-Since $C_3$ and $C_4$ are statistically identical, we only discuss the situation that $C(\tau)=C_3$. In this case the word-length of $P_{[\tau+1]}$ only depends on that of $Y_{[\tau+1]}$. Besides, we have $Y_{[\tau+1]}=Y_{[\tau]}$. It means $d(\tau)$ becomes dependent of the inputs of previous stage $S_{\tau-1}$. There are 2 possible situations for $\tau>-\delta$ as stated below:
+According to (\ref{Eq:Online_Operands}) the word-lengths of $X_{[\tau]}$ and $Y_{[\tau+1]}$ are $(\tau+\delta+1)$ digits $(\tau+\delta+2)$ digits, respectively. If $C(\tau)=C_2$, $P_{[\tau+1]}$ embodies the maximum word-length, i.e. $D=\tau+\delta+1+\delta$ from (\ref{Eq:P_Wordlength}). Combining $D$ and (\ref{Eq:Bound_ChainLength}) gives the longest chain length in (\ref{Eq:MaxChainLength_OneStage}).
+%
+\begin{eqnarray}\label{Eq:MaxChainLength_OneStage}
+  d(\tau)_{max}=Min(D,N-1-\tau)
+\end{eqnarray}
+
+Since $C_3$ and $C_4$ are statistically identical, we only discuss the situation that $C(\tau)=C_3$. In this case the word-length of $P_{[\tau+1]}$ only depends on that of $Y_{[\tau+1]}$. Besides, we have $Y_{[\tau+1]}=Y_{[\tau]}$ because the appending digit $y_{\tau+\delta+1}=0$. It means $d(\tau)$ becomes dependent of the inputs of previous stage $S_{\tau-1}$. There are 2 possible situations for $\tau>-\delta$ as stated below:
 \vspace{-1ex}
 \begin{itemize}
   \item For the previous stage if $y_{\tau+\delta}\neq0$, then the word-length of $Y_{[\tau]}$ is maximized. Thus $d(\tau)=d(\tau)_{max}-1$.
@@ -267,8 +303,8 @@ In summary, we derive Algorithm 2 to go through all possible stages that timing 
   \end{algorithmic}
 \end{algorithm}
 
-\subsubsection{Magnitude of Overclocking Error}
-For a given $T_S$, timing violations may happen on multiple chains. For instance in Figure~\ref{Fig:TimingGraph_OM} if $T_S=3.5\mu$, all the 3 chains would not be correctly propagated and all the three digits of the outputs are affected. For the first chain that timing violation may occur, i.e. $d(\tau)_{max}>b$, let it annihilate at annihilate at $S_{\lambda}$ where $\lambda=\tau+d_{max}(\tau)-1$. Therefore overclocking errors may happen from digit $\lambda$ to digit $N-1$ of the product. In general the magnitude of overclocking error is given by (\ref{Eq:ErrorMagnitude}), where $z_i$ and ${z_i}'$ denote the correct value and the actual value of the output digit of $S_i$, separately.
+\subsection{Magnitude of Overclocking Error}
+For a given $T_S$, timing violations may happen on multiple chains. Let us consider the first chain that timing violation may occur, i.e. $d(\tau)_{max}>b$, let it annihilate at annihilate at $S_{\lambda}$ where $\lambda=\tau+d_{max}(\tau)-1$. Therefore overclocking errors may happen from digit $\lambda$ to digit $N-1$ of the product. In general the magnitude of overclocking error is given by (\ref{Eq:ErrorMagnitude}), where $z_i$ and ${z_i}'$ denote the correct value and the actual value of the output digit of $S_i$, separately.
 %
 \begin{eqnarray}\label{Eq:ErrorMagnitude}
 \scriptsize
@@ -288,7 +324,7 @@ Now we notice that the overclocking error is not a deterministic value for a giv
 \normalsize
 \end{eqnarray}
 
-\subsubsection{Expectation of Overclocking Error}
+\subsection{Expectation of Overclocking Error}
 For a given $T_S$, the combination of $Prob(T_S)$ and $E(|\varepsilon|)$ in Algorithm 2 and (\ref{Eq:Error_Overclocking}) yields the overall expectation of overclocking error, as presented in (\ref{Eq:Expectation_Overclocking}). The verification of the proposed model is illustrated in Figure \ref{Fig:ModelVerification} against the results from Monte-Carlo simulations based on the aforementioned timing model. $T_S$ is normalized with respect to the value from (\ref{Eq:WorstCaseDelay_NaiveAnalysis}). Note that both results are obtained when assuming the input data are randomly generated following uniform distribution. It can be seen that the modeled value match well with the simulation results.
 %
 \begin{eqnarray}\label{Eq:Expectation_Overclocking}
@@ -477,7 +513,7 @@ Tiffany & 99.9\% & 97.6\% & 98.4\% & 97.8\% & 97.2\% & 98.2\%\\
 \begin{table}[tbp]
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4.1pt}
-\caption{Improvement of SNR with Online Arithmetic for Various Normalized Frequencies}
+\caption{Improvement of SNR (dB) with Online Arithmetic for Various Normalized Frequencies}
 \label{Tab:SNR_Impro_Freq}
 \small
 \centering

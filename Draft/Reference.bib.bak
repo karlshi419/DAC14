@@ -364,10 +364,10 @@
 
 @proceeding{Ercegovac_OnlineVLSI,
   author={Tullsen, Dean M. and Ercegovac, M.D.},
-  title = {Design And {VLSI} Implementation Of An On-Line Algorithm},
+  title = {Design And Vlsi Implementation Of An On-Line Algorithm},
   journal = {Proc. SPIE},
-  volume = {0698},
-  pages={92-99},
+  volume = {0698}
+  pages={92-99}
   year={1986}
 }
 

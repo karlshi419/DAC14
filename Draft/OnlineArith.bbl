@@ -1,9 +1,19 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Razor2004}
+T.~Austin, D.~Blaauw, T.~Mudge, and K.~Flautner.
+\newblock Making typical silicon matter with razor.
+\newblock {\em IEEE Trans. on Computer}, 37(3):57--65, 2004.
 
 \bibitem{RedundantNumber}
 A.~Avizienis.
 \newblock Signed-digit number representations for fast parallel arithmetic.
 \newblock {\em IRE Trans. on Electronic Computers}, EC-10(3):389--400, 1961.
+
+\bibitem{Online_Conversion}
+M.~Ercegovac and T.~Lang.
+\newblock On-the-fly conversion of redundant into conventional representations.
+\newblock {\em IEEE Trans. on Computer}, C-36(7):895--897, 1987.
 
 \bibitem{Ercegovac_OnlineOverview}
 M.~D. Ercegovac.
@@ -22,10 +32,29 @@ R.~Galli and A.~Tenca.
   application to the levinson-durbin algorithm.
 \newblock {\em IEEE Trans. on VLSI}, 12(1):52--66, 2004.
 
+\bibitem{Gupta2013TransCADICS}
+V.~Gupta, D.~Mohapatra, A.~Raghunathan, and K.~Roy.
+\newblock Low-power digital signal processing using approximate adders.
+\newblock {\em IEEE Trans. on Computer-Aided Design of Integrated Circuits and
+  Systems}, 32(1):124--137, 2013.
+
 \bibitem{RedundantMult_1987}
 Y.~Harata, Y.~Nakamura, H.~Nagase, M.~Takigawa, and N.~Takagi.
 \newblock A high-speed multiplier using a redundant binary adder tree.
 \newblock {\em IEEE Jourl. of Solid-State Circuits}, 22(1):28--34, 1987.
+
+\bibitem{NonUniformScaling}
+Z.~M. Kedem, V.~J. Mooney, K.~K. Muntimadugu, and K.~V. Palem.
+\newblock An approach to energy-error tradeoffs in approximate ripple carry
+  adders.
+\newblock In {\em Proc. Int. Symp. on Low Power Electronics and Design}, pages
+  211--216, 2011.
+
+\bibitem{Undersigned2x2multiplier}
+P.~Kulkarni, P.~Gupta, and M.~Ercegovac.
+\newblock Trading accuracy for power with an underdesigned multiplier
+  architecture.
+\newblock In {\em Proc. Int. Conf. on VLSI Design}, pages 346--351, 2011.
 
 \bibitem{Online_Trunc}
 S.~Rajagopal and J.~Cavallaro.
@@ -46,6 +75,6 @@ K.~S. Trivedi and M.~Ercegovac.
 
 \bibitem{Ercegovac_OnlineVLSI}
 D.~M. Tullsen and M.~Ercegovac.
-\newblock Design and vlsi implementation of an on-line algorithm.
+\newblock Design and {VLSI} implementation of an on-line algorithm, 1986.
 
 \end{thebibliography}
