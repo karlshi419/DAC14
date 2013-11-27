@@ -155,7 +155,7 @@ Algorithm \ref{Algorithm:OnlineMult} can be synthesized into a unrolled digit pa
 \centering
 \includegraphics[width=.49\textwidth]{./Figures/OnlineMult_Unrolled.pdf}
 \vspace{-4ex}
-\caption{(a) Synthesis of Algorithm 1 into a digit-parallel online multiplier (b) Structure of one stage.}
+\caption{(a) Synthesis of Algorithm 1 into a digit-parallel online multiplier (b) Structure of one stage, in which the maximum digit widths of signals are labeled.}
 \vspace{-2ex}
 \label{Fig:Radix2OnlineMultiplier}
 \end{figure}
@@ -241,7 +241,7 @@ Let $\mu_{OM}$ denote the worst-case delay of an OM. It follows that if the cloc
 We then model the errors assuming that every digit of each input to our circuit is uniformly and independently generated with the digit set $\{\overline{1},0,1\}$. This assumption will be relaxed in Section \ref{Sec:CaseStudy} where real image data are used.
 
 \subsection{Probability of Timing Violations}
-For an $N$-digit OM, let a propagation chain be generated at $S_{\tau}$ with the length of $d(\tau)$ digits, then $\tau$ is bounded by (\ref{Eq:Bound_GenChain}). The presence of timing violation requires $d(\tau)>b$. Besides, the chain cannot propagate over stage N-1. Therefore parameter the bound of $d(\tau)$ is given by (\ref{Eq:Bound_ChainLength}).
+For an $N$-digit OM, let a propagation chain be generated at stage $S_{\tau}$ with the length of $d(\tau)$ digits, then $\tau$ is bounded by (\ref{Eq:Bound_GenChain}). The presence of timing violation requires $d(\tau)>b$. Besides, the chain cannot propagate over stage N-1. Therefore parameter the bound of $d(\tau)$ is given by (\ref{Eq:Bound_ChainLength}).
 %
 \begin{eqnarray}\label{Eq:Bound_GenChain}
 \footnotesize
