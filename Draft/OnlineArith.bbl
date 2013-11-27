@@ -35,8 +35,8 @@ R.~Galli and A.~Tenca.
 \bibitem{Gupta2013TransCADICS}
 V.~Gupta, D.~Mohapatra, A.~Raghunathan, and K.~Roy.
 \newblock Low-power digital signal processing using approximate adders.
-\newblock {\em IEEE Trans. on Computer-Aided Design of Integrated Circuits and
-  Systems}, 32(1):124--137, 2013.
+\newblock {\em IEEE Trans. on CAD of Integrated Circuits and Systems},
+  32(1):124--137, 2013.
 
 \bibitem{RedundantMult_1987}
 Y.~Harata, Y.~Nakamura, H.~Nagase, M.~Takigawa, and N.~Takagi.
@@ -47,14 +47,8 @@ Y.~Harata, Y.~Nakamura, H.~Nagase, M.~Takigawa, and N.~Takagi.
 Z.~M. Kedem, V.~J. Mooney, K.~K. Muntimadugu, and K.~V. Palem.
 \newblock An approach to energy-error tradeoffs in approximate ripple carry
   adders.
-\newblock In {\em Proc. Int. Symp. on Low Power Electronics and Design}, pages
+\newblock In {\em Proc. Int. Symp. on Low Power Elec. and Design}, pages
   211--216, 2011.
-
-\bibitem{Undersigned2x2multiplier}
-P.~Kulkarni, P.~Gupta, and M.~Ercegovac.
-\newblock Trading accuracy for power with an underdesigned multiplier
-  architecture.
-\newblock In {\em Proc. Int. Conf. on VLSI Design}, pages 346--351, 2011.
 
 \bibitem{Online_Trunc}
 S.~Rajagopal and J.~Cavallaro.
@@ -64,7 +58,7 @@ S.~Rajagopal and J.~Cavallaro.
 
 \bibitem{RedundantMult_1985}
 N.~Takagi, H.~Yasuura, and S.~Yajima.
-\newblock High-speed vlsi multiplication algorithm with a redundant binary
+\newblock High-speed {VLSI} multiplication algorithm with a redundant binary
   addition tree.
 \newblock {\em IEEE Trans. on Computers}, 100(9):789--796, 1985.
 
@@ -73,8 +67,8 @@ K.~S. Trivedi and M.~Ercegovac.
 \newblock On-line algorithms for division and multiplication.
 \newblock {\em IEEE Trans. on Computers}, 26:161--167, 1975.
 
-\bibitem{Ercegovac_OnlineVLSI}
-D.~M. Tullsen and M.~Ercegovac.
-\newblock Design and {VLSI} implementation of an on-line algorithm, 1986.
+\bibitem{Virtex6}
+Xilinx.
+\newblock {\em Virtex-6 {FPGA} Configurable Logic Block User Guide}.
 
 \end{thebibliography}

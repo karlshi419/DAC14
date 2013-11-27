@@ -2,35 +2,34 @@
 \citation{Razor2004}
 \citation{Gupta2013TransCADICS}
 \citation{NonUniformScaling}
-\citation{Undersigned2x2multiplier}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{\thepage }}
+\citation{Gupta2013TransCADICS}
+\citation{NonUniformScaling}
 \citation{Ercegovac_OnlineOverview}
 \citation{Ercegovac_OnlineMult}
 \citation{Online_Trunc}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Online Arithmetic}{\thepage }}
 \citation{Ercegovac_Book}
 \citation{RedundantNumber}
 \citation{RedundantMult_1987}
 \citation{RedundantMult_1985}
-\citation{Ercegovac_Book}
-\citation{Ercegovac_OnlineVLSI}
 \citation{Oregon_OnlineNetwork}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Online Arithmetic}{\thepage }}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Dataflow in Online Arithmetic.}}{\thepage }}
+\citation{Online_Conversion}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Dataflow in digit-serial Online Arithmetic.}}{\thepage }}
 \newlabel{Fig:OnlineDataFlow}{{1}{\thepage }}
 \newlabel{Eq:Online_Operands}{{1}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Radix-2 Digit-parallel Online Adder}{\thepage }}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces An $N$-digit radix-2 online adder.}}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Radix-2 Digit-parallel Online Multiplier}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces An $N$-digit radix-2 unrolled online adder.}}{\thepage }}
 \newlabel{Fig:Radix2SD_adder}{{2}{\thepage }}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Online Multiplication}}{\thepage }}
 \newlabel{Eq:OnlineMult_General}{{2}{\thepage }}
 \newlabel{Algorithm:OnlineMult}{{1}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Radix-2 Digit-parallel Online Multiplier}{\thepage }}
 \newlabel{Eq:SelFunc_OM}{{3}{\thepage }}
-\citation{Online_Conversion}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces (a) Synthesis of Algorithm 1 into a digit-parallel online multiplier (b) Structure of one stage.}}{\thepage }}
-\newlabel{Fig:Radix2OnlineMultiplier}{{3}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Probabilistic Model of\\Overclocking Error}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces (a) Synthesis of Algorithm 1 into a digit-parallel online multiplier (b) Structure of one stage, in which the maximum digit widths of signals are labeled.}}{\thepage }}
+\newlabel{Fig:Radix2OnlineMultiplier}{{3}{\thepage }}
 \newlabel{Eq:MaxChainLength}{{4}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Probability of Timing Violations}{\thepage }}
 \newlabel{Eq:Bound_GenChain}{{5}{\thepage }}
@@ -38,31 +37,36 @@
 \newlabel{Eq:AllInputCases}{{7}{\thepage }}
 \newlabel{Eq:P_Wordlength}{{8}{\thepage }}
 \newlabel{Eq:MaxChainLength_OneStage}{{9}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Magnitude of Overclocking Error}{\thepage }}
+\citation{Virtex6}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Probability of Timing Violations}}{\thepage }}
 \newlabel{Algorithm:ProbabilityTimingViolation}{{8}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Magnitude of Overclocking Error}{\thepage }}
 \newlabel{Eq:ErrorMagnitude}{{10}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Expectation of Overclocking Error}{\thepage }}
+\newlabel{Sec:MeanError}{{3.3}{\thepage }}
 \newlabel{Eq:Expectation_Overclocking}{{11}{\thepage }}
+\newlabel{Eq:PDF_MeanError}{{12}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Expectation of overclocking error for online multipliers: verification of the proposed model against Monte-Carlo simulations with timing assumptions (top row) and FPGA results with real timing information (bottom row).}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {8-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {12-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {8-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {12-digit}}}{\thepage }}
 \newlabel{Fig:ModelVerification}{{4}{\thepage }}
-\newlabel{Eq:PDF_MeanError}{{12}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Case Study: Image Filter}{\thepage }}
+\newlabel{Sec:CaseStudy}{{4}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental Setup}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Probabilities of different chain delay, the corresponding magnitude of overclocking error and the combination of both in terms of error expectation in a radix-2 OM.}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {8-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {12-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {16-digit}}}{\thepage }}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {32-digit}}}{\thepage }}
 \newlabel{Fig:Probability_Error_Mean}{{5}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Case Study: Image Filter}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental Setup}{\thepage }}
 \newlabel{Eq:MRE}{{13}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Quantify the Impact of Overclocking}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Overclocking error in an image filter with two types of computer arithmetic: online arithmetic and standard binary arithmetic, of which the rated frequencies are 148.3MHz and 168.7MHz, respectively, according to the timing analysis tool.}}{\thepage }}
 \newlabel{Fig:MRE_ImageFilter}{{6}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Impact of Overclocking on Different\\ Arithmetic}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Potential Benefits in Circuit Design}{\thepage }}
+\newlabel{Eq:MRE_Reduction}{{14}{\thepage }}
 \bibstyle{abbrv}
 \bibdata{Reference}
 \bibcite{Razor2004}{1}
@@ -70,35 +74,33 @@
 \bibcite{Online_Conversion}{3}
 \bibcite{Ercegovac_OnlineOverview}{4}
 \bibcite{Ercegovac_Book}{5}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Output images of image filter using online arithmetic (left column) and traditional arithmetic (right column).}}{\thepage }}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {229MHz,\nobreakspace {}no errors}}}{\thepage }}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {229MHz,\nobreakspace {}SNR:20.6dB}}}{\thepage }}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {242MHz,\nobreakspace {}SNR:38.3dB}}}{\thepage }}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {242MHz,\nobreakspace {}SNR:15.6dB}}}{\thepage }}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {250MHz,\nobreakspace {}SNR:36.2dB}}}{\thepage }}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {250MHz,\nobreakspace {}SNR:8.5dB}}}{\thepage }}
+\bibcite{Oregon_OnlineNetwork}{6}
+\bibcite{Gupta2013TransCADICS}{7}
+\bibcite{RedundantMult_1987}{8}
+\bibcite{NonUniformScaling}{9}
+\bibcite{Online_Trunc}{10}
+\bibcite{RedundantMult_1985}{11}
+\bibcite{Ercegovac_OnlineMult}{12}
+\bibcite{Virtex6}{13}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Output images of image filter using online arithmetic (left column) and traditional arithmetic (right column), where $f_0$ and ${f_0}'$ denote the maximum error-free frequencies for each design.}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {1.05$f_0$,\nobreakspace {}SNR=38.3dB}}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {1.05${f_0}'$,\nobreakspace {}SNR:21.5dB}}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {1.15$f_0$,\nobreakspace {}SNR:36.2dB}}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {1.15${f_0}'$,\nobreakspace {}SNR:9.0dB}}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {1.25$f_0$,\nobreakspace {}SNR:26.7dB}}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {1.25${f_0}'$,\nobreakspace {}SNR:8.5dB}}}{\thepage }}
 \newlabel{Fig:LenaImage}{{7}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Potential Benefits in Circuit Design}{\thepage }}
-\newlabel{Eq:MRE_Reduction}{{14}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {6}References}{\thepage }}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Relative Reduction of MRE with Online Arithmetic for Various Normalized Frequencies.}}{\thepage }}
 \newlabel{Tab:MRE_Redu_Freq}{{1}{\thepage }}
 \newlabel{Tab:}{{1}{\thepage }}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Improvement of SNR (dB) with Online Arithmetic for Various Normalized Frequencies}}{\thepage }}
 \newlabel{Tab:SNR_Impro_Freq}{{2}{\thepage }}
 \newlabel{Tab:}{{2}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {5}References}{\thepage }}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Relative Reduction of MRE with Online Arithmetic for Various Error Budgets.}}{\thepage }}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Relative Improvement in Frequency with Online Arithmetic for Various Error Budgets.}}{\thepage }}
 \newlabel{Tab:MRE_Reduc_Error}{{3}{\thepage }}
 \newlabel{Tab:}{{3}{\thepage }}
-\bibcite{Oregon_OnlineNetwork}{6}
-\bibcite{Gupta2013TransCADICS}{7}
-\bibcite{RedundantMult_1987}{8}
-\bibcite{NonUniformScaling}{9}
-\bibcite{Undersigned2x2multiplier}{10}
-\bibcite{Online_Trunc}{11}
-\bibcite{RedundantMult_1985}{12}
-\bibcite{Ercegovac_OnlineMult}{13}
-\bibcite{Ercegovac_OnlineVLSI}{14}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Area Comparison between Two Designs.}}{\thepage }}
 \newlabel{Tab:AreaComparison}{{4}{\thepage }}
 \newlabel{Tab:Annihilation}{{4}{\thepage }}
