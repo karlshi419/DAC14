@@ -83,7 +83,7 @@ In conventional arithmetic, the computation results are generated either from th
 \vspace{-1ex}
 %Another advantage of online arithmetic is that computations can be dynamically terminated based on the required precision [xxx]. For instance, traditionally $2N$ digits of results will be generated in a $N$-digit multiplier, while only the most significant $N$ digits will be used for successive computations while the $N$ LSDs will be discarded. In contrast, the computation latency can be saved using online arithmetic, which can be finished immediately if the first $N$ digits of results are obtained.
 
-Originally online arithmetic was designed for digit-serial operation. In order to generate the first output digit, $\delta$ digits of inputs are required, as illustrated in Figure \ref{Fig:OnlineDataFlow}. $\delta$ is known as the online delay, which is a constant, independent of the precision in a given operation. For ease of discussion, the input to our circuit is normalized to a fixed point number in the range $(-1,1)$. Based on this premise, the online representations of the operands and the results are given by (\ref{Eq:Online_Operands}) \cite{Ercegovac_Book} for $j\in[-\delta,N-1]$ and $r$ denotes the radix.
+Originally online arithmetic was designed for digit-serial operation. In order to generate the first output digit, $\delta$ digits of inputs are required, as illustrated in Figure \ref{Fig:OnlineDataFlow}. $\delta$ is known as the online delay, which is a constant, independent of the precision in a given operation. For ease of discussion, the input to our circuit is normalized to a fixed point number in the range $(-1,1)$. Based on this premise, the online representations of the operands and the results at step $j$ are given by (\ref{Eq:Online_Operands}) \cite{Ercegovac_Book} for $j\in[-\delta,N-1]$ and $r$ denotes the radix.
 \vspace{-1ex}
 %
 \begin{figure}[htbp]
@@ -428,7 +428,7 @@ The benefits of the proposed methodology are demonstrated by using a Gaussian im
 \normalsize
 \end{eqnarray}
 %
-%Since the redundant digit set is used in online arithmetic, a signed integer number within $[-2^N,2^N-1]$ can be represented using $N$ digits. However the representation range is $[-(2^{N-1},2^{N-1}-1)]$ with $N$ digits using 2's complement number system. For a valid comparison, an $N$-digit image filter using online arithmetic is employed against an $(N+1)$-digit design using traditional arithmetic. 
+%Since the redundant digit set is used in online arithmetic, a signed integer number within $[-2^N,2^N-1]$ can be represented using $N$ digits. However the representation range is $[-(2^{N-1},2^{N-1}-1)]$ with $N$ digits using 2's complement number system. For a valid comparison, an $N$-digit image filter using online arithmetic is employed against an $(N+1)$-digit design using traditional arithmetic.
 In our experiments, two types of input data are utilized. One is randomly sampled from a uniform distribution of $N$-digit numbers. This type is referred to as ``Uniform Independent (UI) inputs''. The other is called ``real inputs'', which are the pixel values of several benchmark images.
 
 \subsection{Impact of Overclocking on Different\\ Arithmetic}
@@ -436,7 +436,8 @@ The values of overclocking error of the image filter based on traditional arithm
 %
 \begin{figure}
     \centering
-    \includegraphics[width=.5\textwidth]{./Figures/MRE.eps}
+    \includegraphics[width=.48\textwidth]{./Figures/MRE.eps}
+    \vspace{-2ex}
     \caption{Overclocking error in an image filter with two types of computer arithmetic: online arithmetic and standard binary arithmetic, of which the rated frequencies are 148.3MHz and 168.7MHz, respectively, according to the timing analysis tool.}
 \label{Fig:MRE_ImageFilter}
 \vspace{-2ex}
@@ -457,10 +458,10 @@ The output images for both design scenarios are presented in Figure \ref{Fig:Len
     \includegraphics[width=1.3in]{./Figures/Lena/Online_T404.eps}
   \end{minipage}%
   }% This is important! use % to indicate same line, otherwise new line
-  \subfigure[1.05${f_0}'$,~SNR:20.6dB]{
+  \subfigure[1.05${f_0}'$,~SNR:21.5dB]{
   \begin{minipage}[c]{0.24\textwidth}
     \centering
-    \includegraphics[width=1.3in]{./Figures/Lena/Trad_T436.eps}
+    \includegraphics[width=1.3in]{./Figures/Lena/Trad_T426.eps}
   \end{minipage}
   }\vspace{-1ex}
   \subfigure[1.15$f_0$,~SNR:36.2dB]{
@@ -469,10 +470,10 @@ The output images for both design scenarios are presented in Figure \ref{Fig:Len
     \includegraphics[width=1.3in]{./Figures/Lena/Online_T370.eps}
   \end{minipage}
   }%
-  \subfigure[1.15${f_0}'$,~SNR:15.6dB]{
+  \subfigure[1.15${f_0}'$,~SNR:9.0dB]{
   \begin{minipage}[c]{0.24\textwidth}
     \centering
-    \includegraphics[width=1.3in]{./Figures/Lena/Trad_T414.eps}
+    \includegraphics[width=1.3in]{./Figures/Lena/Trad_T390.eps}
   \end{minipage}
   }\vspace{-1ex}
   \subfigure[1.25$f_0$,~SNR:26.7dB]{
@@ -484,11 +485,11 @@ The output images for both design scenarios are presented in Figure \ref{Fig:Len
   \subfigure[1.25${f_0}'$,~SNR:8.5dB]{
   \begin{minipage}[c]{0.24\textwidth}
     \centering
-    \includegraphics[width=1.3in]{./Figures/Lena/Trad_T400.eps}
+    \includegraphics[width=1.3in]{./Figures/Lena/Trad_T358.eps}
   \end{minipage}
   }
 \vspace{-2ex}
-\caption{Output images of image filter using online arithmetic (left column) and traditional arithmetic (right column).}
+\caption{Output images of image filter using online arithmetic (left column) and traditional arithmetic (right column), where $f_0$ and ${f_0}'$ denote the maximum error-free frequencies for the corresponding design.}
 \label{Fig:LenaImage}
 \vspace{-2ex}
 \end{figure}
@@ -579,7 +580,7 @@ Tiffany & 2.35\% & 6.90\%   & 18.58\% & 12.22\% & 7.79\% \\
 \normalsize
 \end{table}
 
-The area comparison between two designs when $N=9$ is illustrated in Table~\ref{Tab:AreaComparison}. The area overhead with online arithmetic is 2.08 in terms of LUTs and 1.62 in terms of Slices in the FPGA.
+The area comparison between two designs when $N=8$ is illustrated in Table~\ref{Tab:AreaComparison}. The area overhead with online arithmetic is 2.08 in terms of LUTs and 1.62 in terms of Slices in the FPGA.
 
 \begin{table}[tbp]
 \caption{Area Comparison between Two Designs.}

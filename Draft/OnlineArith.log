@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.3)  26 NOV 2013 23:03
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.3)  27 NOV 2013 14:08
 entering extended mode
 **G:/GitHub/DAC14/Draft/OnlineArith.tex
 (G:/GitHub/DAC14/Draft/OnlineArith.tex
@@ -659,24 +659,24 @@ LaTeX Font Warning: Command \normalsize invalid in math mode on input line 428.
 
 
 Package epstopdf Info: Source file: <./Figures/MRE.eps>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 18533 bytes
+(epstopdf)                    date: 2013-11-27 13:47:06
+(epstopdf)                    size: 19593 bytes
 (epstopdf)             Output file: <./Figures/MRE-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 8123 bytes
+(epstopdf)                    date: 2013-11-27 13:47:16
+(epstopdf)                    size: 8551 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/MRE-eps-converted
 -to.pdf ./Figures/MRE.eps>
 (epstopdf)             \includegraphics on input line 439.
 Package epstopdf Info: Output file is already uptodate.
-<./Figures/MRE-eps-converted-to.pdf, id=125, 489.83pt x 317.185pt>
+<./Figures/MRE-eps-converted-to.pdf, id=125, 568.1225pt x 350.30875pt>
 File: ./Figures/MRE-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/MRE-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/MRE-eps-converted-to.pdf used on input line 
 439.
-(pdftex.def)             Requested size: 252.0pt x 163.18027pt.
+(pdftex.def)             Requested size: 241.91785pt x 149.17056pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 439--440
+Overfull \hbox (1.91785pt too wide) in paragraph at lines 439--441
  [][] 
  []
 
@@ -685,167 +685,152 @@ Package epstopdf Info: Source file: <./Figures/Lena/Online_T404.eps>
 (epstopdf)                    size: 341431 bytes
 (epstopdf)             Output file: <./Figures/Lena/Online_T404-eps-converted-t
 o.pdf>
+(epstopdf)                    date: 2013-11-26 23:03:11
+(epstopdf)                    size: 211351 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Online_T404-
 eps-converted-to.pdf ./Figures/Lena/Online_T404.eps>
-(epstopdf)             \includegraphics on input line 459.
-runsystem(epstopdf --outfile=./Figures/Lena/Online_T404-eps-converted-to.pdf ./
-Figures/Lena/Online_T404.eps)...executed (allowed).
-
-Package epstopdf Info: Result file: <./Figures/Lena/Online_T404-eps-converted-t
-o.pdf>
-(epstopdf)                    date: 2013-11-26 23:03:11
-(epstopdf)                    size: 211351 bytes.
+(epstopdf)             \includegraphics on input line 460.
+Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Online_T404-eps-converted-to.pdf, id=126, 386.44376pt x 386.443
 76pt>
 File: ./Figures/Lena/Online_T404-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Online_T404-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Online_T404-eps-converted-to.pdf used o
-n input line 459.
+n input line 460.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
-Package epstopdf Info: Source file: <./Figures/Lena/Trad_T436.eps>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 340632 bytes
-(epstopdf)             Output file: <./Figures/Lena/Trad_T436-eps-converted-to.
+Package epstopdf Info: Source file: <./Figures/Lena/Trad_T426.eps>
+(epstopdf)                    date: 2013-11-27 14:03:21
+(epstopdf)                    size: 340761 bytes
+(epstopdf)             Output file: <./Figures/Lena/Trad_T426-eps-converted-to.
 pdf>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 206964 bytes
-(epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T436-ep
-s-converted-to.pdf ./Figures/Lena/Trad_T436.eps>
-(epstopdf)             \includegraphics on input line 465.
+(epstopdf)                    date: 2013-11-27 14:03:54
+(epstopdf)                    size: 210508 bytes
+(epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T426-ep
+s-converted-to.pdf ./Figures/Lena/Trad_T426.eps>
+(epstopdf)             \includegraphics on input line 466.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Figures/Lena/Trad_T436-eps-converted-to.pdf, id=127, 386.44376pt x 386.44376
+<./Figures/Lena/Trad_T426-eps-converted-to.pdf, id=127, 386.44376pt x 386.44376
 pt>
-File: ./Figures/Lena/Trad_T436-eps-converted-to.pdf Graphic file (type pdf)
- <use ./Figures/Lena/Trad_T436-eps-converted-to.pdf>
-Package pdftex.def Info: ./Figures/Lena/Trad_T436-eps-converted-to.pdf used on 
-input line 465.
+File: ./Figures/Lena/Trad_T426-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Figures/Lena/Trad_T426-eps-converted-to.pdf>
+Package pdftex.def Info: ./Figures/Lena/Trad_T426-eps-converted-to.pdf used on 
+input line 466.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 Package epstopdf Info: Source file: <./Figures/Lena/Online_T370.eps>
 (epstopdf)                    date: 2013-11-26 23:02:14
 (epstopdf)                    size: 342627 bytes
 (epstopdf)             Output file: <./Figures/Lena/Online_T370-eps-converted-t
 o.pdf>
+(epstopdf)                    date: 2013-11-26 23:03:11
+(epstopdf)                    size: 224417 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Online_T370-
 eps-converted-to.pdf ./Figures/Lena/Online_T370.eps>
-(epstopdf)             \includegraphics on input line 471.
-runsystem(epstopdf --outfile=./Figures/Lena/Online_T370-eps-converted-to.pdf ./
-Figures/Lena/Online_T370.eps)...executed (allowed).
-
-Package epstopdf Info: Result file: <./Figures/Lena/Online_T370-eps-converted-t
-o.pdf>
-(epstopdf)                    date: 2013-11-26 23:03:11
-(epstopdf)                    size: 224417 bytes.
+(epstopdf)             \includegraphics on input line 472.
+Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Online_T370-eps-converted-to.pdf, id=128, 386.44376pt x 386.443
 76pt>
 File: ./Figures/Lena/Online_T370-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Online_T370-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Online_T370-eps-converted-to.pdf used o
-n input line 471.
+n input line 472.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
-Package epstopdf Info: Source file: <./Figures/Lena/Trad_T414.eps>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 341590 bytes
-(epstopdf)             Output file: <./Figures/Lena/Trad_T414-eps-converted-to.
+Package epstopdf Info: Source file: <./Figures/Lena/Trad_T390.eps>
+(epstopdf)                    date: 2013-11-27 14:03:34
+(epstopdf)                    size: 336985 bytes
+(epstopdf)             Output file: <./Figures/Lena/Trad_T390-eps-converted-to.
 pdf>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 220357 bytes
-(epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T414-ep
-s-converted-to.pdf ./Figures/Lena/Trad_T414.eps>
-(epstopdf)             \includegraphics on input line 477.
+(epstopdf)                    date: 2013-11-27 14:03:54
+(epstopdf)                    size: 239777 bytes
+(epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T390-ep
+s-converted-to.pdf ./Figures/Lena/Trad_T390.eps>
+(epstopdf)             \includegraphics on input line 478.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Figures/Lena/Trad_T414-eps-converted-to.pdf, id=129, 386.44376pt x 386.44376
+<./Figures/Lena/Trad_T390-eps-converted-to.pdf, id=129, 386.44376pt x 386.44376
 pt>
-File: ./Figures/Lena/Trad_T414-eps-converted-to.pdf Graphic file (type pdf)
- <use ./Figures/Lena/Trad_T414-eps-converted-to.pdf>
-Package pdftex.def Info: ./Figures/Lena/Trad_T414-eps-converted-to.pdf used on 
-input line 477.
+File: ./Figures/Lena/Trad_T390-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Figures/Lena/Trad_T390-eps-converted-to.pdf>
+Package pdftex.def Info: ./Figures/Lena/Trad_T390-eps-converted-to.pdf used on 
+input line 478.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 Package epstopdf Info: Source file: <./Figures/Lena/Online_T340.eps>
 (epstopdf)                    date: 2013-11-26 23:02:33
 (epstopdf)                    size: 344101 bytes
 (epstopdf)             Output file: <./Figures/Lena/Online_T340-eps-converted-t
 o.pdf>
+(epstopdf)                    date: 2013-11-26 23:03:12
+(epstopdf)                    size: 234732 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Online_T340-
 eps-converted-to.pdf ./Figures/Lena/Online_T340.eps>
-(epstopdf)             \includegraphics on input line 483.
-runsystem(epstopdf --outfile=./Figures/Lena/Online_T340-eps-converted-to.pdf ./
-Figures/Lena/Online_T340.eps)...executed (allowed).
-
-Package epstopdf Info: Result file: <./Figures/Lena/Online_T340-eps-converted-t
-o.pdf>
-(epstopdf)                    date: 2013-11-26 23:03:12
-(epstopdf)                    size: 234732 bytes.
+(epstopdf)             \includegraphics on input line 484.
+Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Online_T340-eps-converted-to.pdf, id=130, 386.44376pt x 386.443
 76pt>
 File: ./Figures/Lena/Online_T340-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Online_T340-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Online_T340-eps-converted-to.pdf used o
-n input line 483.
+n input line 484.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
-Package epstopdf Info: Source file: <./Figures/Lena/Trad_T400.eps>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 343481 bytes
-(epstopdf)             Output file: <./Figures/Lena/Trad_T400-eps-converted-to.
+Package epstopdf Info: Source file: <./Figures/Lena/Trad_T358.eps>
+(epstopdf)                    date: 2013-11-27 14:03:45
+(epstopdf)                    size: 345416 bytes
+(epstopdf)             Output file: <./Figures/Lena/Trad_T358-eps-converted-to.
 pdf>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 240182 bytes
-(epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T400-ep
-s-converted-to.pdf ./Figures/Lena/Trad_T400.eps>
-(epstopdf)             \includegraphics on input line 489.
+(epstopdf)                    date: 2013-11-27 14:03:55
+(epstopdf)                    size: 253605 bytes
+(epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T358-ep
+s-converted-to.pdf ./Figures/Lena/Trad_T358.eps>
+(epstopdf)             \includegraphics on input line 490.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Figures/Lena/Trad_T400-eps-converted-to.pdf, id=131, 386.44376pt x 386.44376
+<./Figures/Lena/Trad_T358-eps-converted-to.pdf, id=131, 386.44376pt x 386.44376
 pt>
-File: ./Figures/Lena/Trad_T400-eps-converted-to.pdf Graphic file (type pdf)
- <use ./Figures/Lena/Trad_T400-eps-converted-to.pdf>
-Package pdftex.def Info: ./Figures/Lena/Trad_T400-eps-converted-to.pdf used on 
-input line 489.
+File: ./Figures/Lena/Trad_T358-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Figures/Lena/Trad_T358-eps-converted-to.pdf>
+Package pdftex.def Info: ./Figures/Lena/Trad_T358-eps-converted-to.pdf used on 
+input line 490.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 
-Overfull \hbox (11.15913pt too wide) in paragraph at lines 459--491
+Overfull \hbox (11.15913pt too wide) in paragraph at lines 460--492
  [][][] 
  []
 
 
-Overfull \hbox (14.237pt too wide) in paragraph at lines 459--491
+Overfull \hbox (14.237pt too wide) in paragraph at lines 460--492
  [][] 
  []
 
 
-Overfull \hbox (11.15913pt too wide) in paragraph at lines 459--491
+Overfull \hbox (11.15913pt too wide) in paragraph at lines 460--492
  [][] 
  []
 
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 50
-0.
+1.
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 502.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 503.
 
 
-
-Underfull \vbox (badness 3260) has occurred while \output is active []
-
- [5 <G:/GitHub/DAC14/Draft/Figures/PE8-eps-converted-to.pdf> <G:/GitHub/DAC14/D
-raft/Figures/PE12-eps-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/PE16-eps
--converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/PE32-eps-converted-to.pdf> <G
-:/GitHub/DAC14/Draft/Figures/MRE-eps-converted-to.pdf>]
-Overfull \hbox (5.64279pt too wide) in paragraph at lines 514--530
+[5 <G:/GitHub/DAC14/Draft/Figures/PE8-eps-converted-to.pdf> <G:/GitHub/DAC14/Dr
+aft/Figures/PE12-eps-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/PE16-eps-
+converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/PE32-eps-converted-to.pdf> <G:
+/GitHub/DAC14/Draft/Figures/MRE-eps-converted-to.pdf>]
+Overfull \hbox (5.64279pt too wide) in paragraph at lines 515--531
  [][] 
  []
 
 (G:\GitHub\DAC14\Draft\OnlineArith.bbl [6 <G:/GitHub/DAC14/Draft/Figures/Lena/O
-nline_T404-eps-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/Lena/Trad_T436-
+nline_T404-eps-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/Lena/Trad_T426-
 eps-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/Lena/Online_T370-eps-conve
-rted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/Lena/Trad_T414-eps-converted-to.pdf
+rted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/Lena/Trad_T390-eps-converted-to.pdf
 > <G:/GitHub/DAC14/Draft/Figures/Lena/Online_T340-eps-converted-to.pdf> <G:/Git
-Hub/DAC14/Draft/Figures/Lena/Trad_T400-eps-converted-to.pdf>]) [7
+Hub/DAC14/Draft/Figures/Lena/Trad_T358-eps-converted-to.pdf>]) [7
 
 ]
 (G:\GitHub\DAC14\Draft\OnlineArith.aux)
@@ -878,7 +863,7 @@ e1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/ur
 w/helvetic/uhvr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/
 utmb8a.pfb>
-Output written on OnlineArith.pdf (7 pages, 2239795 bytes).
+Output written on OnlineArith.pdf (7 pages, 2276768 bytes).
 PDF statistics:
  245 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
