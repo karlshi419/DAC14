@@ -341,7 +341,8 @@ However, the change of output digits may not result in a different number with o
 %\end{eqnarray}
 
 \subsection{Expectation of Overclocking Error}\label{Sec:MeanError}
-For a given $T_S$, the combination of $Prob(T_S)$ and $E(|\varepsilon|)$ in Algorithm 2 and (\ref{Eq:ErrorMagnitude}) yields the overall expectation of overclocking error, as presented in (\ref{Eq:Expectation_Overclocking}). The verification of the proposed model is illustrated in the top row of Figure \ref{Fig:ModelVerification} against the results from Monte-Carlo simulations based on the aforementioned timing model. $T_S$ is normalized with respect to the value from structural timing analysis, i.e. $(N+\delta)\mu$. Note that both results are obtained when assuming the input data are randomly generated following uniform distribution. It can be seen that the modeled value match well with the simulation results. We also verify the models against the FPGA results without timing assumptions, as illustrated in the bottom row in Figure~\ref{Fig:ModelVerification}. We see that our model does not capture the small errors, because the other sources of delay are not modeled.
+For a given $T_S$, the combination of $Prob(T_S)$ and $E(|\varepsilon|)$ in Algorithm 2 and (\ref{Eq:ErrorMagnitude}) yields the overall expectation of overclocking error, as presented in (\ref{Eq:Expectation_Overclocking}). The verification of the proposed model is illustrated in the top row of Figure \ref{Fig:ModelVerification} against the results from Monte-Carlo simulations based on the aforementioned timing model. $T_S$ is normalized with respect to the value from structural timing analysis, i.e. $(N+\delta)\mu$. Note that both results are obtained when assuming the input data are randomly generated following uniform distribution. It can be seen that the modeled value match well with the simulation results. We also verify the models against the FPGA results without timing assumptions, as illustrated in the bottom row in Figure~\ref{Fig:ModelVerification}. 
+The general behavior of the model is similar to the FPGA implementation, however it does not capture the small increments in errors because we only model the coarse delay which is in units of $\mu$. Whereas the other sources of delay are not modeled, such as the generation of the online inputs and result digits.
 %
 \begin{eqnarray}\label{Eq:Expectation_Overclocking}
 \scriptsize
@@ -392,7 +393,13 @@ For all possible $\tau$ as bounded by (\ref{Eq:Bound_GenChain}), the probability
 \normalsize
 \end{eqnarray}
 %
-From Figure \ref{Fig:Probability_Error_Mean} several observations can be made. First, the error magnitude decreases exponentially with longer chain lengths, because in contrast to the conventional arithmetic, timing violation firstly affects LSDs with online arithmetic. Second, chains with longer delay would happen with greater probabilities in an OM, because the delay is mainly dependent upon the inputs that generate the chain, while the chain propagation and annihilation will not be affected by the inputs. For the traditional ripple-carry-based arithmetic, specific input patterns are required to decide carry generation, propagation and annihilation. In addition, carry chains could not be overlapped with traditional arithmetic, whereas long chains might occur simultaneously and mutually overlapped within the OM. However, we also notice that for chains with long delays, the increasing speed of probability is much slower than the decreasing speed of error magnitude with long chain delays. Therefore the combination of both would results in a decline in error expectation. In traditional arithmetic, the decrease of probability is offset by the growth of error magnitude, as both of them vary exponentially. Hence the error expectation with respect to each chain delay keeps almost constant. This finding indicates that the OM is less sensitive to overclocking error than the multiplier using traditional arithmetic, especially when timing violations initially appear.
+From Figure \ref{Fig:Probability_Error_Mean} several observations can be made. First, the error magnitude decreases exponentially with longer chain lengths, because timing violation firstly affects LSDs with online arithmetic. Second, we see that chains with longer delay would happen with greater probabilities in an OM. This is because for the unrolled radix-2 OM, $d(\tau)$ is only dependent upon the inputs for chain generation instead of propagation and annihilation. Thus long chain is generated as long as both input digits are not zeros with the probability of 4/9. Compared to the traditional arithmetic, carry generation, propagation and annihilation are all decided by specific input patterns. This limits the overall probability of long chains. However, we also notice that for chains with long delays, the increasing in likelihood of error is outweighed by the decrease in magnitude of error. Therefore the combination of both results in a decline in error expectation. In contrast, one would expect error expectation to grow faster as the amount of overclocking is increased when using traditional arithmetic because errors occur in MSBs.
+
+%traditional arithmetic, the decrease of probability is offset by the growth of error magnitude, as both of them vary exponentially. Hence the error expectation with respect to each chain delay keeps almost constant. In contrast,
+
+%In addition, carry chains could not be overlapped with traditional arithmetic, whereas long chains might occur simultaneously and mutually overlapped within the OM.
+%, because the delay is mainly dependent upon the inputs that generate the chain, while the chain propagation and annihilation will not be affected by the inputs. For the traditional ripple-carry-based arithmetic,
+%This finding indicates that the OM is less sensitive to overclocking error than the multiplier using traditional arithmetic, especially when timing violations initially appear.
 
 \begin{figure}[t]
   \vspace{-2.5ex}
@@ -429,7 +436,7 @@ From Figure \ref{Fig:Probability_Error_Mean} several observations can be made. F
 
 \section{Case Study: Image Filter}\label{Sec:CaseStudy}
 \subsection{Experimental Setup}
-The benefits of the proposed methodology are demonstrated by using a Gaussian image filter with two types of computer arithmetic. One is the radix-2 traditional arithmetic and data are represented in the 2's complemented form. In this case, adders and multipliers are created using Xilinx Core Generator \cite{Virtex6} with speed optimization. The other is the radix-2 online arithmetic, of which basic building blocks are described in previous sections. In this case, all inputs and outputs are represented in the online format. In order to achieve the desired latency between input and output, both designs are overclocked and the errors seen at the output are recorded. The results are obtained from a Xilinx Virtex-6 FPGA through post place-and-route simulations. In our experiments, the results are evaluated in terms of mean relative error (MRE), which represents the percentage of error at outputs, as given by (\ref{Eq:MRE}) where $E_{error}$ and $E_{out}$ refer to the mean value of error and correct output, respectively.
+The benefits of the proposed methodology are demonstrated by using a $3\times3$ Gaussian image filter with two types of computer arithmetic. One is the radix-2 traditional arithmetic and data are represented in the 2's complemented form. In this case, adders and multipliers are created using Xilinx Core Generator \cite{Virtex6} with speed optimization. The other is the radix-2 online arithmetic, of which basic building blocks are described in previous sections. In this case, all inputs and outputs are represented in the online format. In order to achieve the desired latency between input and output, both designs are overclocked and the errors seen at the output are recorded. The results are obtained from a Xilinx Virtex-6 FPGA through post place-and-route simulations. The results are evaluated in terms of mean relative error (MRE), which represents the percentage of error at outputs, as given by (\ref{Eq:MRE}) where $E_{error}$ and $E_{out}$ refer to the mean value of error and correct output, respectively.
 %
 \begin{eqnarray}\label{Eq:MRE}
 \scriptsize
@@ -439,7 +446,7 @@ The benefits of the proposed methodology are demonstrated by using a Gaussian im
 \normalsize
 %
 %Since the redundant digit set is used in online arithmetic, a signed integer number within $[-2^N,2^N-1]$ can be represented using $N$ digits. However the representation range is $[-(2^{N-1},2^{N-1}-1)]$ with $N$ digits using 2's complement number system. For a valid comparison, an $N$-digit image filter using online arithmetic is employed against an $(N+1)$-digit design using traditional arithmetic.
-In our experiments, two types of input data are utilized. One is randomly sampled from a uniform distribution of $N$-digit numbers. This type is referred to as ``Uniform Independent (UI) inputs''. The other is called ``real inputs'', which are the pixel values of several benchmark images.
+In our experiments, two types of input data are utilized. One is randomly sampled from a uniform distribution of $N$-digit numbers. This type is referred to as ``Uniform Independent (UI) inputs''. The other is called ``real inputs'', which are the pixel values of several $512\times512$ benchmark images.
 
 \vspace{-1ex}
 \subsection{Quantify the Impact of Overclocking}
@@ -505,18 +512,20 @@ The output images for both design scenarios are presented in Figure \ref{Fig:Len
 \vspace{-2ex}
 \end{figure}
 
-\vspace{-1ex}
-\subsection{Potential Benefits in Circuit Design}
-In general, our results could be of interest to a circuit designer in two folds. By choosing different arithmetic and data representations, either a circuit can be designed to operate at a certain frequency with the minimum possible MRE, or a given error budget specified by the algorithm designer can be met with the fastest achievable frequency. For the first case, the experimental results obtained by UI inputs and 4 benchmark images are summarized in Table~\ref{Tab:MRE_Redu_Freq} in terms of the relative reduction of MRE as given by (\ref{Eq:MRE_Reduction}) where $MRE_{OL}$ and $MRE_{Trad}$ denote the value obtained with online arithmetic and with traditional arithmetic, respectively, and in Table \ref{Tab:SNR_Impro_Freq} for the differences of SNR.
-%
-\begin{eqnarray}\label{Eq:MRE_Reduction}
-\scriptsize
-  %\frac{MRE_{Trad}-MRE_{OL}}{MRE_{Trad}}\times100\%
-  {(MRE_{Trad}-MRE_{OL})}/{MRE_{Trad}}\times100\%
-\normalsize
-\end{eqnarray}
-%
-In both tables the frequency is normalized to the maximum error-free frequency for each arithmetic. A significant reduction of MRE can be observed using online arithmetic for all input types. The geometric mean reduction varies from $97.3\%$ to $98.2\%$. In addition, larger differences of MRE reduction can be achieved in practice, as long chains occur with even smaller probabilities with real data. Similarly from Table \ref{Tab:SNR_Impro_Freq}, the differences in SNR are $21.4dB\sim43.9dB$.%\vspace{-1ex}
+%\vspace{-1ex}
+%\subsection{Potential Benefits in Circuit Design}
+%In general, our results could be of interest to a circuit designer in two folds. By choosing different arithmetic and data representations, either a circuit can be designed to operate at a certain frequency with the minimum possible MRE, or a given error budget specified by the algorithm designer can be met with the fastest achievable frequency. For the first case, 
+
+We also perform experiments using other benchmark images. The results are summarized in Table~\ref{Tab:MRE_Redu_Freq} in terms of the relative reduction of MRE, and in in Table \ref{Tab:SNR_Impro_Freq} for the differences of SNR. In both tables the frequency is normalized to the maximum error-free frequency for each arithmetic. A significant reduction of MRE can be observed using online arithmetic for all input types. The geometric mean reduction varies from $97.3\%$ to $98.2\%$. In addition, larger differences of MRE reduction can be achieved in practice, as long chains occur with even smaller probabilities with real data. Similarly from Table \ref{Tab:SNR_Impro_Freq}, the differences in SNR are $21.4dB\sim43.9dB$.%\vspace{-1ex}
+
+%the experimental results obtained by UI inputs and 4 benchmark images are summarized in Table~\ref{Tab:MRE_Redu_Freq} in terms of the relative reduction of MRE as given by (\ref{Eq:MRE_Reduction}) where $MRE_{OL}$ and $MRE_{Trad}$ denote the value obtained with online arithmetic and with traditional arithmetic, respectively, and .
+%%
+%\begin{eqnarray}\label{Eq:MRE_Reduction}
+%\scriptsize
+%  %\frac{MRE_{Trad}-MRE_{OL}}{MRE_{Trad}}\times100\%
+%  {(MRE_{Trad}-MRE_{OL})}/{MRE_{Trad}}\times100\%
+%\normalsize
+%\end{eqnarray}
 
 \begin{table}[htb]
 \vspace{-1ex}
@@ -568,35 +577,38 @@ Tiffany & 43.9 & 25.9 & 29.5 & 25.6 & 24.5\\
 \normalsize
 \end{table}
 
-For the second design perspective, Table \ref{Tab:MRE_Reduc_Error} illustrates the frequency speedups with different input types when specific error budgets can be tolerated. We see that for all input types using online arithmetic still outperforms the traditional design for each MRE budget in terms of operating frequency. Likewise the geometric mean of frequency speed-ups is larger for real image inputs.\vspace{-1ex}
+%For the second design perspective, Table \ref{Tab:MRE_Reduc_Error} illustrates the frequency speedups with different input types when specific error budgets can be tolerated. We see that for all input types using online arithmetic still outperforms the traditional design for each MRE budget in terms of operating frequency. Likewise the geometric mean of frequency speed-ups is larger for real image inputs.\vspace{-1ex}
 
-\begin{table}[htb]
-\vspace{-2ex}
-\renewcommand{\arraystretch}{1.1}
-\setlength{\tabcolsep}{4.1pt}
-\caption{Relative Improvement in Frequency with Online Arithmetic for Various Error Budgets.}
-\label{Tab:MRE_Reduc_Error}
-\scriptsize
-\centering
-\begin{tabular}{|c|cccc|c|}
-\hline
-\multirow{2}*{\textbf{Inputs}} & \multicolumn{4}{c|}{\textbf{Error Budget}} &
-\multirow{2}*{\begin{tabular}{c}\textbf{Geo.}\\\textbf{Mean}\end{tabular}}\\
-& 0.01\% & 0.1\% & 1\% & 10\% &\\
-\hline
-Uniform & N/A & 4.59\%   & 8.78\%  & 12.83\% & 8.03\%\\
-Lena    & 7.96\% & 11.50\%  & 16.39\% & 13.71\% & 11.88\%\\
-Pepper  & 6.22\% & 8.87\%   & 18.68\% & 15.94\% & 11.32\%\\
-Sailboat& 5.71\% & 8.87\%   & 16.93\% & 15.29\% & 10.70\%\\
-Tiffany & 2.35\% & 6.90\%   & 18.58\% & 12.22\% & 7.79\% \\
-\hline
-\end{tabular}
-\label{Tab:}
-\vspace{-2ex}
-\normalsize
-\end{table}
+%\begin{table}[htb]
+%\vspace{-2ex}
+%\renewcommand{\arraystretch}{1.1}
+%\setlength{\tabcolsep}{4.1pt}
+%\caption{Relative Improvement in Frequency with Online Arithmetic for Various Error Budgets.}
+%\label{Tab:MRE_Reduc_Error}
+%\scriptsize
+%\centering
+%\begin{tabular}{|c|cccc|c|}
+%\hline
+%\multirow{2}*{\textbf{Inputs}} & \multicolumn{4}{c|}{\textbf{Error Budget}} &
+%\multirow{2}*{\begin{tabular}{c}\textbf{Geo.}\\\textbf{Mean}\end{tabular}}\\
+%& 0.01\% & 0.1\% & 1\% & 10\% &\\
+%\hline
+%Uniform & N/A & 4.59\%   & 8.78\%  & 12.83\% & 8.03\%\\
+%Lena    & 7.96\% & 11.50\%  & 16.39\% & 13.71\% & 11.88\%\\
+%Pepper  & 6.22\% & 8.87\%   & 18.68\% & 15.94\% & 11.32\%\\
+%Sailboat& 5.71\% & 8.87\%   & 16.93\% & 15.29\% & 10.70\%\\
+%Tiffany & 2.35\% & 6.90\%   & 18.58\% & 12.22\% & 7.79\% \\
+%\hline
+%\end{tabular}
+%\label{Tab:}
+%\vspace{-2ex}
+%\normalsize
+%\end{table}
 
-The area comparison between two designs is illustrated in Table~\ref{Tab:AreaComparison}. The area overhead with online arithmetic is 2.08 in terms of LUTs and 1.62 in terms of Slices in the FPGA.\vspace{-1ex}
+The area comparison between two designs is illustrated in Table~\ref{Tab:AreaComparison}. While we notice that our approach comes at some increase in area, the Virtex architecture is optimized for conventional arithmetic. For instance, dedicated multiplexers and encoders are designed for very fast ripple carry addition [xxx]. Besides, at least 2 orders of magnitude error reduction is obtained for a given frequency in our design, as shown in Figure \ref{Fig:MRE_ImageFilter}
+
+addition is accompolished by built-in fast carry logic 
+%The area overhead with online arithmetic is 2.08 in terms of LUTs and 1.62 in terms of Slices in the FPGA.\vspace{-1ex}
 
 
 \begin{table}[htb]

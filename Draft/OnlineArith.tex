@@ -436,7 +436,7 @@ From Figure \ref{Fig:Probability_Error_Mean} several observations can be made. F
 
 \section{Case Study: Image Filter}\label{Sec:CaseStudy}
 \subsection{Experimental Setup}
-The benefits of the proposed methodology are demonstrated by using a $3\times3$ Gaussian image filter with two types of computer arithmetic. One is the radix-2 traditional arithmetic and data are represented in the 2's complemented form. In this case, adders and multipliers are created using Xilinx Core Generator \cite{Virtex6} with speed optimization. The other is the radix-2 online arithmetic, of which basic building blocks are described in previous sections. In this case, all inputs and outputs are represented in the online format. In order to achieve the desired latency between input and output, both designs are overclocked and the errors seen at the output are recorded. The results are obtained from a Xilinx Virtex-6 FPGA through post place-and-route simulations. The results are evaluated in terms of mean relative error (MRE), which represents the percentage of error at outputs, as given by (\ref{Eq:MRE}) where $E_{error}$ and $E_{out}$ refer to the mean value of error and correct output, respectively.
+The benefits of the proposed methodology are demonstrated by using a $3\times3$ Gaussian image filter with two types of computer arithmetic. One is the radix-2 traditional arithmetic and data are represented in the 2's complemented form. In this case, adders and multipliers are created using Xilinx Core Generator \cite{XilinxMult} with speed optimization. The other is the radix-2 online arithmetic, of which basic building blocks are described in previous sections. In this case, all inputs and outputs are represented in the online format. In order to achieve the desired latency between input and output, both designs are overclocked and the errors seen at the output are recorded. The results are obtained from a Xilinx Virtex-6 FPGA through post place-and-route simulations. The results are evaluated in terms of mean relative error (MRE), which represents the percentage of error at outputs, as given by (\ref{Eq:MRE}) where $E_{error}$ and $E_{out}$ refer to the mean value of error and correct output, respectively.
 %
 \begin{eqnarray}\label{Eq:MRE}
 \scriptsize
@@ -527,11 +527,12 @@ We also perform experiments using other benchmark images. The results are summar
 %\normalsize
 %\end{eqnarray}
 
-\begin{table}[htb]
+\begin{table}[bht]
 \vspace{-1ex}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4.1pt}
 \caption{Relative Reduction of MRE with Online Arithmetic for Various Normalized Frequencies.}
+\vspace{.5ex}
 \label{Tab:MRE_Redu_Freq}
 \scriptsize
 \centering
@@ -548,16 +549,16 @@ Sailboat& 99.5\% & 97.9\% & 97.3\% & 96.8\% & 95.1\% & 97.3\%\\
 Tiffany & 99.9\% & 97.6\% & 98.4\% & 97.8\% & 97.2\% & 98.2\%\\
 \hline
 \end{tabular}
-\label{Tab:}
-\vspace{-2ex}
+\vspace{-1ex}
 \normalsize
 \end{table}
 
-\begin{table}[htb]
-\vspace{-3ex}
+\begin{table}[bht]
+\vspace{-1ex}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4.1pt}
 \caption{Improvement of SNR (dB) with Online Arithmetic for Various Normalized Frequencies}
+\vspace{.5ex}
 \label{Tab:SNR_Impro_Freq}
 \scriptsize
 \centering
@@ -572,8 +573,7 @@ Sailboat& 33.7 & 27.5 & 26.3 & 25.0 & 21.7\\
 Tiffany & 43.9 & 25.9 & 29.5 & 25.6 & 24.5\\
 \hline
 \end{tabular}
-\label{Tab:}
-\vspace{-2ex}
+\vspace{-1ex}
 \normalsize
 \end{table}
 
@@ -605,12 +605,15 @@ Tiffany & 43.9 & 25.9 & 29.5 & 25.6 & 24.5\\
 %\normalsize
 %\end{table}
 
-The area comparison between two designs is illustrated in Table~\ref{Tab:AreaComparison}. The area overhead with online arithmetic is 2.08 in terms of LUTs and 1.62 in terms of Slices in the FPGA.\vspace{-1ex}
+The area comparison between two designs is illustrated in Table~\ref{Tab:AreaComparison}. While we notice that our approach comes at some increase in area, the FPGA architecture is optimized for conventional arithmetic. For instance, the Virtex series employs dedicated multiplexers and encoders for very fast ripple carry addition~\cite{Virtex6}. Besides, at least 2 orders of magnitude error reduction is obtained for a given frequency in our design, as shown in Figure \ref{Fig:MRE_ImageFilter}. Although the differences in both error and area can be compensated by using more digits with traditional arithmetic, this will result in longer delay and an even larger gap in frequency between two designs.
+ 
+%The area overhead with online arithmetic is 2.08 in terms of LUTs and 1.62 in terms of Slices in the FPGA.\vspace{-1ex}
 
 
-\begin{table}[htb]
-\vspace{-3ex}
+\begin{table}[bht]
+\vspace{-1ex}
 \caption{Area Comparison between Two Designs.}
+\vspace{.5ex}
 \scriptsize
 \centering
 \label{Tab:AreaComparison}
@@ -619,12 +622,11 @@ The area comparison between two designs is illustrated in Table~\ref{Tab:AreaCom
 \multirow{2}*{\textbf{Metric}} & \multicolumn{2}{c|}{\textbf{Arithmetic Type}} &
 \multirow{2}*{\textbf{Overhead}}\\
  & Traditional & Online &\\ \hline
- LUTs   & 304 & 632 & 2.08 \\ \hline
- Slices & 108 & 175 & 1.62 \\ \hline
+ LUTs   & 912 & 1896 & 2.08 \\ \hline
+ Slices & 324 & 525 & 1.62 \\ \hline
 
 \end{tabular}
-\label{Tab:Annihilation}
-\vspace{-2ex}
+%\vspace{-1ex}
 \normalsize
 \end{table}
 

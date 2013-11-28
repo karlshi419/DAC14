@@ -69,6 +69,10 @@ K.~S. Trivedi and M.~Ercegovac.
 
 \bibitem{Virtex6}
 Xilinx.
-\newblock {\em Virtex-6 {FPGA} Configurable Logic Block User Guide}.
+\newblock Virtex-6 {FPGA} configurable logic block user guide.
+
+\bibitem{XilinxMult}
+Xilinx.
+\newblock Logi{CORE} {IP} multiplier v11.2, 2011.
 
 \end{thebibliography}
