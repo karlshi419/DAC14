@@ -50,6 +50,12 @@ Z.~M. Kedem, V.~J. Mooney, K.~K. Muntimadugu, and K.~V. Palem.
 \newblock In {\em Proc. Int. Symp. on Low Power Elec. and Design}, pages
   211--216, 2011.
 
+\bibitem{Undersigned2x2multiplier}
+P.~Kulkarni, P.~Gupta, and M.~Ercegovac.
+\newblock Trading accuracy for power with an underdesigned multiplier
+  architecture.
+\newblock In {\em Proc. Int. Conf. on VLSI Design}, pages 346--351, 2011.
+
 \bibitem{Online_Trunc}
 S.~Rajagopal and J.~Cavallaro.
 \newblock Truncated online arithmetic with applications to communication

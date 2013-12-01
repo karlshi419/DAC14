@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.3)  29 NOV 2013 12:56
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.3)  1 DEC 2013 17:11
 entering extended mode
 **G:/GitHub/DAC14/Draft/OnlineArith.tex
 (G:/GitHub/DAC14/Draft/OnlineArith.tex
@@ -334,7 +334,7 @@ LaTeX Font Info:    Try loading font information for U+lasy on input line 34.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (2.37462pt too wide) in paragraph at lines 64--65
+Overfull \hbox (2.37462pt too wide) in paragraph at lines 65--66
 []\T1/aer/m/n/9 analytical and em-pir-i-cal re-sults which demon-strate that
  []
 
@@ -347,33 +347,33 @@ File: ./Figures/OnlineArithmetic_DataFlow.pdf Graphic file (type pdf)
 
 <use ./Figures/OnlineArithmetic_DataFlow.pdf>
 Package pdftex.def Info: ./Figures/OnlineArithmetic_DataFlow.pdf used on input 
-line 93.
+line 94.
 (pdftex.def)             Requested size: 221.76123pt x 77.6708pt.
 
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 10
-1.
+2.
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 103.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 104.
 
 
 <./Figures/SDAdder.pdf, id=13, 623.32875pt x 368.1253pt>
 File: ./Figures/SDAdder.pdf Graphic file (type pdf)
 
 <use ./Figures/SDAdder.pdf>
-Package pdftex.def Info: ./Figures/SDAdder.pdf used on input line 115.
+Package pdftex.def Info: ./Figures/SDAdder.pdf used on input line 116.
 (pdftex.def)             Requested size: 252.0pt x 148.82593pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 115--117
+Overfull \hbox (12.0pt too wide) in paragraph at lines 116--118
 [][]
  []
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 148.
+LaTeX Font Warning: Command \small invalid in math mode on input line 149.
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 154.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 155.
 
 
 <./Figures/OnlineMult_Unrolled.pdf, id=14, 733.23938pt x 509.65407pt>
@@ -381,10 +381,10 @@ File: ./Figures/OnlineMult_Unrolled.pdf Graphic file (type pdf)
 
 <use ./Figures/OnlineMult_Unrolled.pdf>
 Package pdftex.def Info: ./Figures/OnlineMult_Unrolled.pdf used on input line 1
-62.
+63.
 (pdftex.def)             Requested size: 246.96277pt x 171.65475pt.
 
-Overfull \hbox (6.96277pt too wide) in paragraph at lines 162--164
+Overfull \hbox (6.96277pt too wide) in paragraph at lines 163--165
  [][] 
  []
 
@@ -392,165 +392,165 @@ Overfull \hbox (6.96277pt too wide) in paragraph at lines 162--164
 14/Draft/Figures/SDAdder.pdf>]
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 24
-1.
+2.
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 244.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 245.
 
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 253.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 254.
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 261.
 
 
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 26
-6.
+7.
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 273.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 274.
 
 
 
-LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 27
-9.
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 28
+0.
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 284.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 285.
 
 
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 29
-2.
+3.
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 294.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 295.
 
 
 [3 <G:/GitHub/DAC14/Draft/Figures/OnlineMult_Unrolled.pdf>]
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 328.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 329.
 
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 330.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 331.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 351.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 352.
 
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 353.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 354.
 
 
 Package epstopdf Info: Source file: <./Figures/WL8_Model.eps>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 12083 bytes
+(epstopdf)                    date: 2013-12-01 17:02:58
+(epstopdf)                    size: 11370 bytes
 (epstopdf)             Output file: <./Figures/WL8_Model-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 4206 bytes
+(epstopdf)                    date: 2013-12-01 17:03:48
+(epstopdf)                    size: 4049 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/WL8_Model-eps-con
 verted-to.pdf ./Figures/WL8_Model.eps>
-(epstopdf)             \includegraphics on input line 365.
+(epstopdf)             \includegraphics on input line 366.
 Package epstopdf Info: Output file is already uptodate.
-<./Figures/WL8_Model-eps-converted-to.pdf, id=107, 376.40625pt x 317.185pt>
+<./Figures/WL8_Model-eps-converted-to.pdf, id=107, 338.26375pt x 298.11375pt>
 File: ./Figures/WL8_Model-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/WL8_Model-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/WL8_Model-eps-converted-to.pdf used on input
- line 365.
-(pdftex.def)             Requested size: 122.85876pt x 103.52916pt.
+ line 366.
+(pdftex.def)             Requested size: 122.85876pt x 108.27612pt.
 
-Overfull \hbox (1.896pt too wide) in paragraph at lines 365--365
+Overfull \hbox (1.896pt too wide) in paragraph at lines 366--366
 [][] 
  []
 
 Package epstopdf Info: Source file: <./Figures/WL12_Model.eps>
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 12806 bytes
+(epstopdf)                    date: 2013-12-01 17:02:46
+(epstopdf)                    size: 13163 bytes
 (epstopdf)             Output file: <./Figures/WL12_Model-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2013-11-22 16:50:39
-(epstopdf)                    size: 4444 bytes
+(epstopdf)                    date: 2013-12-01 17:03:49
+(epstopdf)                    size: 4434 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/WL12_Model-eps-co
 nverted-to.pdf ./Figures/WL12_Model.eps>
-(epstopdf)             \includegraphics on input line 371.
+(epstopdf)             \includegraphics on input line 372.
 Package epstopdf Info: Output file is already uptodate.
-<./Figures/WL12_Model-eps-converted-to.pdf, id=108, 376.40625pt x 317.185pt>
+<./Figures/WL12_Model-eps-converted-to.pdf, id=108, 338.26375pt x 299.1175pt>
 File: ./Figures/WL12_Model-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/WL12_Model-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/WL12_Model-eps-converted-to.pdf used on inpu
-t line 371.
-(pdftex.def)             Requested size: 122.85876pt x 103.52916pt.
+t line 372.
+(pdftex.def)             Requested size: 122.85876pt x 108.64069pt.
 
-Overfull \hbox (1.896pt too wide) in paragraph at lines 371--371
+Overfull \hbox (1.896pt too wide) in paragraph at lines 372--372
 [][] 
  []
 
 Package epstopdf Info: Source file: <./Figures/Model8.eps>
-(epstopdf)                    date: 2013-11-26 16:39:18
-(epstopdf)                    size: 17735 bytes
+(epstopdf)                    date: 2013-12-01 17:03:43
+(epstopdf)                    size: 17749 bytes
 (epstopdf)             Output file: <./Figures/Model8-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-11-26 16:39:18
-(epstopdf)                    size: 5603 bytes
+(epstopdf)                    date: 2013-12-01 17:03:49
+(epstopdf)                    size: 5680 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Model8-eps-conver
 ted-to.pdf ./Figures/Model8.eps>
-(epstopdf)             \includegraphics on input line 377.
+(epstopdf)             \includegraphics on input line 378.
 Package epstopdf Info: Output file is already uptodate.
-<./Figures/Model8-eps-converted-to.pdf, id=109, 376.40625pt x 317.185pt>
+<./Figures/Model8-eps-converted-to.pdf, id=109, 347.2975pt x 301.125pt>
 File: ./Figures/Model8-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/Model8-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Model8-eps-converted-to.pdf used on input li
-ne 377.
-(pdftex.def)             Requested size: 122.85876pt x 103.52916pt.
+ne 378.
+(pdftex.def)             Requested size: 122.85876pt x 106.52563pt.
 
-Overfull \hbox (1.896pt too wide) in paragraph at lines 377--377
+Overfull \hbox (1.896pt too wide) in paragraph at lines 378--378
 [][] 
  []
 
 Package epstopdf Info: Source file: <./Figures/Model12.eps>
-(epstopdf)                    date: 2013-11-26 16:39:18
-(epstopdf)                    size: 19875 bytes
+(epstopdf)                    date: 2013-12-01 17:03:32
+(epstopdf)                    size: 17934 bytes
 (epstopdf)             Output file: <./Figures/Model12-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-11-26 16:39:18
-(epstopdf)                    size: 6155 bytes
+(epstopdf)                    date: 2013-12-01 17:03:49
+(epstopdf)                    size: 5454 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Model12-eps-conve
 rted-to.pdf ./Figures/Model12.eps>
-(epstopdf)             \includegraphics on input line 383.
+(epstopdf)             \includegraphics on input line 384.
 Package epstopdf Info: Output file is already uptodate.
 <./Figures/Model12-eps-converted-to.pdf, id=110, 376.40625pt x 317.185pt>
 File: ./Figures/Model12-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/Model12-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Model12-eps-converted-to.pdf used on input l
-ine 383.
+ine 384.
 (pdftex.def)             Requested size: 122.85876pt x 103.52916pt.
 
-Overfull \hbox (1.896pt too wide) in paragraph at lines 383--383
+Overfull \hbox (1.896pt too wide) in paragraph at lines 384--384
 [][] 
  []
 
 
-Overfull \hbox (11.15913pt too wide) in paragraph at lines 365--385
+Overfull \hbox (11.15913pt too wide) in paragraph at lines 366--386
  [][][] 
  []
 
 
-Overfull \hbox (11.15913pt too wide) in paragraph at lines 365--385
+Overfull \hbox (11.15913pt too wide) in paragraph at lines 366--386
  [][] 
  []
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 394.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 395.
 
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 396.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 397.
 
 
 Package epstopdf Info: Source file: <./Figures/PE8.eps>
@@ -561,17 +561,17 @@ Package epstopdf Info: Source file: <./Figures/PE8.eps>
 (epstopdf)                    size: 4866 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/PE8-eps-converted
 -to.pdf ./Figures/PE8.eps>
-(epstopdf)             \includegraphics on input line 415.
+(epstopdf)             \includegraphics on input line 416.
 Package epstopdf Info: Output file is already uptodate.
 <./Figures/PE8-eps-converted-to.pdf, id=111, 376.40625pt x 317.185pt>
 File: ./Figures/PE8-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/PE8-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/PE8-eps-converted-to.pdf used on input line 
-415.
+416.
 (pdftex.def)             Requested size: 122.85876pt x 103.52916pt.
 
-Overfull \hbox (1.896pt too wide) in paragraph at lines 415--415
+Overfull \hbox (1.896pt too wide) in paragraph at lines 416--416
 [][] 
  []
 
@@ -583,17 +583,17 @@ Package epstopdf Info: Source file: <./Figures/PE12.eps>
 (epstopdf)                    size: 5310 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/PE12-eps-converte
 d-to.pdf ./Figures/PE12.eps>
-(epstopdf)             \includegraphics on input line 421.
+(epstopdf)             \includegraphics on input line 422.
 Package epstopdf Info: Output file is already uptodate.
 <./Figures/PE12-eps-converted-to.pdf, id=112, 376.40625pt x 317.185pt>
 File: ./Figures/PE12-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/PE12-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/PE12-eps-converted-to.pdf used on input line
- 421.
+ 422.
 (pdftex.def)             Requested size: 122.85876pt x 103.52916pt.
 
-Overfull \hbox (1.896pt too wide) in paragraph at lines 421--421
+Overfull \hbox (1.896pt too wide) in paragraph at lines 422--422
 [][] 
  []
 
@@ -605,17 +605,17 @@ Package epstopdf Info: Source file: <./Figures/PE16.eps>
 (epstopdf)                    size: 5694 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/PE16-eps-converte
 d-to.pdf ./Figures/PE16.eps>
-(epstopdf)             \includegraphics on input line 427.
+(epstopdf)             \includegraphics on input line 428.
 Package epstopdf Info: Output file is already uptodate.
 <./Figures/PE16-eps-converted-to.pdf, id=113, 376.40625pt x 317.185pt>
 File: ./Figures/PE16-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/PE16-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/PE16-eps-converted-to.pdf used on input line
- 427.
+ 428.
 (pdftex.def)             Requested size: 122.85876pt x 103.52916pt.
 
-Overfull \hbox (1.896pt too wide) in paragraph at lines 427--427
+Overfull \hbox (1.896pt too wide) in paragraph at lines 428--428
 [][] 
  []
 
@@ -627,32 +627,32 @@ Package epstopdf Info: Source file: <./Figures/PE32.eps>
 (epstopdf)                    size: 5870 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/PE32-eps-converte
 d-to.pdf ./Figures/PE32.eps>
-(epstopdf)             \includegraphics on input line 433.
+(epstopdf)             \includegraphics on input line 434.
 Package epstopdf Info: Output file is already uptodate.
 <./Figures/PE32-eps-converted-to.pdf, id=114, 376.40625pt x 317.185pt>
 File: ./Figures/PE32-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/PE32-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/PE32-eps-converted-to.pdf used on input line
- 433.
+ 434.
 (pdftex.def)             Requested size: 122.85876pt x 103.52916pt.
 
-Overfull \hbox (1.896pt too wide) in paragraph at lines 433--433
+Overfull \hbox (1.896pt too wide) in paragraph at lines 434--434
 [][] 
  []
 
 
-Overfull \hbox (11.15913pt too wide) in paragraph at lines 415--435
+Overfull \hbox (11.15913pt too wide) in paragraph at lines 416--436
  [][][] 
  []
 
 
-Overfull \hbox (11.15913pt too wide) in paragraph at lines 415--435
+Overfull \hbox (11.15913pt too wide) in paragraph at lines 416--436
  [][] 
  []
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 445.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 446.
 
 
 [4 <G:/GitHub/DAC14/Draft/Figures/WL8_Model-eps-converted-to.pdf> <G:/GitHub/DA
@@ -667,7 +667,7 @@ Package epstopdf Info: Source file: <./Figures/MRE.eps>
 (epstopdf)                    size: 8551 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/MRE-eps-converted
 -to.pdf ./Figures/MRE.eps>
-(epstopdf)             \includegraphics on input line 460.
+(epstopdf)             \includegraphics on input line 461.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/MRE-eps-converted-to.pdf, id=134, 568.1225pt x 350.30875pt>
@@ -675,10 +675,10 @@ File: ./Figures/MRE-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Figures/MRE-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/MRE-eps-converted-to.pdf used on input line 
-460.
+461.
 (pdftex.def)             Requested size: 241.91785pt x 149.17056pt.
 
-Overfull \hbox (1.91785pt too wide) in paragraph at lines 460--462
+Overfull \hbox (1.91785pt too wide) in paragraph at lines 461--463
  [][] 
  []
 
@@ -691,7 +691,7 @@ o.pdf>
 (epstopdf)                    size: 211351 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Online_T404-
 eps-converted-to.pdf ./Figures/Lena/Online_T404.eps>
-(epstopdf)             \includegraphics on input line 481.
+(epstopdf)             \includegraphics on input line 482.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Online_T404-eps-converted-to.pdf, id=135, 386.44376pt x 386.443
@@ -699,7 +699,7 @@ Package epstopdf Info: Output file is already uptodate.
 File: ./Figures/Lena/Online_T404-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Online_T404-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Online_T404-eps-converted-to.pdf used o
-n input line 481.
+n input line 482.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 Package epstopdf Info: Source file: <./Figures/Lena/Trad_T426.eps>
 (epstopdf)                    date: 2013-11-27 20:50:03
@@ -710,7 +710,7 @@ pdf>
 (epstopdf)                    size: 210508 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T426-ep
 s-converted-to.pdf ./Figures/Lena/Trad_T426.eps>
-(epstopdf)             \includegraphics on input line 487.
+(epstopdf)             \includegraphics on input line 488.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Trad_T426-eps-converted-to.pdf, id=136, 386.44376pt x 386.44376
@@ -718,7 +718,7 @@ pt>
 File: ./Figures/Lena/Trad_T426-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Trad_T426-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Trad_T426-eps-converted-to.pdf used on 
-input line 487.
+input line 488.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 Package epstopdf Info: Source file: <./Figures/Lena/Online_T370.eps>
 (epstopdf)                    date: 2013-11-27 20:50:02
@@ -729,7 +729,7 @@ o.pdf>
 (epstopdf)                    size: 224417 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Online_T370-
 eps-converted-to.pdf ./Figures/Lena/Online_T370.eps>
-(epstopdf)             \includegraphics on input line 493.
+(epstopdf)             \includegraphics on input line 494.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Online_T370-eps-converted-to.pdf, id=137, 386.44376pt x 386.443
@@ -737,7 +737,7 @@ Package epstopdf Info: Output file is already uptodate.
 File: ./Figures/Lena/Online_T370-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Online_T370-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Online_T370-eps-converted-to.pdf used o
-n input line 493.
+n input line 494.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 Package epstopdf Info: Source file: <./Figures/Lena/Trad_T390.eps>
 (epstopdf)                    date: 2013-11-27 20:50:03
@@ -748,7 +748,7 @@ pdf>
 (epstopdf)                    size: 239777 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T390-ep
 s-converted-to.pdf ./Figures/Lena/Trad_T390.eps>
-(epstopdf)             \includegraphics on input line 499.
+(epstopdf)             \includegraphics on input line 500.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Trad_T390-eps-converted-to.pdf, id=138, 386.44376pt x 386.44376
@@ -756,7 +756,7 @@ pt>
 File: ./Figures/Lena/Trad_T390-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Trad_T390-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Trad_T390-eps-converted-to.pdf used on 
-input line 499.
+input line 500.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 Package epstopdf Info: Source file: <./Figures/Lena/Online_T340.eps>
 (epstopdf)                    date: 2013-11-27 20:50:02
@@ -767,7 +767,7 @@ o.pdf>
 (epstopdf)                    size: 234732 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Online_T340-
 eps-converted-to.pdf ./Figures/Lena/Online_T340.eps>
-(epstopdf)             \includegraphics on input line 505.
+(epstopdf)             \includegraphics on input line 506.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Online_T340-eps-converted-to.pdf, id=139, 386.44376pt x 386.443
@@ -775,7 +775,7 @@ Package epstopdf Info: Output file is already uptodate.
 File: ./Figures/Lena/Online_T340-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Online_T340-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Online_T340-eps-converted-to.pdf used o
-n input line 505.
+n input line 506.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 Package epstopdf Info: Source file: <./Figures/Lena/Trad_T358.eps>
 (epstopdf)                    date: 2013-11-27 20:50:03
@@ -786,7 +786,7 @@ pdf>
 (epstopdf)                    size: 253605 bytes
 (epstopdf)             Command: <epstopdf --outfile=./Figures/Lena/Trad_T358-ep
 s-converted-to.pdf ./Figures/Lena/Trad_T358.eps>
-(epstopdf)             \includegraphics on input line 511.
+(epstopdf)             \includegraphics on input line 512.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Figures/Lena/Trad_T358-eps-converted-to.pdf, id=140, 386.44376pt x 386.44376
@@ -794,27 +794,38 @@ pt>
 File: ./Figures/Lena/Trad_T358-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Figures/Lena/Trad_T358-eps-converted-to.pdf>
 Package pdftex.def Info: ./Figures/Lena/Trad_T358-eps-converted-to.pdf used on 
-input line 511.
+input line 512.
 (pdftex.def)             Requested size: 93.95122pt x 93.95131pt.
 
-Overfull \hbox (11.15913pt too wide) in paragraph at lines 481--513
+Overfull \hbox (11.15913pt too wide) in paragraph at lines 482--514
  [][][] 
  []
 
 
-Overfull \hbox (14.237pt too wide) in paragraph at lines 481--513
+Overfull \hbox (14.237pt too wide) in paragraph at lines 482--514
  [][] 
  []
 
 
-Overfull \hbox (11.15913pt too wide) in paragraph at lines 481--513
+Overfull \hbox (11.15913pt too wide) in paragraph at lines 482--514
  [][] 
  []
 
-[5 <G:/GitHub/DAC14/Draft/Figures/PE8-eps-converted-to.pdf> <G:/GitHub/DAC14/Dr
-aft/Figures/PE12-eps-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/PE16-eps-
-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/PE32-eps-converted-to.pdf> <G:
-/GitHub/DAC14/Draft/Figures/MRE-eps-converted-to.pdf>]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 528.
+
+
+
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 531.
+
+
+
+Underfull \vbox (badness 3386) has occurred while \output is active []
+
+ [5 <G:/GitHub/DAC14/Draft/Figures/PE8-eps-converted-to.pdf> <G:/GitHub/DAC14/D
+raft/Figures/PE12-eps-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/PE16-eps
+-converted-to.pdf> <G:/GitHub/DAC14/Draft/Figures/PE32-eps-converted-to.pdf> <G
+:/GitHub/DAC14/Draft/Figures/MRE-eps-converted-to.pdf>]
 Overfull \hbox (3.12146pt too wide) in paragraph at lines 637--638
 \T1/aer/m/n/9 per-for-mance im-prove-ment can be achieved by us-ing the ``over-
 
@@ -828,10 +839,10 @@ f> <G:/GitHub/DAC14/Draft/Figures/Lena/Online_T340-eps-converted-to.pdf> <G:/Gi
 tHub/DAC14/Draft/Figures/Lena/Trad_T358-eps-converted-to.pdf>]
 (G:\GitHub\DAC14\Draft\OnlineArith.aux) ) 
 Here is how much of TeX's memory you used:
- 3377 strings out of 494053
- 45707 string characters out of 3146189
- 107043 words of memory out of 3000000
- 6526 multiletter control sequences out of 15000+200000
+ 3379 strings out of 494053
+ 45751 string characters out of 3146189
+ 110056 words of memory out of 3000000
+ 6528 multiletter control sequences out of 15000+200000
  62161 words of font info for 94 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  42i,15n,26p,1391b,495s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -855,7 +866,7 @@ es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program
 Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x
 86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files (x86)/MiKT
 eX 2.9/fonts/type1/urw/times/utmb8a.pfb>
-Output written on OnlineArith.pdf (6 pages, 2352076 bytes).
+Output written on OnlineArith.pdf (6 pages, 2313834 bytes).
 PDF statistics:
  261 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
