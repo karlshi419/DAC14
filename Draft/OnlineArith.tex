@@ -108,7 +108,7 @@ MSD-first operation in online arithmetic is possible because they adopt a redund
 
 \subsection{Radix-2 Digit-parallel Online Adder}\label{subsec:OnlineAdder}
 Adders serve as a critical building block for arithmetic operations. To perform digit-parallel online addition, a redundant adder can be directly utilized. The adder structure diagram is shown in Figure~\ref{Fig:Radix2SD_adder}. A major advantage with the redundant number system over the standard ripple-carry based arithmetic is that the propagation of carry is eliminated, resulting in a precision-independent computation time for addition. As seen in Figure~\ref{Fig:Radix2SD_adder}, the computation delay of this adder is only 2 full adder (FA) delays for any operand word-length, with the cost of one extra FA for each digit of operands. This makes online adder suitable for building up more complex arithmetic operators such as multipliers to accelerate the sum of partial products \cite{RedundantMult_1987,RedundantMult_1985}.
-% 
+%
 % Therefore it is unlikely that timing violations happen on the online adder. For this reason, this adder structure has been widely used as a part of other arithmetic operators such as multipliers to accelerate the sum of partial products
 %
 \begin{figure}
@@ -261,7 +261,7 @@ For an $N$-digit OM, let a propagation chain be generated at stage $S_{\tau}$ wi
 \normalsize
 \end{eqnarray}
 %
-However, the actual length of a propagation chain is dependent upon input patterns. Let $C(\tau)$ represent the specific input pattern of $S_{\tau}$. Generally there are four types of inputs as listed in (\ref{Eq:AllInputCases}). Under the assumption that all digits of input signal are mutually independent, the probability of $C_1\sim C_4$ equal to $1/9$, $4/9$, $2/9$ and $2/9$ respectively.
+However, the actual length of a propagation chain is dependent upon input patterns. For $S_{\tau}$, let the specific input pattern of the 1-digit input be represented by $C(\tau)$, which can be classified into four types, as listed in (\ref{Eq:AllInputCases}). Under the assumption that all digits of input signal are mutually independent, the probability of $C_1\sim C_4$ equal to $1/9$, $4/9$, $2/9$ and $2/9$ respectively.
 %
 \begin{eqnarray}\label{Eq:AllInputCases}
 \footnotesize
@@ -274,7 +274,7 @@ However, the actual length of a propagation chain is dependent upon input patter
 \normalsize
 \end{eqnarray}
 %
-If all internal signals are reset to 0 initially, then (\ref{Eq:OnlineMult_General}) can be modified to give (\ref{Eq:P_Wordlength}) for $\tau>-\delta$. Consequently no propagation chain will be generated at $S_{\tau}$ if $C(\tau)=C_1$.
+The classification based on whether a digit is zero, as all internal signals are reset to zero initially. In this case, (\ref{Eq:OnlineMult_General}) can be modified to give (\ref{Eq:P_Wordlength}) for $\tau>-\delta$. If $C(\tau)=C_1$, no ``carry'' chain will be generated at $S_{\tau}$ because $P_{[\tau+1]}=0$.
 %
 \begin{eqnarray}\label{Eq:P_Wordlength}
 \footnotesize
@@ -285,36 +285,49 @@ If all internal signals are reset to 0 initially, then (\ref{Eq:OnlineMult_Gener
 \normalsize
 \end{eqnarray}
 %
-In other cases, a new propagation chain will be generated at $S_{\tau}$. If, for example, the word-length of $P_{[\tau+1]}$ is $D$ digits. That is, $P_{[\tau+1]}$ changes $D$ digits for chain generation. From (\ref{Eq:OnlineMult_General}) we notice that $D=D-1$ when $P_{[\tau+1]}$ propagates to the next stage, because of the 1-digit shifting when computing $P_{[\tau+1]}=r(W_{[\tau]}-z_{\tau})$, and this process is independent of the inputs. Finally this chain is annihilated when $D=1$. Hence the actual chain length corresponds to the word-length of $P_{[\tau+1]}$, of which the value we consider separately for different values of $C(\tau)$.\vspace{-1ex}
+In other cases, $P_{[\tau+1]}\!\neq\!0$ and a new chain will be generated at $S_{\tau}$. We denote the number of leading non-zero digits of $P_{[\tau+1]}$ to be $D$. That is, $P_{[\tau+1]}$ changes $D$ digits for chain generation. From (\ref{Eq:OnlineMult_General}) we notice that $D\!=\!D\!-\!1$ for each propagation because of the 1-digit shifting when computing $P_{[\tau+1]}=r(W_{[\tau]}-z_{\tau})$, and this is independent of the inputs. Finally, this chain will be annihilated when $D\!=\!1$. As a summary, the actual chain length $d(\tau)$ corresponds to the value of $D$, which we consider separately for different $C(\tau)$.\vspace{-1ex}
 
-According to (\ref{Eq:Online_Operands}) the word-lengths of $X_{[\tau]}$ and $Y_{[\tau+1]}$ are $(\tau+\delta+1)$ digits $(\tau+\delta+2)$ digits, respectively. If $C(\tau)=C_2$, $P_{[\tau+1]}$ embodies the maximum word-length, i.e. $D=\tau+\delta+1+\delta$ from (\ref{Eq:P_Wordlength}). Combining $D$ and (\ref{Eq:Bound_ChainLength}) gives the longest chain length in (\ref{Eq:MaxChainLength_OneStage}).
+If $C(\tau)=C_2$, $D$ equals to the maximum word-length of $P_{[\tau+1]}$ as shown in Figure~\ref{Fig:Radix2OnlineMultiplier}(b), i.e. $D=\tau+2\delta+1$. Combining $D$ and (\ref{Eq:Bound_ChainLength}) gives the longest chain length in (\ref{Eq:MaxChainLength_OneStage}).
+%
+%According to (\ref{Eq:Online_Operands}) the word-lengths of $X_{[\tau]}$ and $Y_{[\tau+1]}$ are $(\tau+\delta+1)$ digits $(\tau+\delta+2)$ digits, respectively. i.e. $D=\tau+\delta+1+\delta$ from (\ref{Eq:P_Wordlength}).
 %
 \begin{eqnarray}\label{Eq:MaxChainLength_OneStage}
 \footnotesize
-  d(\tau)_{max}=Min(D,N-1-\tau)
+    \begin{aligned}
+        d(\tau)_{max} &= Min(D,N-1-\tau)\\
+                      &= Min(\tau+2\delta+1,N-1-\tau)
+    \end{aligned}
 \normalsize
 \end{eqnarray}
 %
-Since the carry generation, propagation and annihilation behavior from $C_3$ and $C_4$ are identical, we only discuss the situation that $C(\tau)=C_3$. In this case the word-length of $P_{[\tau+1]}$ only depends on that of $Y_{[\tau+1]}$. Besides, we have $Y_{[\tau+1]}=Y_{[\tau]}$ because the appending digit $y_{\tau+\delta+1}=0$. It means $d(\tau)$ becomes dependent of the inputs of previous stage $S_{\tau-1}$. There are 2 possible situations for $\tau>-\delta$ as stated below:
+For $C_3$ and $C_4$, the carry generation, propagation and annihilation behavior of both cases are identical. Hence we only discuss $C(\tau)=C_3$. In this case, (\ref{Eq:P_Wordlength}) is modified to give (\ref{Eq:P_C3}). Thus $D$ only depends on the number of leading non-zero digits of $Y_{[\tau+1]}$. Besides, we have $Y_{[\tau+1]}=Y_{[\tau]}$ because the appending digit $y_{\tau+\delta+1}=0$. It means $d(\tau)$ becomes dependent of the inputs of previous stage.
+%
+\begin{eqnarray}\label{Eq:P_C3}
+\footnotesize
+  P_{[\tau+1]}=r^{-\delta+1}(x_{\tau+\delta+1}Y_{[\tau+1]})
+\normalsize
+\end{eqnarray}
+%
+For the first stage where $\tau=-\delta$, (\ref{Eq:P_Wordlength}) can be modified further yielding $P_{[-\delta+1]}=r^{\delta+1}(x_1Y_{[-\delta+1]})$. Therefore the value in (\ref{Eq:MaxChainLength_OneStage}) can only be obtained when $C(-\delta)=C_1$, otherwise $d(-\delta)=0$.\vspace{-1ex}
+
+For $\tau>-\delta$, there are 2 possible situations as stated below:
 \vspace{-2.5ex}
 \begin{itemize}
   \item For the previous stage if $y_{\tau+\delta}\neq0$, then the word-length of $Y_{[\tau]}$ is maximized. Thus $d(\tau)=d(\tau)_{max}-1$.\vspace{-1ex}
   \item If $y_{\tau+\delta}=0$, then $Y_{[\tau]}=Y_{[\tau-1]}$. This is a recursive process and these two judgements will be performed again for $\tau=\tau-1$. It terminates when $\tau=-\delta$ or the first judgement is satisfied.
 \end{itemize}
 \vspace{-1.5ex}
-%
-For the first stage where $\tau=-\delta$, (\ref{Eq:P_Wordlength}) can be modified further yielding $P_{[-\delta+1]}=r^{\delta+1}(x_1Y_{[-\delta+1]})$. Therefore the value in (\ref{Eq:MaxChainLength_OneStage}) can only be achieved when $C(-\delta)=C_1$, otherwise $d(-\delta)=0$.\vspace{-1ex}
 
-In summary, we derive Algorithm 2 to go through all possible stages that timing violations may occur and the corresponding inputs. This algorithm returns $Prob(T_S)$, which denotes the probability that timing violations happen in an $N$-digit online multiplier under a given $T_S$. $Prob(i,C(i))$ denotes the probability of the input pattern for stage $i$.
+In summary, Algorithm 2 is derived to examine all possible stages that timing violations may occur, and all possible input patterns for each stage. This algorithm returns $Prob(T_S)$, which denotes the probability that timing violations happen in an $N$-digit online multiplier as a function of $T_S$. In this algorithm, $\tau_{max}$ and $b$ are obtained from (\ref{Eq:Bound_GenChain}) and (\ref{Eq:MaxChainLength}), respectively. The probability of the input pattern for stage $i$ is denoted by $Prob(C(i))$, which can be determined through (\ref{Eq:AllInputCases}).
 %
 \begin{algorithm}[htbp]
   \caption{Probability of Timing Violations}
   \begin{algorithmic}[1]
-    \STATE  $Prob(T_S)=0$
-    \FORALL {stages $\tau\in\{-\delta,-\delta+1,\cdots,\tau_{upp}\}$ and input cases $C(\tau)\in\{C_1,\cdots,C4\}$}
+    \STATE  $Prob(T_S)\leftarrow0$
+    \FORALL {stages $\tau\in\{-\delta,-\delta+1,\cdots,\tau_{max}\}$ and \textbf{all} input cases $C(\tau)\in\{C_1,\cdots,C4\}$}
     \STATE  Determine $d(\tau)$ based on $C(\tau)$
     \IF     {$d(\tau)>b$}
-    \STATE  $Prob(T_S)=Prob(T_S)+\prod_{i=-\delta}^{\tau}Prob(i,C(i))$
+    \STATE  $Prob(T_S)\leftarrow Prob(T_S)+\prod_{i=-\delta}^{\tau}Prob(C(i))$
     \ENDIF
     \ENDFOR
     \RETURN $Prob(T_S)$
@@ -345,7 +358,7 @@ However, the change of output digits may not result in a different number with o
 %\end{eqnarray}
 
 \subsection{Expectation of Overclocking Error}\label{Sec:MeanError}
-For a given $T_S$, the combination of $Prob(T_S)$ and $E(|\varepsilon|)$ in Algorithm 2 and (\ref{Eq:ErrorMagnitude}) yields the overall expectation of overclocking error, as presented in (\ref{Eq:Expectation_Overclocking}). The verification of the proposed model is illustrated in the top row of Figure \ref{Fig:ModelVerification} against the results from Monte-Carlo simulations based on the aforementioned timing model. $T_S$ is normalized with respect to the value from structural timing analysis, i.e. $(N+\delta)\mu$. Note that both results are obtained when assuming the input data are randomly generated following uniform distribution. It can be seen that the modeled value match well with the simulation results. We also verify the models against the FPGA results without timing assumptions, as illustrated in the bottom row in Figure~\ref{Fig:ModelVerification}.
+For a given $T_S$, the combination of $Prob(T_S)$ and $|\varepsilon|$ in Algorithm 2 and (\ref{Eq:ErrorMagnitude}) yields the overall expectation of overclocking error, as presented in (\ref{Eq:Expectation_Overclocking}). The verification of the proposed model is illustrated in the top row of Figure \ref{Fig:ModelVerification} against the results from Monte-Carlo simulations based on the aforementioned timing model. $T_S$ is normalized with respect to the value from structural timing analysis, i.e. $(N+\delta)\mu$. Note that both results are obtained when assuming the input data are randomly generated following uniform distribution. It can be seen that the modeled value match well with the simulation results. We also verify the models against the FPGA results without timing assumptions, as illustrated in the bottom row in Figure~\ref{Fig:ModelVerification}.
 The general behavior of the model is similar to the FPGA implementation, however it does not capture the small increments in errors because we only model the coarse delay which is in units of $\mu$. Whereas the other sources of delay are not modeled, such as the generation of the online inputs and result digits.
 %
 \begin{eqnarray}\label{Eq:Expectation_Overclocking}
@@ -440,7 +453,7 @@ From Figure \ref{Fig:Probability_Error_Mean} several observations can be made. F
 
 \section{Case Study: Image Filter}\label{Sec:CaseStudy}
 \subsection{Experimental Setup}
-The benefits of the proposed methodology are demonstrated by using a $3\times3$ Gaussian image filter with two types of computer arithmetic. One is the radix-2 traditional arithmetic with data represented using 2's complement form. In this case, speed-optimized adders and multipliers are created using Xilinx Core Generator \cite{XilinxMult}. The other is the radix-2 online arithmetic, with the basic building blocks as described in Section~\ref{subsec:OnlineAdder} and Section~\ref{subsec:OnlineMultiplier}. In this case, all inputs and outputs are represented in the online format. In order to achieve the desired latency between input and output, both designs are overclocked and the errors seen at the output are recorded. The results are obtained from a Xilinx Virtex-6 FPGA through post place-and-route simulations. The results are evaluated in terms of mean relative error (MRE), which represents the percentage of error at outputs, as given by (\ref{Eq:MRE}) where $E_{error}$ and $E_{out}$ refer to the mean value of error and correct output, respectively.
+The benefits of the proposed methodology are demonstrated by using a $3\times3$ Gaussian image filter, which contains 9 multipliers and 8 adders, with two types of computer arithmetic. One is the radix-2 traditional arithmetic with data represented using 2's complement form. In this case, speed-optimized adders and multipliers are created using Xilinx Core Generator \cite{XilinxMult}. The other is the radix-2 online arithmetic, with the basic building blocks as described in Section~\ref{subsec:OnlineAdder} and Section~\ref{subsec:OnlineMultiplier}. In this case, all inputs and outputs are represented in the online format. In order to achieve the desired latency between input and output, both designs are overclocked and the errors seen at the output are recorded. The results are obtained from a Xilinx Virtex-6 FPGA through post place-and-route simulations. The results are evaluated in terms of mean relative error (MRE), which represents the percentage of error at outputs, as given by (\ref{Eq:MRE}) where $E_{error}$ and $E_{out}$ refer to the mean value of error and correct output, respectively.
 %
 \begin{eqnarray}\label{Eq:MRE}
 \scriptsize
@@ -454,7 +467,7 @@ In our experiments, two types of input data are utilized. One is randomly sample
 
 \vspace{-1ex}
 \subsection{Quantify the Impact of Overclocking}
-The values of overclocking error of the image filter based on traditional arithmetic (dotted lines) and online arithmetic (solid lines) when $N=8$ are illustrated in Figure \ref{Fig:MRE_ImageFilter}. According to the timing analysis tool, the rated operating frequencies of the two designs are $168.7$MHz and $148.3$MHz, respectively. However as seen in Figure \ref{Fig:MRE_ImageFilter}, for both input types the online image filter actually operates at a higher frequency without timing violations in comparison to the design using traditional arithmetic. In addition, this error-free frequency is even larger when using the real image data as inputs, since the real data do not exactly follow the uniform distribution or the independent assumption. In Figure \ref{Fig:MRE_ImageFilter} the ``Lena'' benchmark image is used as the real inputs.
+The MRE values of the image filter with traditional arithmetic (dotted lines) and online arithmetic (solid lines) when $N=8$ are illustrated in Figure \ref{Fig:MRE_ImageFilter}. According to the timing analysis tool, the rated operating frequencies of the two designs are $168.7$MHz and $148.3$MHz, respectively. However as seen in Figure \ref{Fig:MRE_ImageFilter}, for the UI inputs, design with online arithmetic actually operates at a higher frequency without timing violations in comparison to the design using traditional arithmetic. This error-free frequency is even larger when using the real image data as inputs, since the real data do not exactly follow the uniform distribution or the independent assumption. In Figure \ref{Fig:MRE_ImageFilter} the ``Lena'' benchmark image is used as the real inputs.
 %
 \begin{figure}
     \centering
@@ -467,9 +480,9 @@ The values of overclocking error of the image filter based on traditional arithm
 
 %\subsection{Sensitivity of Overclocking Error}
 \vspace{-1ex}
-If errors can be tolerated, we may allow timing violations to happen for better performance. The sensitivity of overclocking error for a given arithmetic can be evaluated by the data slope in Figure~\ref{Fig:MRE_ImageFilter}. For instance under an error budget of $1\%$~MRE, using the UI inputs the frequency of the traditional design can be improved by $3.89\%$ with respect to the maximum frequency without errors, whereas the design with online arithmetic can be overclocked by $6.85\%$. This indicates that online arithmetic is less sensitive to overclocking, as illustrated in Section \ref{Sec:MeanError}. The difference is even greater using real image data: $13.74\%$ frequency speedup using online arithmetic against $4.04\%$ with traditional arithmetic, because fewer long chains are generated with real inputs.\vspace{-1ex}
+If errors can be tolerated, we may allow timing violations to happen for better performance. The sensitivity of overclocking error for a given arithmetic can be evaluated by the data slope in Figure~\ref{Fig:MRE_ImageFilter}. For instance under an error budget of $1\%$~MRE, using the UI inputs the frequency of the traditional design can be improved by $3.89\%$ with respect to the maximum frequency without errors, whereas the design with online arithmetic can be overclocked by $6.85\%$. This indicates that online arithmetic is less sensitive to overclocking, as illustrated in Section \ref{Sec:MeanError}. The difference is even greater using real image data: $13.74\%$ frequency speedup with online arithmetic against $4.04\%$ with traditional arithmetic, because fewer long chains are generated with real inputs.\vspace{-1ex}
 
-The output images for both design scenarios are presented in Figure \ref{Fig:LenaImage}. Since the overclocking errors are in the LSDs of the results with online arithmetic, the degradation on the image can be hardly observed. In contrast, timing violations cause error in the MSDs with traditional arithmetic. This leads to ``salt and pepper noise''. Meanwhile, errors in the MSDs would result in large noise power and therefore the signal-to-noise ratio (SNR) for the traditional design is small.
+The output images for both design scenarios are presented in Figure \ref{Fig:LenaImage}. Since the overclocking errors are in the LSDs of the results with online arithmetic, the degradation on the image can be hardly observed. In contrast, timing violations cause error in the MSDs with traditional arithmetic. This leads to severe quality loss as shown on the images in the right column of Figure~\ref{Fig:LenaImage}. Meanwhile, errors in the MSDs result in large noise power and therefore the signal-to-noise ratio (SNR) of the traditional design is small.\vspace{-1ex}
 
 \begin{figure}[htb]
   \vspace{-2.5ex}
@@ -520,7 +533,7 @@ The output images for both design scenarios are presented in Figure \ref{Fig:Len
 %\subsection{Potential Benefits in Circuit Design}
 %In general, our results could be of interest to a circuit designer in two folds. By choosing different arithmetic and data representations, either a circuit can be designed to operate at a certain frequency with the minimum possible MRE, or a given error budget specified by the algorithm designer can be met with the fastest achievable frequency. For the first case,
 
-We also perform experiments using other benchmark images. The results are summarized in Table~\ref{Tab:MRE_Redu_Freq} in terms of the relative reduction of MRE as given by (\ref{Eq:MRE_Reduction}) where $MRE_{OL}$ and $MRE_{Trad}$ denote the value obtained with online arithmetic and with traditional arithmetic, respectively, and in in Table \ref{Tab:SNR_Impro_Freq} for the differences of SNR. In both tables the frequency is normalized to the maximum error-free frequency for each arithmetic. A significant reduction of MRE can be observed using online arithmetic for all input types. The geometric mean reduction varies from $97.3\%$ to $98.2\%$. In addition, larger differences of MRE reduction can be achieved in practice, as long chains occur with even smaller probabilities with real data. Similarly from Table \ref{Tab:SNR_Impro_Freq}, the differences in SNR are $21.4dB\sim43.9dB$.\vspace{1ex}
+We also perform experiments using other benchmark images. The results are summarized in Table~\ref{Tab:MRE_Redu_Freq} in terms of the relative reduction of MRE as given by (\ref{Eq:MRE_Reduction}) where $MRE_{OL}$ and $MRE_{Trad}$ denote the value obtained with online arithmetic and with traditional arithmetic, respectively, and in in Table \ref{Tab:SNR_Impro_Freq} for the differences of SNR. In both tables the frequency is normalized to the maximum error-free frequency for each arithmetic. A significant reduction of MRE can be observed using online arithmetic for all input types. The geometric mean reduction of MRE is $89.2\%$ using UI data. Even larger differences of MRE can be achieved when testing with real image data, varying from $97.3\%$ to $98.2\%$, as expected given the results shown in Figure~\ref{Fig:MRE_ImageFilter}. Similarly from Table~\ref{Tab:SNR_Impro_Freq}, the differences in SNR are $21.4dB\sim43.9dB$.\vspace{1ex}
 %
 %the experimental results obtained by UI inputs and 4 benchmark images are summarized in Table~\ref{Tab:MRE_Redu_Freq} in terms of the relative reduction of MRE as given by (\ref{Eq:MRE_Reduction}) where $MRE_{OL}$ and $MRE_{Trad}$ denote the value obtained with online arithmetic and with traditional arithmetic, respectively, and .
 %
@@ -530,11 +543,11 @@ We also perform experiments using other benchmark images. The results are summar
   %{(MRE_{Trad}-MRE_{OL})}/{MRE_{Trad}}\times100\%
 \normalsize
 \end{eqnarray}
-
+%
 The area comparison between two designs is illustrated in Table~\ref{Tab:AreaComparison}. While we notice that our approach comes at some increase in area, the FPGA architecture is optimized for conventional arithmetic. For instance, the Virtex series employs dedicated multiplexers and encoders for very fast ripple carry addition~\cite{Virtex6}. Besides, at least 2 orders of magnitude error reduction is obtained for a given frequency in our design, as shown in Figure \ref{Fig:MRE_ImageFilter}. Although the differences in both error and area can be compensated by using more digits with traditional arithmetic, this will result in longer delay and an even larger gap in frequency between two designs.
 
 
-\begin{table}[tbh]
+\begin{table}[bth]
 \vspace{-1ex}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4.1pt}
@@ -560,7 +573,7 @@ Tiffany & 99.9\% & 97.6\% & 98.4\% & 97.8\% & 97.2\% & 98.2\%\\
 \normalsize
 \end{table}
 
-\begin{table}[tbh]
+\begin{table}[bth]
 %\vspace{-1ex}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4.1pt}
@@ -581,7 +594,7 @@ Sailboat& 33.7 & 27.5 & 26.3 & 25.0 & 21.7\\
 Tiffany & 43.9 & 25.9 & 29.5 & 25.6 & 24.5\\
 \hline
 \end{tabular}
-%\vspace{-1ex}
+\vspace{-1ex}
 \normalsize
 \end{table}
 
