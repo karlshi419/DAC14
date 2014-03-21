@@ -43,24 +43,17 @@ Y.~Harata, Y.~Nakamura, H.~Nagase, M.~Takigawa, and N.~Takagi.
 \newblock A high-speed multiplier using a redundant binary adder tree.
 \newblock {\em IEEE Jourl. of Solid-State Circuits}, 22(1):28--34, 1987.
 
-\bibitem{NonUniformScaling}
-Z.~M. Kedem, V.~J. Mooney, K.~K. Muntimadugu, and K.~V. Palem.
-\newblock An approach to energy-error tradeoffs in approximate ripple carry
-  adders.
-\newblock In {\em Proc. Int. Symp. on Low Power Elec. and Design}, pages
-  211--216, 2011.
-
 \bibitem{Undersigned2x2multiplier}
 P.~Kulkarni, P.~Gupta, and M.~Ercegovac.
 \newblock Trading accuracy for power with an underdesigned multiplier
   architecture.
 \newblock In {\em Proc. Int. Conf. on VLSI Design}, pages 346--351, 2011.
 
-\bibitem{Online_Trunc}
-S.~Rajagopal and J.~Cavallaro.
-\newblock Truncated online arithmetic with applications to communication
-  systems.
-\newblock {\em IEEE Trans. on Computers}, 55(10):1240--1252, 2006.
+\bibitem{SKfccm13}
+K.~Shi, D.~Boland, and G.~A. Constantinides.
+\newblock Accuracy-performance tradeoffs on an fpga through overclocking.
+\newblock In {\em Proc. Int. Symp. Field-Programmable Custom Computing
+  Machines}, volume~0, pages 29--36, 2013.
 
 \bibitem{RedundantMult_1985}
 N.~Takagi, H.~Yasuura, and S.~Yajima.
