@@ -55,12 +55,6 @@ K.~Shi, D.~Boland, and G.~A. Constantinides.
 \newblock In {\em Proc. Int. Symp. Field-Programmable Custom Computing
   Machines}, volume~0, pages 29--36, 2013.
 
-\bibitem{RedundantMult_1985}
-N.~Takagi, H.~Yasuura, and S.~Yajima.
-\newblock High-speed {VLSI} multiplication algorithm with a redundant binary
-  addition tree.
-\newblock {\em IEEE Trans. on Computers}, 100(9):789--796, 1985.
-
 \bibitem{Ercegovac_OnlineMult}
 K.~S. Trivedi and M.~Ercegovac.
 \newblock On-line algorithms for division and multiplication.

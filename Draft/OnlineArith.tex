@@ -24,7 +24,7 @@ Kan Shi, David Boland, Edward Stott, Samuel Bayliss and George A. Constantinides
        \affaddr{Department of Electrical and Electronic Engineering}\\
        \affaddr{Imperial College London}\\
        \affaddr{London, UK}\\
-       \email{\{k.shi11, david.boland03, g.constantinides\}@imperial.ac.uk}
+       \email{\{k.shi11, david.boland03, ed.stott, s.bayliss08, g.constantinides\}@imperial.ac.uk}
 %\and  % use '\and for second row
 }
 
@@ -96,7 +96,7 @@ Originally online arithmetic was designed for digit-serial operation. In order t
 MSD-first operation in online arithmetic is possible because they adopt a redundant number system \cite{RedundantNumber}, in which each digit is represented with a redundant digit set $\{-a, \cdots,-1,\\0, 1, \cdots, a\}$, where $a\in[r/2,r-1]$. Due to the redundancy, the MSDs of the result can be calculated only based on partial information of the inputs and then the value of the number can be revised by the following digits.
 
 \subsection{Radix-2 Digit-parallel Online Adder}\label{subsec:OnlineAdder}
-Adders serve as a critical building block for arithmetic operations. To perform digit-parallel online addition, a redundant adder can be directly utilized. The adder structure diagram is shown in Figure~\ref{Fig:Radix2SD_adder}. A major advantage of the redundant number system over the standard ripple-carry based arithmetic is that the propagation of carry is eliminated, resulting in a precision-independent computation time for addition. As seen in Figure~\ref{Fig:Radix2SD_adder}, the computation delay of this adder is only 2 full adder (FA) delays for any operand word-length, with the cost of one extra FA for each digit of operands. This makes the online adder suitable for building up more complex arithmetic operators such as multipliers to accelerate the sum of partial products \cite{RedundantMult_1987,RedundantMult_1985}.
+Adders serve as a critical building block for arithmetic operations. To perform digit-parallel online addition, a redundant adder can be directly utilized. The adder structure diagram is shown in Figure~\ref{Fig:Radix2SD_adder}. A major advantage of the redundant number system over the standard ripple-carry based arithmetic is that the propagation of carry is eliminated, resulting in a precision-independent computation time for addition. As seen in Figure~\ref{Fig:Radix2SD_adder}, the computation delay of this adder is only 2 full adder (FA) delays for any operand word-length, with the cost of one extra FA for each digit of operands. This makes the online adder suitable for building up more complex arithmetic operators such as multipliers to accelerate the sum of partial products \cite{RedundantMult_1987}.
 %
 % Therefore it is unlikely that timing violations happen on the online adder. For this reason, this adder structure has been widely used as a part of other arithmetic operators such as multipliers to accelerate the sum of partial products
 %
@@ -145,13 +145,13 @@ Multiplication is another key arithmetic operator. Typically the online multipli
 \end{eqnarray}
 %\vspace{-2ex}
 %
-Algorithm \ref{Algorithm:OnlineMult} can be synthesized into a unrolled digit parallel structure as shown in  Figure~\ref{Fig:Radix2OnlineMultiplier}(a). In an $N$-digit online multiplier (OM), there are a total of $N+\delta$ stages, of which the online inputs are generated from the appending logic according to (\ref{Eq:Online_Operands}). In each stage, an online adder is used as shown in Figure~\ref{Fig:Radix2OnlineMultiplier}(b). The SDVM module performs the Signed-Digit Vector Multiplication. When $r=2$ and the digit set $\{\overline{1},0,1\}$ is used, the implementation of SDVM is straight forward, because for instance the output of $(y_{j+\delta+1}\cdot X_{[j]})$ is 0, $X_{[j]}$ or $-X_{[j]}$ when $y$ is equal to $0$, $1$ and $-1$ respectively.\vspace{-1ex}
+Algorithm \ref{Algorithm:OnlineMult} can be synthesized into a unrolled digit parallel structure as shown in  Figure~\ref{Fig:Radix2OnlineMultiplier}(a). In an $N$-digit online multiplier (OM), there are a total of $N+\delta$ stages, of which the online inputs are generated from the \emph{appending logic} according to (\ref{Eq:Online_Operands}). In each stage, an online adder is used as shown in Figure~\ref{Fig:Radix2OnlineMultiplier}(b). The SDVM module performs the \emph{Signed-Digit Vector Multiplication}. When $r=2$ and the digit set $\{\overline{1},0,1\}$ is used, the implementation of SDVM is straight forward, because for instance the output of $(y_{j+\delta+1}\cdot X_{[j]})$ is 0, $X_{[j]}$ or $-X_{[j]}$ when $y$ is equal to $0$, $1$ and $-1$ respectively.\vspace{-1ex}
 
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=.49\textwidth]{./Figures/OnlineMult_Unrolled.pdf}
 \vspace{-4ex}
-\caption{(a) Synthesis of Algorithm 1 into a digit-parallel online multiplier (b) Structure of one stage, in which the maximum digit widths of signals are labeled.}
+\caption{(a) Synthesis of Algorithm 1 into a digit-parallel online multiplier (b) Structure of one stage with the maximum digit widths of signals labeled.}
 \vspace{-2ex}
 \label{Fig:Radix2OnlineMultiplier}
 \end{figure}
@@ -223,7 +223,7 @@ Instead of duplicating the digit-serial implementation $N+\delta$ times, each st
 
 %\subsection{Probabilistic Model of Overclocking \\Error}
 \section{Probabilistic Model of\\Overclocking Error}
-As it is unlikely that timing violation happens in the online adder, in this Section we model the overclocking error in the radix-2 OM. From Figure~\ref{Fig:Radix2OnlineMultiplier} we observe two types of delay chains. One is caused by generation and propagation of $P_{[j]}$ among different stages. The other is the generation of online inputs $X_{[j]}$ and $Y_{[j]}$ from the appending logic. Since the appending logic is basically wires and simple combinational logic \cite{Online_Conversion}, the overall latency will eventually be determined by the delay of the $P_{[j]}$ path, especially with increasing operand word-lengths. As such, we initially model the delay of each stage within an OM to be a constant value $\mu$, as shown in Figure~\ref{Fig:Radix2OnlineMultiplier}(b). We also assume that the generation of online inputs costs no delay.\vspace{-1ex}
+As the delay of online adder is small, the occurrence of timing violation requires very fast frequency. Hence we only model the overclocking error in the radix-2 OM. From Figure~\ref{Fig:Radix2OnlineMultiplier} we observe two types of delay chains. One is caused by generation and propagation of $P_{[j]}$ among different stages. The other is the generation of online inputs $X_{[j]}$ and $Y_{[j]}$. Since the appending logic is basically wires and simple combinational logic \cite{Online_Conversion}, the overall latency will eventually be determined by the delay of the $P_{[j]}$ path, especially with increasing operand word-lengths. As such, we initially model the delay of each stage within an OM to be a constant value $\mu$, as shown in Figure~\ref{Fig:Radix2OnlineMultiplier}(b). We also assume that the generation of online inputs costs no delay.\vspace{-1ex}
 
 Let $\mu_{OM}$ denote the worst-case delay of an OM. It follows that if the clock period $T_S$ is greater than $\mu_{OM}$, correct results will be sampled. If, however, faster-than-rated sampling frequencies are applied such that $T_S<\mu_{OM}$, timing violations might happen and intermediate results will be sampled, potentially generating errors. For a given $T_S$, the maximum length of error-free propagation is described by (\ref{Eq:MaxChainLength}) where $f_S$ denotes the sampling frequency. We always ensure that the first digit of the product will be generated correctly, i.e. $b>\delta$.
 %
@@ -388,7 +388,7 @@ For a given $T_S$, the expectation of overclocking error can be obtained by comb
   \end{minipage}
   }
   \vspace{-2ex}
-  \caption{Expectation of overclocking error for online multipliers: verification of the proposed model against Monte-Carlo simulations with timing assumptions (top row) and FPGA results with real timing information (bottom row).}
+  \caption{Expectation of overclocking error for online multipliers: verification of the proposed model against Monte-Carlo simulations with timing assumptions (top row) and against FPGA results with real timing information (bottom row).}
   \label{Fig:ModelVerification}
   \vspace{-2ex}
 \end{figure}
@@ -447,7 +447,7 @@ From Figure \ref{Fig:Probability_Error_Mean} several observations can be made. F
 
 \section{Case Study: Image Filter}\label{Sec:CaseStudy}
 \subsection{Experimental Setup}
-The benefits of the proposed methodology are demonstrated by using a $3\times3$ Gaussian image filter, which contains 9 multipliers and 8 adders, with two types of computer arithmetic. One is the radix-2 traditional arithmetic with data represented using 2's complement form. In this case, speed-optimized adders and multipliers are created using Xilinx Core Generator \cite{XilinxMult}. The other is the radix-2 online arithmetic, with the basic building blocks as described in Section~\ref{subsec:OnlineAdder} and Section~\ref{subsec:OnlineMultiplier}. In this case, all inputs and outputs are represented in the online format. In order to achieve the desired latency between input and output, both designs are overclocked and the errors seen at the output are recorded. The results are obtained from a Xilinx Virtex-6 FPGA through post place-and-route simulations. The results are evaluated in terms of mean relative error (MRE), which represents the percentage of error at outputs, as given by (\ref{Eq:MRE}) where $E_{error}$ and $E_{out}$ refer to the mean value of error and correct output, respectively.
+The benefits of the proposed methodology are demonstrated by using a $3\times3$ Gaussian image filter, which contains 9 multipliers and 8 adders, with two types of computer arithmetic. One is the standard binary arithmetic with data represented using 2's complement form. In this case, speed-optimized adders and multipliers are created using Xilinx Core Generator \cite{XilinxMult}. The other is the radix-2 online arithmetic, with the basic building blocks as described in Section~\ref{subsec:OnlineAdder} and Section~\ref{subsec:OnlineMultiplier}. In this case, all inputs and outputs are represented in the online format. In order to achieve the desired latency between input and output, both designs are overclocked and the errors seen at the output are recorded. The results are obtained from a Xilinx Virtex-6 FPGA through post place-and-route simulations. The results are evaluated in terms of mean relative error (MRE), which represents the percentage of error at outputs, as given by (\ref{Eq:MRE}) where $E_{error}$ and $E_{out}$ refer to the mean value of error and correct output, respectively.
 %
 \begin{eqnarray}\label{Eq:MRE}
 \scriptsize
@@ -461,7 +461,7 @@ In our experiments, two types of input data are utilized. One is randomly sample
 
 \vspace{-1ex}
 \subsection{Quantify the Impact of Overclocking}
-The MRE values of the image filter with traditional arithmetic (dotted lines) and online arithmetic (solid lines) when $N=8$ are illustrated in Figure \ref{Fig:MRE_ImageFilter}. According to the timing analysis tool, the rated operating frequencies of the two designs are $168.7$MHz and $148.3$MHz, respectively. However as seen in Figure \ref{Fig:MRE_ImageFilter}, for the UI inputs, design with online arithmetic actually operates at a higher frequency without timing violations in comparison to the design using traditional arithmetic. This error-free frequency is even larger when using the real image data as inputs, since the real data do not exactly follow the uniform distribution or the independent assumption. In Figure \ref{Fig:MRE_ImageFilter} the ``Lena'' benchmark image is used as the real inputs.
+The MRE values of the image filter with traditional arithmetic (dotted lines) and online arithmetic (solid lines) when $N=8$ are illustrated in Figure \ref{Fig:MRE_ImageFilter}. According to the timing report, the rated operating frequencies of the two designs are $168.7$MHz and $148.3$MHz, respectively. However as seen in Figure \ref{Fig:MRE_ImageFilter}, for the UI inputs, design with online arithmetic actually operates at a higher frequency without timing violations in comparison to the design using traditional arithmetic. This error-free frequency is even larger when using the real image data as inputs, since the real data do not exactly follow the uniform distribution or the independent assumption. In Figure \ref{Fig:MRE_ImageFilter} the ``Lena'' benchmark image is used as the real inputs.
 %
 \begin{figure}
     \centering
@@ -645,9 +645,8 @@ Tiffany & 43.9 & 25.9 & 29.5 & 25.6 & 24.5\\
 In this paper, we have studied the probabilistic behavior of key arithmetic primitives with different computer arithmetic when operating beyond the deterministic region. Through the usage of analytical models and empirical FPGA results, we have demonstrated that significant error reduction and performance improvement can be achieved by using the ``overclocking friendly'' online arithmetic.
 
 
-%ACKNOWLEDGMENTS are optional
-%\section{Acknowledgments}
-%This section is optional;
+\section{Acknowledgments}
+This work is supported by the EPSRC (Grants EP/I020557/1 and EP/I012036/1).
 %
 % The following two commands are all you need in the
 % initial runs of your .tex file to
